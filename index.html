@@ -1068,6 +1068,22 @@ button.fl.sel{background:#fff;color:#1d62a6;border-color:#fff;box-shadow:0 8px 2
 /* ====== v.01: effects keep moving while pages slide, version tag ====== */
 html.moving .floaters, html.moving .floaters i { animation-play-state: running !important; }
 .ver { position: fixed; left: 50%; bottom: 3px; transform: translateX(-50%); z-index: 45; font: 500 9px/1 var(--f-body); letter-spacing: .12em; color: #000; opacity: .75; pointer-events: none; }
+
+/* ====== V.04: animated scroll line ====== */
+.progress { left: 0; right: auto; width: calc(var(--p, 0) * 100%); min-width: 10px; height: 4px; transform: none !important; border-radius: 0 6px 6px 0; overflow: visible;
+  background: linear-gradient(90deg, #174f8a, #5aa9e6, #bfe3ff, #ffffff, #bfe3ff, #5aa9e6, #174f8a); background-size: 300% 100%;
+  box-shadow: 0 0 14px rgba(191,227,255,.8); transition: width .95s cubic-bezier(.34, 1.45, .5, 1), height .35s ease;
+  animation: lineFlow 2.4s linear infinite; }
+html[dir="rtl"] .progress { left: auto; right: 0; border-radius: 6px 0 0 6px; }
+.progress::after { content: ""; position: absolute; top: 50%; inset-inline-end: -7px; width: 16px; height: 16px; margin-top: -8px; border-radius: 50%;
+  background: radial-gradient(circle, #fff, #bfe3ff 45%, transparent 70%); box-shadow: 0 0 18px 6px rgba(191,227,255,.85); animation: headPulse 1.3s ease-in-out infinite; transition: transform .35s ease; }
+.progress::before { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(90deg, transparent, rgba(255,255,255,.9), transparent); background-size: 60px 100%; background-repeat: no-repeat; animation: lineSweep 1.6s ease-in-out infinite; }
+html.moving .progress { height: 7px; animation-duration: .7s; }
+html.moving .progress::after { transform: scale(1.9); }
+html.moving .progress, html.moving .progress::before, html.moving .progress::after { animation-play-state: running !important; }
+@keyframes lineFlow { to { background-position: -300% 0; } }
+@keyframes headPulse { 50% { opacity: .65; box-shadow: 0 0 26px 10px rgba(191,227,255,.6); } }
+@keyframes lineSweep { from { background-position: -60px 0; } to { background-position: 140vw 0; } }
 </style>
 <style>[hidden]{display:none!important}html{background:#2a78bd}body{margin:0}img{max-width:100%}</style>
 </head>
@@ -1090,7 +1106,7 @@ html.moving .floaters, html.moving .floaters i { animation-play-state: running !
 <div class="where" id="where" aria-hidden="true"><b></b><span></span></div>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="ver" aria-hidden="true">V.03</div>
+<div class="ver" aria-hidden="true">V.04</div>
 <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav class="dots-nav" id="dotsNav" aria-label="Sections"></nav>
@@ -1720,7 +1736,7 @@ html.moving .floaters, html.moving .floaters i { animation-play-state: running !
   var dn = document.getElementById("dotsNav");
   panels.forEach(function (p, k) { var d = document.createElement("button"); d.type = "button"; d.setAttribute("aria-label", "Screen " + (k + 1)); d.addEventListener("click", function () { go(k - idx); }); dn.appendChild(d); });
   function sync() {
-    if (bar) bar.style.transform = "scaleX(" + (panels.length > 1 ? idx / (panels.length - 1) : 0).toFixed(4) + ")";
+    if (bar) bar.style.setProperty("--p", (panels.length > 1 ? idx / (panels.length - 1) : 0).toFixed(4));
     var el = $("#where");
     if (el && panels[idx]) { el.querySelector("b").textContent = num(("0" + (idx + 1)).slice(-2)) + " / " + num(("0" + panels.length).slice(-2)); el.querySelector("span").textContent = t(panels[idx].dataset.nav); }
     root.dataset.tone = /light/.test(panels[idx].className) ? "light" : "dark";
