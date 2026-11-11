@@ -1084,6 +1084,11 @@ html.moving .progress, html.moving .progress::before, html.moving .progress::aft
 @keyframes lineFlow { to { background-position: -300% 0; } }
 @keyframes headPulse { 50% { opacity: .65; box-shadow: 0 0 26px 10px rgba(191,227,255,.6); } }
 @keyframes lineSweep { from { background-position: -60px 0; } to { background-position: 140vw 0; } }
+
+/* ====== V.05: no circle at the end of the scroll line ====== */
+.progress::after { display: none !important; }
+.progress { min-width: 0; border-radius: 0; }
+html[dir="rtl"] .progress { border-radius: 0; }
 </style>
 <style>[hidden]{display:none!important}html{background:#2a78bd}body{margin:0}img{max-width:100%}</style>
 </head>
@@ -1106,7 +1111,7 @@ html.moving .progress, html.moving .progress::before, html.moving .progress::aft
 <div class="where" id="where" aria-hidden="true"><b></b><span></span></div>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="ver" aria-hidden="true">V.04</div>
+<div class="ver" aria-hidden="true">V.05</div>
 <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav class="dots-nav" id="dotsNav" aria-label="Sections"></nav>
