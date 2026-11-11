@@ -1183,7 +1183,7 @@ html.hb-gl .b3 { display: none; }
 <div class="where" id="where" aria-hidden="true"><b></b><span></span></div>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="ver" aria-hidden="true">V.16</div>
+<div class="ver" aria-hidden="true">V.17</div>
 <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav class="dots-nav" id="dotsNav" aria-label="Sections"></nav>
@@ -1969,18 +1969,18 @@ html.hb-gl .b3 { display: none; }
   var cv = document.createElement("canvas"); cv.className = "hbgl"; wrap.querySelector(".hbs").appendChild(cv);
   var gl = cv.getContext("webgl", { alpha: true, premultipliedAlpha: true, antialias: true });
   if (!gl) { cv.remove(); return; }
-  var VS = "attribute vec3 aP;attribute vec3 aN;attribute vec2 aT;uniform mat4 uM;uniform mat4 uVP;varying vec3 vW;varying vec3 vN;varying vec2 vT;void main(){vec4 w=uM*vec4(aP,1.);vW=w.xyz;vN=mat3(uM)*aN;vT=aT;gl_Position=uVP*w;}";
-  var FS = "precision mediump float;varying vec3 vW;varying vec3 vN;varying vec2 vT;uniform vec3 uCam;uniform int uMode;uniform int uPass;uniform sampler2D uTex;" +
+  var VS = "attribute vec3 aP;attribute vec3 aN;attribute vec2 aT;uniform mat4 uM;uniform mat4 uVP;varying vec3 vW;varying vec3 vN;varying vec2 vT;varying vec3 vL;void main(){vec4 w=uM*vec4(aP,1.);vL=aP;vW=w.xyz;vN=mat3(uM)*aN;vT=aT;gl_Position=uVP*w;}";
+  var FS = "precision mediump float;varying vec3 vW;varying vec3 vN;varying vec2 vT;varying vec3 vL;uniform float uTime;uniform float uAmp;uniform vec3 uCam;uniform int uMode;uniform int uPass;uniform sampler2D uTex;" +
     "vec3 env(vec3 r){float h=r.y*.5+.5;vec3 c=mix(vec3(.22,.46,.78),vec3(.93,.97,1.),smoothstep(0.,1.,h));" +
     "float s1=smoothstep(.76,.93,dot(r,normalize(vec3(-.45,.55,.7))));float s2=smoothstep(.84,.97,dot(r,normalize(vec3(.75,.25,.55))));" +
     "float s3=smoothstep(.9,.99,dot(r,normalize(vec3(.1,.9,.3))));float band=smoothstep(0.,.05,.1-abs(r.y-.12))*.45;return c+s1*1.5+s2*.9+s3*.7+band;}" +
     "void main(){vec3 N=normalize(vN);vec3 V=normalize(uCam-vW);float nv=dot(N,V);" +
     "if(uMode==0){ if(uPass==0&&nv>0.)discard; if(uPass==1&&nv<0.)discard; if(nv<0.)N=-N; nv=abs(nv);" +
     "float f=pow(1.-nv,3.);vec3 R=reflect(-V,N);vec3 e=env(R);float a=.09+.75*f+.4*max(e.r-1.,0.);a+=.10*smoothstep(.55,1.,abs(N.x));" +
-    "if(uPass==0)a*=.7;vec3 col=vec3(.66,.88,1.)*.2*(.65+.35*smoothstep(-.45,.25,vW.y))+e*(.18+.9*f);gl_FragColor=vec4(col*a,a);}" +
-    "else if(uMode==1){ if(uPass==0&&nv>0.)discard; if(uPass==1&&nv<0.)discard; if(nv<0.)N=-N;" +
+    "if(uPass==0)a*=.7;vec3 col=vec3(.66,.88,1.)*.2*(.65+.35*smoothstep(-.45,.25,vW.y))+e*(.18+.9*f);float rim=pow(1.-nv,4.5);float gl=pow(max(sin(vW.x*3.2+vW.y*2.1-uTime*1.3),0.),22.);col+=vec3(.85,.95,1.)*(rim*1.1+gl*rim*2.4);a=min(1.,a+rim*.55+gl*rim*.6);gl_FragColor=vec4(col*min(a,1.),a);}" +
+    "else if(uMode==1){ float topY=.2675+(sin(vL.x*13.+uTime*4.6)*.011+sin(vL.z*10.-uTime*3.7)*.008+vL.x*.05)*uAmp; if(vL.y>topY)discard; float men=smoothstep(.014,0.,topY-vL.y); if(uPass==0&&nv>0.)discard; if(uPass==1&&nv<0.)discard; if(nv<0.)N=-N;" +
     "float d=.62+.38*max(dot(N,normalize(vec3(-.4,.7,.6))),0.);float g=smoothstep(-.45,.3,vW.y);" +
-    "vec3 c=mix(vec3(.38,.82,.98),vec3(.7,.94,1.),g)*d;float a=(uPass==0)?.30:.34;c*=.84+.16*abs(nv);c*=.9+.1*smoothstep(-.42,.1,vW.y);c+=vec3(.06,.1,.12);c+=vec3(.2)*pow(1.-abs(nv),2.);gl_FragColor=vec4(c*a,a);}" +
+    "vec3 c=mix(vec3(.38,.82,.98),vec3(.7,.94,1.),g)*d;float a=(uPass==0)?.30:.34;c*=.84+.16*abs(nv);c*=.9+.1*smoothstep(-.42,.1,vW.y);c+=vec3(.06,.1,.12);c+=vec3(.05,.09,.1)*(sin(vL.x*34.+vL.y*22.+uTime*1.7)*sin(vL.z*28.-vL.y*18.-uTime*1.3)*.5+.5);c+=vec3(.55,.8,.95)*men*.55;c*=.92+.08*sin(vL.y*60.+uTime*2.);c+=vec3(.2)*pow(1.-abs(nv),2.);gl_FragColor=vec4(c*a,a);}" +
     "else if(uMode==2){ vec3 Nn=nv<0.?-N:N; vec3 R=reflect(-V,Nn);vec3 e=env(R);vec3 base=vec3(.52,.68,.9);e=min(e,vec3(1.15));" +
     "vec3 c=base*(.28+.62*e)+vec3(.9,.95,1.)*pow(max(dot(R,normalize(vec3(-.45,.55,.7))),0.),60.)*.45;" +
     "c*=.85+.15*smoothstep(.0,1.,vT.y);c=mix(c,vec3(dot(c,vec3(.33))),.25);gl_FragColor=vec4(c,1.);}" +
@@ -1989,7 +1989,7 @@ html.hb-gl .b3 { display: none; }
   var pr = gl.createProgram(); gl.attachShader(pr, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, FS)); gl.linkProgram(pr);
   if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) { cv.remove(); return; }
   gl.useProgram(pr);
-  var L = { p: gl.getAttribLocation(pr, "aP"), n: gl.getAttribLocation(pr, "aN"), t: gl.getAttribLocation(pr, "aT"), M: gl.getUniformLocation(pr, "uM"), VP: gl.getUniformLocation(pr, "uVP"), cam: gl.getUniformLocation(pr, "uCam"), mode: gl.getUniformLocation(pr, "uMode"), pass: gl.getUniformLocation(pr, "uPass"), tex: gl.getUniformLocation(pr, "uTex") };
+  var L = { p: gl.getAttribLocation(pr, "aP"), n: gl.getAttribLocation(pr, "aN"), t: gl.getAttribLocation(pr, "aT"), M: gl.getUniformLocation(pr, "uM"), VP: gl.getUniformLocation(pr, "uVP"), cam: gl.getUniformLocation(pr, "uCam"), mode: gl.getUniformLocation(pr, "uMode"), pass: gl.getUniformLocation(pr, "uPass"), tex: gl.getUniformLocation(pr, "uTex"), time: gl.getUniformLocation(pr, "uTime"), amp: gl.getUniformLocation(pr, "uAmp") };
 
   /* geometry */
   function mesh(P, N, T, I) {
@@ -2055,7 +2055,7 @@ html.hb-gl .b3 { display: none; }
     gl.uniformMatrix4fv(L.M, false, M); gl.uniform1i(L.mode, mode); gl.uniform1i(L.pass, pass);
     gl.drawElements(gl.TRIANGLES, b.n, gl.UNSIGNED_SHORT, 0);
   }
-  var started = false, t0 = 0, DUR = 3.0, mx = 0, my = 0, tx = 0, ty = 0, dirty = true, raf = 0;
+  var lastTx = 0, vis = true, started = false, t0 = 0, DUR = 3.0, mx = 0, my = 0, tx = 0, ty = 0, dirty = true, raf = 0;
   var D2R = Math.PI / 180;
   function ease(u) { return 1 - Math.pow(1 - u, 3); }
   function size() {
@@ -2077,6 +2077,8 @@ html.hb-gl .b3 { display: none; }
     /* camera position in world = (0,0,camZ); the view matrix is only a translation */
     gl.uniform3f(L.cam, 0, 0, camZ);
     gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, tex); gl.uniform1i(L.tex, 0);
+    var sec = (performance.now() - t0) / 1000, amp = u < 1 ? 1 : Math.exp(-(sec - DUR) * 1.0); amp = Math.min(1.6, amp + Math.abs(tx - lastTx) * 40); lastTx = tx;
+    gl.uniform1f(L.time, sec); gl.uniform1f(L.amp, amp);
     var C = function (x, y, z) { return mul(Mm, tr(x, y, z)); };
     /* opaque cap first */
     gl.depthMask(true);
@@ -2091,12 +2093,14 @@ html.hb-gl .b3 { display: none; }
     draw(G.label, C(0, -.0156 + .0, .128), 3, 1);
     draw(G.body, bodyM, 0, 1);
     gl.depthMask(true);
-    if (u < 1 || Math.abs(mx - tx) > .002 || Math.abs(my - ty) > .002) raf = requestAnimationFrame(frame);
+    if (vis && !document.hidden) raf = requestAnimationFrame(frame);
     dirty = false;
   }
   window.addEventListener("mousemove", function (ev) {
     if (!started) return; mx = ev.clientX / innerWidth * 2 - 1; my = ev.clientY / innerHeight * 2 - 1; if (!raf) raf = requestAnimationFrame(frame);
   }, { passive: true });
+  if (window.IntersectionObserver) new IntersectionObserver(function (en) { vis = en[0].isIntersecting; if (vis && started && !raf) raf = requestAnimationFrame(frame); }).observe(cv);
+  document.addEventListener("visibilitychange", function () { if (!document.hidden && started && !raf) raf = requestAnimationFrame(frame); });
   window.addEventListener("resize", function () { if (started && !raf) raf = requestAnimationFrame(frame); });
   window.__hbStart = function () { if (started) return; started = true; document.documentElement.classList.add("hb-gl"); t0 = performance.now(); raf = requestAnimationFrame(frame); };
 })();
