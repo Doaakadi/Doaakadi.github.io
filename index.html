@@ -1183,7 +1183,7 @@ html.hb-gl .b3 { display: none; }
 <div class="where" id="where" aria-hidden="true"><b></b><span></span></div>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="ver" aria-hidden="true">V.17</div>
+<div class="ver" aria-hidden="true">V.18</div>
 <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav class="dots-nav" id="dotsNav" aria-label="Sections"></nav>
@@ -2055,7 +2055,7 @@ html.hb-gl .b3 { display: none; }
     gl.uniformMatrix4fv(L.M, false, M); gl.uniform1i(L.mode, mode); gl.uniform1i(L.pass, pass);
     gl.drawElements(gl.TRIANGLES, b.n, gl.UNSIGNED_SHORT, 0);
   }
-  var lastTx = 0, vis = true, started = false, t0 = 0, DUR = 3.0, mx = 0, my = 0, tx = 0, ty = 0, dirty = true, raf = 0;
+  var lastTx = 0, vis = true, started = false, t0 = 0, DUR = 3.1, mx = 0, my = 0, tx = 0, ty = 0, dirty = true, raf = 0;
   var D2R = Math.PI / 180;
   function ease(u) { return 1 - Math.pow(1 - u, 3); }
   function size() {
@@ -2067,7 +2067,7 @@ html.hb-gl .b3 { display: none; }
     size();
     var u = Math.min(1, (performance.now() - t0) / 1000 / DUR), e = ease(u), e2 = 1 - Math.pow(1 - u, 2);
     tx += (mx - tx) * .06; ty += (my - ty) * .06;
-    var yaw = (-215 + 239 * e) * D2R + tx * 9 * D2R * e, pit = (38 - 34 * e) * D2R - ty * 4 * D2R * e, rol = (-16 + 14 * e) * D2R;
+    var er = 1 - Math.pow(1 - u, 2.4), yaw = (-336 + 360 * er) * D2R + tx * 9 * D2R * e, pit = (38 - 34 * e) * D2R - ty * 4 * D2R * e, rol = (-16 + 14 * e) * D2R;
     var py = -1.85 * (1 - e2) - .02, pz = -3.4 * (1 - e);
     var Mm = mul(tr(0, py, pz), mul(rz(rol), mul(rx(pit), ry(yaw))));
     var aspect = cv.width / cv.height, camZ = 2.2, VP = mul(persp(26 * D2R, aspect, .1, 20), tr(0, 0, -camZ));
