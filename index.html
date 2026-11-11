@@ -1140,15 +1140,20 @@ html[dir="rtl"] .pm { padding: 6px 7px 6px 14px; }
   html.moving .b3, html.moving .hbs::before { animation-play-state: running !important; }
 }
 @keyframes hbIn {
-  0%   { opacity: 0; transform: translate3d(0, -16vh, -2600px) rotateY(-215deg) rotateX(22deg) rotateZ(-16deg); }
-  18%  { opacity: 1; }
-  70%  { opacity: 1; transform: translate3d(0, 1vh, 80px) rotateY(36deg) rotateX(2deg) rotateZ(-.5deg); }
+  0%   { opacity: 0; transform: translate3d(0, 78vh, -1500px) rotateY(-215deg) rotateX(38deg) rotateZ(-16deg); }
+  10%  { opacity: 1; }
+  68%  { opacity: 1; transform: translate3d(0, -2vh, 90px) rotateY(36deg) rotateX(2deg) rotateZ(-.5deg); }
   100% { opacity: 1; transform: translate3d(0, 0, 0) rotateY(24deg) rotateX(4deg) rotateZ(-2deg); }
 }
 @keyframes hbGlow { 0% { opacity: 0; } 65% { opacity: 1; } 100% { opacity: .55; } }
 @media (prefers-reduced-motion: reduce) { html.hb-go .b3 { animation-duration: .01s; } }
 /* ====== V.13: flavours are plain labels (not clickable) ====== */
 .pc-fl li.flx { padding: 7px 14px; border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.12); border-radius: 999px; font-size: 13px; letter-spacing: .04em; cursor: default; pointer-events: none; user-select: none; }
+
+/* ====== V.14: cards keep animating while scrolling; smoother motion ====== */
+html.moving .card, html.moving .card *, html.moving .card::before, html.moving .card::after, html.moving .panel .stg, html.moving .panel .fr { animation-play-state: running !important; }
+.card, .b3, .hbs { backface-visibility: hidden; }
+.card { will-change: transform; }
 </style>
 <style>[hidden]{display:none!important}html{background:#2a78bd}body{margin:0}img{max-width:100%}</style>
 </head>
@@ -1171,7 +1176,7 @@ html[dir="rtl"] .pm { padding: 6px 7px 6px 14px; }
 <div class="where" id="where" aria-hidden="true"><b></b><span></span></div>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="ver" aria-hidden="true">V.13</div>
+<div class="ver" aria-hidden="true">V.14</div>
 <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav class="dots-nav" id="dotsNav" aria-label="Sections"></nav>
