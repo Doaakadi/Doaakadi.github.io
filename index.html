@@ -1161,6 +1161,16 @@ html.hb-gl .b3 { display: none; }
 
 /* ====== V.16: soft shadows around the 3D bottle ====== */
 .hbgl { filter: drop-shadow(0 34px 30px rgba(4, 38, 90, .42)) drop-shadow(0 8px 10px rgba(4, 38, 90, .28)) drop-shadow(-14px 0 24px rgba(4, 38, 90, .18)); }
+
+/* ====== V.20: hair section tabs + rainbow Next button ====== */
+.grid.off { display: none !important; }
+.hairtabs { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 22px; }
+.hairtab { font: 500 13px var(--f-body); letter-spacing: .08em; color: #fff; padding: 10px 22px; border-radius: 999px; border: 1px solid rgba(255,255,255,.45); background: rgba(255,255,255,.1); cursor: pointer; transition: background .3s, transform .3s; }
+.hairtab:hover { background: rgba(255,255,255,.2); transform: translateY(-2px); }
+.hairtab.on { background: rgba(255,255,255,.28); border-color: #fff; }
+.nextbtn { border: 2px solid transparent !important; background: linear-gradient(#1d62a6, #1d62a6) padding-box, linear-gradient(90deg, #ff3b6b, #ffb02e, #f5f14a, #37e08a, #2fb8ff, #8a5bff, #ff3b6b) border-box !important; background-size: 100% 100%, 300% 100% !important; animation: rbRun 3.2s linear infinite !important; }
+.nextbtn:hover { animation: rbRun 3.2s linear infinite !important; filter: brightness(1.12); }
+html.moving .nextbtn { animation-play-state: running !important; }
 </style>
 <style>[hidden]{display:none!important}html{background:#2a78bd}body{margin:0}img{max-width:100%}</style>
 </head>
@@ -1183,7 +1193,7 @@ html.hb-gl .b3 { display: none; }
 <div class="where" id="where" aria-hidden="true"><b></b><span></span></div>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="ver" aria-hidden="true">V.19</div>
+<div class="ver" aria-hidden="true">V.20</div>
 <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav class="dots-nav" id="dotsNav" aria-label="Sections"></nav>
@@ -1244,6 +1254,25 @@ html.hb-gl .b3 { display: none; }
       </div>
     </div>
   </section>
+  <section class="panel deep" id="hair" data-nav="h_hair">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <div class="eyebrow stg" style="--n:0" data-i18n="e_hair"></div>
+          <h2 class="stg" style="--n:1"><span data-i18n="h_hair"></span><em>قسم الشعر</em></h2>
+        </div>
+        <p class="stg" style="--n:2" id="hairDesc" data-i18n="d_hair"></p>
+      </div>
+      <div class="hairtabs stg" style="--n:3" role="tablist">
+        <button type="button" class="hairtab on" role="tab" data-ht="hair" data-d="d_hair" data-i18n="tab_hair"></button>
+        <button type="button" class="hairtab" role="tab" data-ht="sidr" data-d="d_sidr" data-i18n="h_sidr"></button>
+        <button type="button" class="hairtab" role="tab" data-ht="henna" data-d="d_henna" data-i18n="h_henna"></button>
+      </div>
+      <div class="grid" data-cat="hair"></div>
+      <div class="grid off" data-cat="sidr"></div>
+      <div class="grid off" data-cat="henna"></div>
+    </div>
+  </section>
 
     <section class="panel wine duo solo" id="gifts" data-nav="h_gifts">
     <div class="wrap">
@@ -1255,45 +1284,6 @@ html.hb-gl .b3 { display: none; }
         <p class="stg" style="--n:2" data-i18n="d_gifts"></p>
       </div>
       <div class="grid" data-cat="gifts"></div>
-    </div>
-  </section>
-
-  <section class="panel deep" id="hair" data-nav="h_hair">
-    <div class="wrap">
-      <div class="head">
-        <div>
-          <div class="eyebrow stg" style="--n:0" data-i18n="e_hair"></div>
-          <h2 class="stg" style="--n:1"><span data-i18n="h_hair"></span><em>زيوت الشعر</em></h2>
-        </div>
-        <p class="stg" style="--n:2" data-i18n="d_hair"></p>
-      </div>
-      <div class="grid" data-cat="hair"></div>
-    </div>
-  </section>
-
-<section class="panel deep duo" id="sidr" data-nav="h_sidr">
-    <div class="wrap">
-      <div class="head">
-        <div>
-          <div class="eyebrow stg" style="--n:0" data-i18n="e_addons"></div>
-          <h2 class="stg" style="--n:1"><span data-i18n="h_sidr"></span><em>سدر</em></h2>
-        </div>
-        <p class="stg" style="--n:2" data-i18n="d_sidr"></p>
-      </div>
-      <div class="grid" data-cat="sidr"></div>
-    </div>
-  </section>
-
-  <section class="panel wine duo" id="henna" data-nav="h_henna">
-    <div class="wrap">
-      <div class="head">
-        <div>
-          <div class="eyebrow stg" style="--n:0" data-i18n="e_addons"></div>
-          <h2 class="stg" style="--n:1"><span data-i18n="h_henna"></span><em>حنة</em></h2>
-        </div>
-        <p class="stg" style="--n:2" data-i18n="d_henna"></p>
-      </div>
-      <div class="grid" data-cat="henna"></div>
     </div>
   </section>
 
@@ -1418,7 +1408,7 @@ html.hb-gl .b3 { display: none; }
       complete: "Complete order", contact_wa: "Contact us on WhatsApp", back_shop: "Back to shop", op_title: "Your order", op_sum: "Order summary", op_note: "Card payment is coming soon. For now we confirm your order with you on WhatsApp.", remove: "Remove", items: "Items", each: "each",
       cart: "Cart", sure: "Are you sure?", yes: "Yes, send", no: "Not yet", brand: "DOAA KADI", mono: "DK", brand_sub: "Luxury Perfumes", foot: "© Doaa Kadi · Luxury Perfumes", n_home: "Home", n_perfumes: "Perfumes", n_fawhat: "Air Scents", n_oils: "Oil Perfumes", n_addons: "Sidr & Henna", n_story: "Our Story", n_contact: "Order",
       greet: "Welcome to Doaa Kadi",
-      na: "NA", h_gifts: "Gifts", e_gifts: "Ready to give", d_gifts: "Wrapped with a ribbon and ready to give.", h_hair: "Hair Oil Perfumes", e_hair: "Hair care", d_hair: "Scented oils and mists that keep your hair smelling good all day.",
+      na: "NA", h_gifts: "Gifts", e_gifts: "Ready to give", d_gifts: "Wrapped with a ribbon and ready to give.", h_hair: "Hair Section", tab_hair: "Hair oil", e_hair: "Hair care", d_hair: "Scented oils and mists that keep your hair smelling good all day.",
       promise: "A Fragrance That Stays With You", e_promise: "Always with you", promise_sub: "On your skin, in your home, all through your day.",
       tagline: "More than a fragrance… it’s a feeling", shop: "Shop the collection", wa_cta: "Order on WhatsApp", scroll: "Scroll",
       e_perfumes: "Eau de parfum", d_perfumes: "Signature scents in 100 ml glass bottles. Long lasting, made to be remembered.",
@@ -1446,7 +1436,7 @@ html.hb-gl .b3 { display: none; }
       complete: "إتمام الطلب", contact_wa: "كلمنا على واتساب", back_shop: "الرجوع للمتجر", op_title: "طلبك", op_sum: "ملخص الطلب", op_note: "الدفع بالكارت قريبًا. دلوقتي بنأكد طلبك معاك على واتساب.", remove: "حذف", items: "القطع", each: "للواحدة",
       cart: "السلة", sure: "متأكد يا قمر؟", yes: "أيوه، ابعت", no: "لسه", brand: "دعاء القاضي", mono: "DK", brand_sub: "عطور فاخرة", foot: "© دعاء القاضي · عطور فاخرة", n_home: "الرئيسية", n_perfumes: "عطور", n_fawhat: "فوحات", n_oils: "عطور زيتية", n_addons: "سدر وحنة", n_story: "حكايتنا", n_contact: "اطلب",
       greet: "حيّاك الله في دعاء القاضي",
-      na: "غير محدد", h_gifts: "هدايا", e_gifts: "للإهداء", d_gifts: "جاهزة للإهداء ومغلفة بشريط حلو.", h_hair: "زيوت الشعر العطرية", e_hair: "للعناية بالشعر", d_hair: "زيوت وبخاخات عطرية تدلّع شعرك وريحتها تفضل طول اليوم.",
+      na: "غير محدد", h_gifts: "هدايا", e_gifts: "للإهداء", d_gifts: "جاهزة للإهداء ومغلفة بشريط حلو.", h_hair: "قسم الشعر", tab_hair: "زيت الشعر", e_hair: "للعناية بالشعر", d_hair: "زيوت وبخاخات عطرية تدلّع شعرك وريحتها تفضل طول اليوم.",
       promise: "عطر يرافقك… دوام لا ينتهي", e_promise: "دايمًا معاك", promise_sub: "على جلدك، في بيتك، وطول يومك.",
       tagline: "أكتر من عطر… ده إحساس", shop: "تسوّق المجموعة", wa_cta: "اطلب على واتساب", scroll: "انزل",
       e_perfumes: "أو دو بارفان", d_perfumes: "عطور مميزة في زجاجات ١٠٠ مل، ثباتها طويل وريحتها ما تتنسيش.",
@@ -1472,6 +1462,7 @@ html.hb-gl .b3 { display: none; }
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var t = function (k) { return T[lang][k] || k; };
+  window.__t = t;
   var cur = function () { return CURRENCY[lang]; };
   var num = function (n) { return lang === "ar" ? String(n).replace(/\d/g, function (d) { return "٠١٢٣٤٥٦٧٨٩"[d]; }) : String(n); };
   var wa = function (text) { return "https://wa.me/" + WA_NUMBER + (text ? "?text=" + encodeURIComponent(text) : ""); };
@@ -2103,6 +2094,19 @@ html.hb-gl .b3 { display: none; }
   document.addEventListener("visibilitychange", function () { if (!document.hidden && started && !raf) raf = requestAnimationFrame(frame); });
   window.addEventListener("resize", function () { if (started && !raf) raf = requestAnimationFrame(frame); });
   window.__hbStart = function () { if (started) return; started = true; document.documentElement.classList.add("hb-gl"); t0 = performance.now(); raf = requestAnimationFrame(frame); };
+})();
+
+/* ---------- hair section tabs ---------- */
+(function () {
+  var sec = document.getElementById("hair"); if (!sec) return;
+  sec.addEventListener("click", function (ev) {
+    var b = ev.target.closest(".hairtab"); if (!b) return;
+    var k = b.dataset.ht;
+    sec.querySelectorAll(".hairtab").forEach(function (x) { x.classList.toggle("on", x === b); x.setAttribute("aria-selected", x === b ? "true" : "false"); });
+    sec.querySelectorAll(".grid[data-cat]").forEach(function (g) { g.classList.toggle("off", g.dataset.cat !== k); });
+    var d = document.getElementById("hairDesc"); d.setAttribute("data-i18n", b.dataset.d);
+    if (window.__t) d.textContent = window.__t(b.dataset.d);
+  });
 })();
 </script>
 
