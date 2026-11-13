@@ -1270,7 +1270,8 @@ html.moving .nextbtn { animation-play-state: running !important; }
 .mini .mv3 img{width:100%;height:100%;object-fit:contain;display:block}
 .mini .szo{color:#bfe3ff;font-weight:500}
 @media (max-width:700px){.pc-3d{aspect-ratio:1/1;min-height:240px}.szbtn b{font-size:21px}}
-@media (min-width:1001px){html[dir=ltr] .cine-stage{left:104%}}
+@media (min-width:1001px){html[dir=ltr] .cine-stage{left:34%} html[dir=ltr] .cine-bg{background-position:40% 50%} html[dir=ltr].hb-go .cine-img{opacity:.4}}
+@media (min-width:1001px){html[dir=ltr] .cine-bg{-webkit-mask-image:linear-gradient(90deg,#000 0,#000 38%,transparent 62%);mask-image:linear-gradient(90deg,#000 0,#000 38%,transparent 62%)}}
 </style>
 <style>[hidden]{display:none!important}html{background:#2a78bd}body{margin:0}img{max-width:100%}</style>
 </head>
@@ -1293,7 +1294,7 @@ html.moving .nextbtn { animation-play-state: running !important; }
 <div class="where" id="where" aria-hidden="true"><b></b><span></span></div>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="ver" aria-hidden="true">V.28</div>
+<div class="ver" aria-hidden="true">V.29</div>
 <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav class="dots-nav" id="dotsNav" aria-label="Sections"></nav>
@@ -1540,7 +1541,7 @@ html.moving .nextbtn { animation-play-state: running !important; }
       complete: "إتمام الطلب", contact_wa: "كلمنا على واتساب", back_shop: "الرجوع للمتجر", op_title: "طلبك", op_sum: "ملخص الطلب", op_note: "الدفع بالكارت قريبًا. دلوقتي بنأكد طلبك معاك على واتساب.", remove: "حذف", items: "القطع", each: "للواحدة",
       cart: "السلة", sure: "متأكد يا قمر؟", yes: "أيوه، ابعت", no: "لسه", brand: "دعاء القاضي", mono: "DK", brand_sub: "عطور فاخرة", foot: "© دعاء القاضي · عطور فاخرة", n_home: "الرئيسية", n_perfumes: "عطور", n_fawhat: "فوحات", n_oils: "عطور زيتية", n_addons: "سدر وحنة", n_story: "حكايتنا", n_contact: "اطلب",
       greet: "حيّاك الله في دعاء القاضي",
-      na: "غير محدد", ml: "مل", sz_t: "الحجم", tester: "عطر تستر", from_p: "يبدأ من", h_gifts: "هدايا", e_gifts: "للإهداء", d_gifts: "جاهزة للإهداء ومغلفة بشريط حلو.", h_hair: "العناية بالشعر", tab_hair: "زيت الشعر", e_hair: "زيوت وبخاخات عطرية", d_hair: "زيوت وبخاخات عطرية تدلّع شعرك وريحتها تفضل طول اليوم.",
+      na: "غير محدد", ml: "مل", sz_t: "الحجم", tester: "تجرُبة العطر", from_p: "يبدأ من", h_gifts: "هدايا", e_gifts: "للإهداء", d_gifts: "جاهزة للإهداء ومغلفة بشريط حلو.", h_hair: "العناية بالشعر", tab_hair: "زيت الشعر", e_hair: "زيوت وبخاخات عطرية", d_hair: "زيوت وبخاخات عطرية تدلّع شعرك وريحتها تفضل طول اليوم.",
       promise: "عطر يرافقك… دوام لا ينتهي", e_promise: "دايمًا معاك", promise_sub: "على جلدك، في بيتك، وطول يومك.",
       tagline: "أكتر من عطر… ده إحساس", shop: "تسوّق المجموعة", wa_cta: "اطلب على واتساب", scroll: "انزل",
       e_perfumes: "أو دو بارفان", d_perfumes: "عطور مميزة في زجاجات ١٠٠ مل، ثباتها طويل وريحتها ما تتنسيش.",
