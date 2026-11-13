@@ -1246,6 +1246,31 @@ html.moving .nextbtn { animation-play-state: running !important; }
 @media (max-width: 1000px) and (orientation: portrait), (max-width: 640px) {
   .panel:not(.hero):not(.shop):not(#promise):not(#contact) > .wrap > .head, .hairtabs { flex: none !important; height: auto !important; }
 }
+
+/* V.28 3D product card */
+.pc-3d{position:relative;aspect-ratio:4/5;min-height:300px;border-radius:24px;overflow:hidden;background:radial-gradient(90% 70% at 50% 38%,rgba(191,227,255,.55),rgba(191,227,255,.08) 70%),linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.28)}
+.pc-3d .pc-gl{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab}
+.pc-3d .pc-gl.drag{cursor:grabbing}
+.pc-sz{margin-top:20px}
+.pc-sz h4{margin:0 0 10px;font:500 11px var(--f-body);letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.szrow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.szbtn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px 6px;border-radius:16px;cursor:pointer;color:#fff;font:400 14px var(--f-body);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3);transition:background .3s,border-color .3s,box-shadow .3s,transform .3s}
+.szbtn b{font:600 24px var(--f-display)}
+.szbtn em{font-style:normal;font-size:12px;opacity:.85}
+.szbtn:hover{background:rgba(255,255,255,.18)}
+.szbtn.on{background:#174f8a;border-color:#bfe3ff;box-shadow:0 0 0 1px #bfe3ff,0 8px 22px rgba(10,40,80,.35);transform:translateY(-2px)}
+.testerbtn{margin-top:10px;width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 16px;border-radius:999px;cursor:pointer;color:#fff;font:500 14px var(--f-body);background:transparent;border:1px dashed rgba(255,255,255,.55);transition:background .3s,border-color .3s}
+.testerbtn em{font-style:normal;font-size:12px;opacity:.85}
+.testerbtn:hover{background:rgba(255,255,255,.1)}
+.testerbtn.on{background:#174f8a;border:1px solid #bfe3ff;box-shadow:0 0 0 1px #bfe3ff}
+.pc-row .price.pop{animation:pricePop .45s ease}
+@keyframes pricePop{0%{transform:scale(.8);opacity:.3}60%{transform:scale(1.12)}100%{transform:none;opacity:1}}
+.fromt{font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.75;margin-inline-end:4px}
+.mini .mv3{background:none}
+.mini .mv3 img{width:100%;height:100%;object-fit:contain;display:block}
+.mini .szo{color:#bfe3ff;font-weight:500}
+@media (max-width:700px){.pc-3d{aspect-ratio:1/1;min-height:240px}.szbtn b{font-size:21px}}
+@media (min-width:1001px){html[dir=ltr] .cine-stage{left:104%}}
 </style>
 <style>[hidden]{display:none!important}html{background:#2a78bd}body{margin:0}img{max-width:100%}</style>
 </head>
@@ -1268,7 +1293,7 @@ html.moving .nextbtn { animation-play-state: running !important; }
 <div class="where" id="where" aria-hidden="true"><b></b><span></span></div>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="ver" aria-hidden="true">V.27</div>
+<div class="ver" aria-hidden="true">V.28</div>
 <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav class="dots-nav" id="dotsNav" aria-label="Sections"></nav>
@@ -1487,7 +1512,7 @@ html.moving .nextbtn { animation-play-state: running !important; }
       complete: "Complete order", contact_wa: "Contact us on WhatsApp", back_shop: "Back to shop", op_title: "Your order", op_sum: "Order summary", op_note: "Card payment is coming soon. For now we confirm your order with you on WhatsApp.", remove: "Remove", items: "Items", each: "each",
       cart: "Cart", sure: "Are you sure?", yes: "Yes, send", no: "Not yet", brand: "DOAA KADI", mono: "DK", brand_sub: "Luxury Perfumes", foot: "© Doaa Kadi · Luxury Perfumes", n_home: "Home", n_perfumes: "Perfumes", n_fawhat: "Air Scents", n_oils: "Oil Perfumes", n_addons: "Sidr & Henna", n_story: "Our Story", n_contact: "Order",
       greet: "Welcome to Doaa Kadi",
-      na: "NA", h_gifts: "Gifts", e_gifts: "Ready to give", d_gifts: "Wrapped with a ribbon and ready to give.", h_hair: "Hair care", tab_hair: "Hair oil", e_hair: "Scented oils & mists", d_hair: "Scented oils and mists that keep your hair smelling good all day.",
+      na: "NA", ml: "ml", sz_t: "Size", tester: "Tester perfume", from_p: "From", h_gifts: "Gifts", e_gifts: "Ready to give", d_gifts: "Wrapped with a ribbon and ready to give.", h_hair: "Hair care", tab_hair: "Hair oil", e_hair: "Scented oils & mists", d_hair: "Scented oils and mists that keep your hair smelling good all day.",
       promise: "A Fragrance That Stays With You", e_promise: "Always with you", promise_sub: "On your skin, in your home, all through your day.",
       tagline: "More than a fragrance… it’s a feeling", shop: "Shop the collection", wa_cta: "Order on WhatsApp", scroll: "Scroll",
       e_perfumes: "Eau de parfum", d_perfumes: "Signature scents in 100 ml glass bottles. Long lasting, made to be remembered.",
@@ -1515,7 +1540,7 @@ html.moving .nextbtn { animation-play-state: running !important; }
       complete: "إتمام الطلب", contact_wa: "كلمنا على واتساب", back_shop: "الرجوع للمتجر", op_title: "طلبك", op_sum: "ملخص الطلب", op_note: "الدفع بالكارت قريبًا. دلوقتي بنأكد طلبك معاك على واتساب.", remove: "حذف", items: "القطع", each: "للواحدة",
       cart: "السلة", sure: "متأكد يا قمر؟", yes: "أيوه، ابعت", no: "لسه", brand: "دعاء القاضي", mono: "DK", brand_sub: "عطور فاخرة", foot: "© دعاء القاضي · عطور فاخرة", n_home: "الرئيسية", n_perfumes: "عطور", n_fawhat: "فوحات", n_oils: "عطور زيتية", n_addons: "سدر وحنة", n_story: "حكايتنا", n_contact: "اطلب",
       greet: "حيّاك الله في دعاء القاضي",
-      na: "غير محدد", h_gifts: "هدايا", e_gifts: "للإهداء", d_gifts: "جاهزة للإهداء ومغلفة بشريط حلو.", h_hair: "العناية بالشعر", tab_hair: "زيت الشعر", e_hair: "زيوت وبخاخات عطرية", d_hair: "زيوت وبخاخات عطرية تدلّع شعرك وريحتها تفضل طول اليوم.",
+      na: "غير محدد", ml: "مل", sz_t: "الحجم", tester: "عطر تستر", from_p: "يبدأ من", h_gifts: "هدايا", e_gifts: "للإهداء", d_gifts: "جاهزة للإهداء ومغلفة بشريط حلو.", h_hair: "العناية بالشعر", tab_hair: "زيت الشعر", e_hair: "زيوت وبخاخات عطرية", d_hair: "زيوت وبخاخات عطرية تدلّع شعرك وريحتها تفضل طول اليوم.",
       promise: "عطر يرافقك… دوام لا ينتهي", e_promise: "دايمًا معاك", promise_sub: "على جلدك، في بيتك، وطول يومك.",
       tagline: "أكتر من عطر… ده إحساس", shop: "تسوّق المجموعة", wa_cta: "اطلب على واتساب", scroll: "انزل",
       e_perfumes: "أو دو بارفان", d_perfumes: "عطور مميزة في زجاجات ١٠٠ مل، ثباتها طويل وريحتها ما تتنسيش.",
@@ -1541,7 +1566,7 @@ html.moving .nextbtn { animation-play-state: running !important; }
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var t = function (k) { return T[lang][k] || k; };
-  window.__t = t;
+  window.__t = t; window.__renderCart = function () { try { renderCart(); } catch (e) {} };
   var cur = function () { return CURRENCY[lang]; };
   var num = function (n) { return lang === "ar" ? String(n).replace(/\d/g, function (d) { return "٠١٢٣٤٥٦٧٨٩"[d]; }) : String(n); };
   var wa = function (text) { return "https://wa.me/" + WA_NUMBER + (text ? "?text=" + encodeURIComponent(text) : ""); };
@@ -1571,7 +1596,7 @@ html.moving .nextbtn { animation-play-state: running !important; }
   try { fav = JSON.parse(localStorage.getItem("dk-fav") || "{}") || {}; } catch (e) {}
   var nameOf = function (p) { return lang === "ar" && p.ar ? p.ar : p.en; };
   var descOf = function (p) { return p.d ? p.d[lang] : (p.s ? (lang === "ar" ? p.s.replace(/\d+/g, num) : p.s) : ""); };
-  function priceHtml(p) { return p.price == null ? '<span class="price na">' + t("na") + '</span>' : '<span class="price">' + num(p.price) + '<small>' + cur() + '</small></span>'; }
+  function priceHtml(p) { if (hasSizes(p)) return '<span class="price"><small class="fromt">' + t("from_p") + '</small> ' + num(SIZEP["30"]) + '<small>' + cur() + '</small></span>'; return p.price == null ? '<span class="price na">' + t("na") + '</span>' : '<span class="price">' + num(p.price) + '<small>' + cur() + '</small></span>'; }
   function heartBtn(p) { return '<button class="heart' + (fav[p.id] ? ' on' : '') + '" type="button" data-fav="' + p.id + '" aria-label="' + t("fav_add") + '" title="' + t("fav_add") + '">' + HEART + '</button>'; }
   function acts(p) { return '<div class="acts"><button class="add" type="button" data-add="' + p.id + '">' + t("add") + '</button>' + heartBtn(p) + '</div>'; }
   function visOf(p, i) {
@@ -1638,24 +1663,29 @@ html.moving .nextbtn { animation-play-state: running !important; }
   }
 
   /* ---------- big product card ---------- */
-  var modalId = null, modalFl = null;
+  var modalId = null, modalFl = null, modalSz = "50";
   function renderModal() {
     var p = find(modalId); if (!p) return;
     var tag = CATKEY[p.cat] && p.cat !== "mine" ? '<span class="pc-tag">' + t(CATKEY[p.cat]) + '</span>' : "";
-    var vis = p.d ? "" : '<div class="pc-vis">' + visOf(p, P.indexOf(p)) + '</div>';
+    var sized = hasSizes(p) && !(window.DKB && window.DKB.ok === false);
+    var vis = sized ? '<div class="pc-vis pc-3d"></div>' : (p.d ? "" : '<div class="pc-vis">' + visOf(p, P.indexOf(p)) + '</div>');
     var fl = p.fl ? '<div class="pc-fl"><h4>' + t("flavours") + '</h4><ul>' + p.fl.map(function (f) { return '<li class="flx">' + flName(f) + '</li>'; }).join("") + '</ul></div>' : "";
     var alt = p.d ? "" : '<small>' + (lang === "ar" ? p.en : p.ar) + '</small>';
-    $("#pcard").className = "pcard" + (p.d ? " solo" : "");
+    $("#pcard").className = "pcard" + (p.d && !sized ? " solo" : "");
+    var szUi = sized ? '<div class="pc-sz"><h4>' + t("sz_t") + '</h4><div class="szrow">' + ["30", "50", "100"].map(function (s) { return '<button type="button" class="szbtn' + (modalSz === s ? ' on' : '') + '" data-sz="' + s + '"><b>' + num(s) + '</b> ' + t("ml") + '<em>' + num(SIZEP[s]) + ' ' + cur() + '</em></button>'; }).join("") +
+      '</div><button type="button" class="testerbtn' + (modalSz === "t" ? ' on' : '') + '" data-sz="t"><span>' + t("tester") + '</span><em>' + num(10) + ' ' + t("ml") + ' · ' + num(SIZEP.t) + ' ' + cur() + '</em></button></div>' : "";
+    var prc = sized ? '<span class="price" id="pcPrice">' + num(SIZEP[modalSz]) + '<small>' + cur() + '</small></span>' : priceHtml(p);
     $("#pcard").innerHTML = '<button class="x pc-x" type="button" data-close aria-label="' + t("close") + '">' + XICO + '</button>' + vis +
-      '<div class="pc-body">' + tag + '<h2>' + nameOf(p) + alt + '</h2>' + (descOf(p) ? '<p class="pc-desc">' + descOf(p) + '</p>' : '') + fl +
-      '<div class="pc-row">' + priceHtml(p) + acts(p) + '</div></div>';
+      '<div class="pc-body">' + tag + '<h2>' + nameOf(p) + alt + '</h2>' + (descOf(p) ? '<p class="pc-desc">' + descOf(p) + '</p>' : '') + fl + szUi +
+      '<div class="pc-row">' + prc + acts(p) + '</div></div>';
+    if (sized && window.DKB && window.DKB.mount) { if (!window.DKB.mount($("#pcard .pc-3d"), { name: labName(p), ml: modalSz })) { $("#pcard .pc-3d").remove(); } }
   }
   function openModal(id) {
     var p = find(id); if (!p || p.empty) return;
-    menu(false); modalId = id; modalFl = null; renderModal();
+    menu(false); modalId = id; modalFl = null; modalSz = "50"; renderModal();
     $("#pmodal").classList.add("open"); $("#pmodal").setAttribute("aria-hidden", "false"); ovlSync();
   }
-  function closeModal() { modalId = null; $("#pmodal").classList.remove("open"); $("#pmodal").setAttribute("aria-hidden", "true"); ovlSync(); }
+  function closeModal() { modalId = null; if (window.DKB && window.DKB.unmount) window.DKB.unmount(); $("#pmodal").classList.remove("open"); $("#pmodal").setAttribute("aria-hidden", "true"); ovlSync(); }
   function ovl() { return !!document.querySelector(".pmodal.open,.drawer.open,.opage.open"); }
   function ovlSync() { document.documentElement.classList.toggle("ovl", ovl()); }
 
@@ -1679,26 +1709,33 @@ html.moving .nextbtn { animation-play-state: running !important; }
   /* ---------- cart, favourites, order page ---------- */
   var cart = {};
   try { cart = JSON.parse(localStorage.getItem("dk-cart") || "{}") || {}; } catch (e) {}
-  var find = function (id) { id = String(id).split("~")[0]; return P.filter(function (p) { return p.id === id && !p.empty; })[0]; };
+  var find = function (id) { id = String(id).split(/[~@]/)[0]; return P.filter(function (p) { return p.id === id && !p.empty; })[0]; };
   var flOf = function (k) { return String(k).split("~")[1] || ""; };
+  var szOf = function (k) { return String(k).split("@")[1] || ""; };
+  var SIZEP = { "30": 55, "50": 65, "100": 155, "t": 10 };
+  var hasSizes = function (p) { return !!(p && p.cat === "perfumes" && p.d); };
+  var szLabel = function (s) { return s === "t" ? t("tester") + " · " + num(10) + " " + t("ml") : num(s) + " " + t("ml"); };
+  var priceOfKey = function (k, p) { var s = szOf(k); return s && SIZEP[s] != null ? SIZEP[s] : p.price; };
+  var labName = function (p) { return p.en || p.name || nameOf(p); };
   Object.keys(cart).forEach(function (id) { if (!find(id)) delete cart[id]; });
   Object.keys(fav).forEach(function (id) { if (!find(id)) delete fav[id]; });
   function save() { try { localStorage.setItem("dk-cart", JSON.stringify(cart)); } catch (e) {} }
   function saveFav() { try { localStorage.setItem("dk-fav", JSON.stringify(fav)); } catch (e) {} }
   function totals() {
     var n = 0, sum = 0, unk = false;
-    Object.keys(cart).forEach(function (id) { var p = find(id); if (p) { n += cart[id]; if (p.price == null) unk = true; else sum += cart[id] * p.price; } });
+    Object.keys(cart).forEach(function (id) { var p = find(id); if (p) { n += cart[id]; if (p.price == null) unk = true; else sum += cart[id] * priceOfKey(id, p); } });
     return { n: n, sum: sum, unk: unk };
   }
   function totalText(tt) { return tt.unk ? (tt.sum ? num(tt.sum) + " " + cur() + " + " + t("na") : t("na")) : num(tt.sum) + " " + cur(); }
-  function lineText(p, q) { return p.price == null ? t("na") : num(p.price * q) + " " + cur(); }
+  function lineText(p, q, id) { var pr = id ? priceOfKey(id, p) : p.price; return pr == null ? t("na") : num(pr * q) + " " + cur(); }
   function orderText() {
     var tt = totals(), L = [t("order_head")];
-    Object.keys(cart).forEach(function (id) { var p = find(id); if (p) L.push("• " + nameOf(p) + (flOf(id) ? " (" + flOf(id) + ")" : "") + " × " + cart[id] + " = " + (p.price == null ? t("na") : p.price * cart[id] + " " + cur())); });
+    Object.keys(cart).forEach(function (id) { var p = find(id); if (p) L.push("• " + nameOf(p) + (flOf(id) ? " (" + flOf(id) + ")" : "") + (szOf(id) ? " (" + szLabel(szOf(id)) + ")" : "") + " × " + cart[id] + " = " + (priceOfKey(id, p) == null ? t("na") : priceOfKey(id, p) * cart[id] + " " + cur())); });
     L.push(t("sum") + ": " + (tt.unk ? (tt.sum ? tt.sum + " " + cur() + " + " + t("na") : t("na")) : tt.sum + " " + cur()));
     return L.join("\n");
   }
-  function miniVis(p) { return p.img ? '<span class="mv ph" style="--img:var(--ph-' + p.id + ')"></span>' : (p.t ? '<span class="mv">' + art(p, P.indexOf(p)) + '</span>' : ""); }
+  function thumbOf(id, p) { var s = szOf(id) || "50"; return window.DKB && window.DKB.thumb ? window.DKB.thumb(s, labName(p)) : ""; }
+  function miniVis(p, id) { if (hasSizes(p)) { var u = thumbOf(id || p.id, p); return u ? '<span class="mv mv3"><img alt="" src="' + u + '"></span>' : ""; } return p.img ? '<span class="mv ph" style="--img:var(--ph-' + p.id + ')"></span>' : (p.t ? '<span class="mv">' + art(p, P.indexOf(p)) + '</span>' : ""); }
   function cartIds() { return Object.keys(cart).filter(function (id) { return find(id) && cart[id] > 0; }); }
   function renderCart() {
     var tt = totals(), ids = cartIds();
@@ -1707,8 +1744,8 @@ html.moving .nextbtn { animation-play-state: running !important; }
     $("#goOrder").hidden = !ids.length;
     $("#lines").innerHTML = ids.length ? ids.map(function (id) {
       var p = find(id);
-      return '<div class="mini">' + miniVis(p) + '<div class="mi"><b>' + nameOf(p) + '</b>' + (descOf(p) ? '<small>' + descOf(p) + '</small>' : '') + (flOf(id) ? '<small class="flo">' + t("flavours") + ': ' + flName(flOf(id)) + '</small>' : '') +
-        '<span class="mp">' + lineText(p, cart[id]) + '<em>× ' + num(cart[id]) + '</em></span></div><button class="rm" type="button" data-rm="' + id + '" aria-label="' + t("remove") + '">' + XICO + '</button></div>';
+      return '<div class="mini">' + miniVis(p, id) + '<div class="mi"><b>' + nameOf(p) + '</b>' + (szOf(id) ? '<small class="szo">' + szLabel(szOf(id)) + '</small>' : (descOf(p) ? '<small>' + descOf(p) + '</small>' : '')) + (flOf(id) ? '<small class="flo">' + t("flavours") + ': ' + flName(flOf(id)) + '</small>' : '') +
+        '<span class="mp">' + lineText(p, cart[id], id) + '<em>× ' + num(cart[id]) + '</em></span></div><button class="rm" type="button" data-rm="' + id + '" aria-label="' + t("remove") + '">' + XICO + '</button></div>';
     }).join("") : '<div class="empty">' + t("empty") + '</div>';
     renderOrder();
   }
@@ -1716,11 +1753,11 @@ html.moving .nextbtn { animation-play-state: running !important; }
     var tt = totals(), ids = cartIds();
     $("#opList").innerHTML = ids.length ? ids.map(function (id) {
       var p = find(id);
-      return '<article class="oi">' + miniVis(p) + '<div class="oi-b"><h3>' + nameOf(p) + '</h3>' + (descOf(p) ? '<p>' + descOf(p) + '</p>' : '') +
+      return '<article class="oi">' + miniVis(p, id) + '<div class="oi-b"><h3>' + nameOf(p) + '</h3>' + (szOf(id) ? '<p>' + szLabel(szOf(id)) + '</p>' : (descOf(p) ? '<p>' + descOf(p) + '</p>' : '')) +
         '<div class="oi-r"><span class="qty"><button type="button" data-q="-1" data-id="' + id + '" aria-label="-">−</button>' + num(cart[id]) + '<button type="button" data-q="1" data-id="' + id + '" aria-label="+">+</button></span>' +
-        '<span class="oi-p">' + lineText(p, cart[id]) + '</span><button class="oi-rm" type="button" data-rm="' + id + '">' + t("remove") + '</button></div></div></article>';
+        '<span class="oi-p">' + lineText(p, cart[id], id) + '</span><button class="oi-rm" type="button" data-rm="' + id + '">' + t("remove") + '</button></div></div></article>';
     }).join("") : '<div class="empty">' + t("empty") + '</div>';
-    $("#opRows").innerHTML = ids.map(function (id) { var p = find(id); return '<div><span>' + nameOf(p) + (flOf(id) ? ' (' + flOf(id) + ')' : '') + ' <em>× ' + num(cart[id]) + '</em></span><b>' + lineText(p, cart[id]) + '</b></div>'; }).join("");
+    $("#opRows").innerHTML = ids.map(function (id) { var p = find(id); return '<div><span>' + nameOf(p) + (flOf(id) ? ' (' + flOf(id) + ')' : '') + (szOf(id) ? ' (' + szLabel(szOf(id)) + ')' : '') + ' <em>× ' + num(cart[id]) + '</em></span><b>' + lineText(p, cart[id], id) + '</b></div>'; }).join("");
     $("#opTotal").textContent = totalText(tt);
     $("#sendOrder").href = ids.length ? wa(orderText()) : wa(t("hello"));
   }
@@ -1810,8 +1847,16 @@ html.moving .nextbtn { animation-play-state: running !important; }
   }
   document.addEventListener("click", function (e) {
     var tg = e.target, b = tg.closest("[data-add]");
+    var szb = tg.closest("[data-sz]");
+    if (szb && modalId) {
+      modalSz = szb.dataset.sz; $$("#pcard [data-sz]").forEach(function (x) { x.classList.toggle("on", x.dataset.sz === modalSz); });
+      var pe = $("#pcPrice"); if (pe) { pe.innerHTML = num(SIZEP[modalSz]) + '<small>' + cur() + '</small>'; pe.classList.remove("pop"); void pe.offsetWidth; pe.classList.add("pop"); }
+      if (window.DKB && window.DKB.set) window.DKB.set(modalSz);
+      return;
+    }
+    if (b && hasSizes(find(b.dataset.add)) && !b.closest("#pcard")) { var fd = b.dataset.add; if (typeof openDrawer === "function") { try { openDrawer(null); } catch (x) {} } openModal(fd); return; }
     if (b) {
-      var ak = b.dataset.add + (modalFl && b.closest("#pcard") ? "~" + modalFl : "");
+      var ak = b.dataset.add + (hasSizes(find(b.dataset.add)) && b.closest("#pcard") ? "@" + modalSz : (modalFl && b.closest("#pcard") ? "~" + modalFl : ""));
       cart[ak] = (cart[ak] || 0) + 1; save(); renderCart();
       b.classList.add("done"); b.textContent = t("added"); setTimeout(function () { b.classList.remove("done"); b.textContent = t("add"); }, 1200);
       chime();
@@ -2237,6 +2282,266 @@ html.moving .nextbtn { animation-play-state: running !important; }
   if (window.visualViewport) window.visualViewport.addEventListener("resize", function () { setTimeout(fit, 60); });
   document.addEventListener("click", function () { setTimeout(fit, 80); });
   [400, 1500, 3500, 6000].forEach(function (d) { setTimeout(fit, d); });
+})();
+
+
+/* ---------- 3D product viewer: sizes, liquid level, tester, cart thumbnails ---------- */
+(function () {
+  "use strict";
+  var VS = "attribute vec3 aP;attribute vec3 aN;attribute vec2 aT;uniform mat4 uM;uniform mat4 uVP;varying vec3 vW;varying vec3 vN;varying vec2 vT;varying vec3 vL;void main(){vec4 w=uM*vec4(aP,1.);vL=aP;vW=w.xyz;vN=mat3(uM)*aN;vT=aT;gl_Position=uVP*w;}", FS = "precision mediump float;varying vec3 vW;varying vec3 vN;varying vec2 vT;varying vec3 vL;uniform float uTime;uniform float uAmp;uniform float uTop;uniform float uAlpha;uniform vec3 uCam;uniform int uMode;uniform int uPass;uniform sampler2D uTex;" +
+    "vec3 env(vec3 r){float h=r.y*.5+.5;vec3 c=mix(vec3(.22,.46,.78),vec3(.93,.97,1.),smoothstep(0.,1.,h));" +
+    "float s1=smoothstep(.76,.93,dot(r,normalize(vec3(-.45,.55,.7))));float s2=smoothstep(.84,.97,dot(r,normalize(vec3(.75,.25,.55))));" +
+    "float s3=smoothstep(.9,.99,dot(r,normalize(vec3(.1,.9,.3))));float band=smoothstep(0.,.05,.1-abs(r.y-.12))*.45;return c+s1*1.5+s2*.9+s3*.7+band;}" +
+    "void main(){vec3 N=normalize(vN);vec3 V=normalize(uCam-vW);float nv=dot(N,V);" +
+    "if(uMode==0){ if(uPass==0&&nv>0.)discard; if(uPass==1&&nv<0.)discard; if(nv<0.)N=-N; nv=abs(nv);" +
+    "float f=pow(1.-nv,3.);vec3 R=reflect(-V,N);vec3 e=env(R);float a=.09+.75*f+.4*max(e.r-1.,0.);a+=.10*smoothstep(.55,1.,abs(N.x));" +
+    "if(uPass==0)a*=.7;vec3 col=vec3(.66,.88,1.)*.2*(.65+.35*smoothstep(-.45,.25,vW.y))+e*(.18+.9*f);float rim=pow(1.-nv,4.5);float gl=pow(max(sin(vW.x*3.2+vW.y*2.1-uTime*1.3),0.),22.);col+=vec3(.85,.95,1.)*(rim*1.1+gl*rim*2.4);a=min(1.,a+rim*.55+gl*rim*.6);gl_FragColor=vec4(col*min(a,1.),a);}" +
+    "else if(uMode==1){ float topY=uTop+(sin(vL.x*13.+uTime*4.6)*.011+sin(vL.z*10.-uTime*3.7)*.008+vL.x*.05)*uAmp; if(vL.y>topY)discard; float men=smoothstep(.014,0.,topY-vL.y); if(uPass==0&&nv>0.)discard; if(uPass==1&&nv<0.)discard; if(nv<0.)N=-N;" +
+    "float d=.62+.38*max(dot(N,normalize(vec3(-.4,.7,.6))),0.);float g=smoothstep(-.45,.3,vW.y);" +
+    "vec3 c=mix(vec3(.38,.82,.98),vec3(.7,.94,1.),g)*d;float a=(uPass==0)?.30:.34;c*=.84+.16*abs(nv);c*=.9+.1*smoothstep(-.42,.1,vW.y);c+=vec3(.06,.1,.12);c+=vec3(.05,.09,.1)*(sin(vL.x*34.+vL.y*22.+uTime*1.7)*sin(vL.z*28.-vL.y*18.-uTime*1.3)*.5+.5);c+=vec3(.55,.8,.95)*men*.55;c*=.92+.08*sin(vL.y*60.+uTime*2.);c+=vec3(.2)*pow(1.-abs(nv),2.);gl_FragColor=vec4(c*a,a);}" +
+    "else if(uMode==2){ vec3 Nn=nv<0.?-N:N; vec3 R=reflect(-V,Nn);vec3 e=env(R);vec3 base=vec3(.52,.68,.9);e=min(e,vec3(1.15));" +
+    "vec3 c=base*(.28+.62*e)+vec3(.9,.95,1.)*pow(max(dot(R,normalize(vec3(-.45,.55,.7))),0.),60.)*.45;" +
+    "c*=.85+.15*smoothstep(.0,1.,vT.y);c=mix(c,vec3(dot(c,vec3(.33))),.25);gl_FragColor=vec4(c,1.);}" +
+    "else if(uMode==4){ vec4 t=texture2D(uTex,vT); float k=nv<0.?.7:1.; gl_FragColor=t*uAlpha*k; }" +
+    "else if(uMode==5){ vec2 q=vT*2.-1.; float a=smoothstep(1.,0.,length(q)); a=a*a*.5; gl_FragColor=vec4(vec3(.05,.16,.34)*a,a); }" +
+    "else { vec4 t=texture2D(uTex,vT);float k=nv<0.?.78:1.;gl_FragColor=vec4(t.rgb*k*.97,.97);} }";
+  var D2R = Math.PI / 180;
+  /* matrices (column-major) */
+  function mul(a, b) { var o = new Float32Array(16); for (var i = 0; i < 4; i++) for (var j = 0; j < 4; j++) { var s = 0; for (var k = 0; k < 4; k++) s += a[k * 4 + j] * b[i * 4 + k]; o[i * 4 + j] = s; } return o; }
+  function persp(f, a, n, fa) { var t = 1 / Math.tan(f / 2); return new Float32Array([t / a, 0, 0, 0, 0, t, 0, 0, 0, 0, (fa + n) / (n - fa), -1, 0, 0, 2 * fa * n / (n - fa), 0]); }
+  function tr(x, y, z) { return new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, x, y, z, 1]); }
+  function rx(a) { var c = Math.cos(a), s = Math.sin(a); return new Float32Array([1, 0, 0, 0, 0, c, s, 0, 0, -s, c, 0, 0, 0, 0, 1]); }
+  function ry(a) { var c = Math.cos(a), s = Math.sin(a); return new Float32Array([c, 0, -s, 0, 0, 1, 0, 0, s, 0, c, 0, 0, 0, 0, 1]); }
+  function rz(a) { var c = Math.cos(a), s = Math.sin(a); return new Float32Array([c, s, 0, 0, -s, c, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]); }
+
+  function sc(s) { return new Float32Array([s, 0, 0, 0, 0, s, 0, 0, 0, 0, s, 0, 0, 0, 0, 1]); }
+  var FONT = '"Cormorant Garamond","Amiri",Georgia,serif';
+
+  /* ----- label / decal artwork drawn with canvas ----- */
+  function fitText(c, txt, maxW, size, weight) {
+    var s = size; c.font = weight + " " + s + "px " + FONT;
+    while (c.measureText(txt).width > maxW && s > 14) { s -= 2; c.font = weight + " " + s + "px " + FONT; }
+    return s;
+  }
+  function drawLabel(name) {
+    var cv = document.createElement("canvas"); cv.width = 640; cv.height = 500; var c = cv.getContext("2d");
+    var g = c.createLinearGradient(0, 0, 640, 500); g.addColorStop(0, "#c9e0f2"); g.addColorStop(1, "#aecbe6");
+    c.fillStyle = g; c.fillRect(0, 0, 640, 500);
+    c.strokeStyle = "#2b5c8a"; c.lineWidth = 5; c.strokeRect(24, 24, 592, 452);
+    c.strokeStyle = "rgba(43,92,138,.45)"; c.lineWidth = 2; c.strokeRect(36, 36, 568, 428);
+    c.fillStyle = "#2b5c8a"; c.textAlign = "center"; c.textBaseline = "alphabetic";
+    c.font = "600 150px " + FONT; c.fillText("DK", 320, 200);
+    c.fillRect(150, 150, 60, 4); c.fillRect(430, 150, 60, 4);
+    fitText(c, name, 520, 76, 600); c.fillText(name, 320, 308);
+    c.font = "500 27px " + FONT; try { c.letterSpacing = "7px"; } catch (e) {}
+    c.fillText("LUXURY PERFUMES", 320, 410);
+    return cv;
+  }
+  function drawDecal(name) {
+    var cv = document.createElement("canvas"); cv.width = 280; cv.height = 512; var c = cv.getContext("2d");
+    c.clearRect(0, 0, 280, 512);
+    var ink = "#14649a"; c.strokeStyle = ink; c.fillStyle = ink; c.lineWidth = 5; c.lineJoin = "round"; c.lineCap = "round";
+    var cx = 140, cy = 190;
+    function petal(dx, h, rot) { c.save(); c.translate(cx, cy); c.rotate(rot); c.beginPath(); c.moveTo(0, 0); c.quadraticCurveTo(-30, -h * .55, 0, -h); c.quadraticCurveTo(30, -h * .55, 0, 0); c.stroke(); c.restore(); }
+    petal(0, 78, 0); petal(0, 62, -.78); petal(0, 62, .78);
+    c.beginPath(); c.moveTo(cx - 60, cy + 10); c.quadraticCurveTo(cx, cy + 40, cx + 60, cy + 10); c.stroke();
+    c.textAlign = "center"; c.textBaseline = "alphabetic";
+    var words = String(name).split(" "), lines = words.length > 1 ? [words[0], words.slice(1).join(" ")] : [name];
+    var sz = 64; lines.forEach(function (l) { sz = Math.min(sz, fitText(c, l, 236, 64, 500)); });
+    c.font = "500 " + sz + "px " + FONT;
+    lines.forEach(function (l, i) { c.fillText(l, cx, 300 + i * (sz + 8)); });
+    return cv;
+  }
+
+  /* ----- one renderer per canvas ----- */
+  function Viewer(cv, preserve) {
+    var gl = cv.getContext("webgl", { alpha: true, premultipliedAlpha: true, antialias: true, preserveDrawingBuffer: !!preserve });
+    if (!gl) return null;
+    function sh(t, s) { var o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); return o; }
+    var pr = gl.createProgram(); gl.attachShader(pr, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, FS)); gl.linkProgram(pr);
+    if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return null;
+    gl.useProgram(pr);
+    var U = function (n) { return gl.getUniformLocation(pr, n); };
+    var L = { p: gl.getAttribLocation(pr, "aP"), n: gl.getAttribLocation(pr, "aN"), t: gl.getAttribLocation(pr, "aT"), M: U("uM"), VP: U("uVP"), cam: U("uCam"), mode: U("uMode"), pass: U("uPass"), time: U("uTime"), amp: U("uAmp"), tex: U("uTex"), top: U("uTop"), alpha: U("uAlpha") };
+  /* geometry */
+  function mesh(P, N, T, I) {
+    var b = { n: I.length, p: gl.createBuffer(), i: gl.createBuffer() };
+    var d = new Float32Array(P.length / 3 * 8);
+    for (var k = 0; k < P.length / 3; k++) { d.set([P[3 * k], P[3 * k + 1], P[3 * k + 2], N[3 * k], N[3 * k + 1], N[3 * k + 2], T[2 * k], T[2 * k + 1]], k * 8); }
+    gl.bindBuffer(gl.ARRAY_BUFFER, b.p); gl.bufferData(gl.ARRAY_BUFFER, d, gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, b.i); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(I), gl.STATIC_DRAW);
+    return b;
+  }
+  function rbox(hx, hy, hz, r, n) {
+    var P = [], N = [], T = [], I = [], faces = [[0, 1, 2, 1], [0, 1, 2, -1], [1, 2, 0, 1], [1, 2, 0, -1], [2, 0, 1, 1], [2, 0, 1, -1]], h = [hx, hy, hz], inn = [hx - r, hy - r, hz - r];
+    faces.forEach(function (f) {
+      var base = P.length / 3;
+      for (var j = 0; j <= n; j++) for (var i = 0; i <= n; i++) {
+        var v = [0, 0, 0]; v[f[0]] = i / n * 2 - 1; v[f[1]] = j / n * 2 - 1; v[f[2]] = f[3];
+        var q = [0, 0, 0], dr = [0, 0, 0], l = 0, k;
+        for (k = 0; k < 3; k++) { var w = v[k] * h[k]; q[k] = Math.max(-inn[k], Math.min(inn[k], w)); dr[k] = w - q[k]; l += dr[k] * dr[k]; }
+        l = Math.sqrt(l); var nn = l > 1e-6 ? [dr[0] / l, dr[1] / l, dr[2] / l] : (function () { var z = [0, 0, 0]; z[f[2]] = f[3]; return z; })();
+        P.push(q[0] + nn[0] * r, q[1] + nn[1] * r, q[2] + nn[2] * r); N.push(nn[0], nn[1], nn[2]); T.push(i / n, 1 - j / n);
+      }
+      for (var y = 0; y < n; y++) for (var x = 0; x < n; x++) { var a = base + y * (n + 1) + x, b2 = a + 1, c = a + n + 1, d2 = c + 1; I.push(a, b2, c, b2, d2, c); }
+    });
+    return mesh(P, N, T, I);
+  }
+  function cyl(r, h, seg, capTop) {
+    var P = [], N = [], T = [], I = [], i;
+    for (i = 0; i <= seg; i++) { var a = i / seg * Math.PI * 2, c = Math.cos(a), s = Math.sin(a); P.push(c * r, 0, s * r, c * r, h, s * r); N.push(c, 0, s, c, 0, s); T.push(i / seg, 0, i / seg, 1); }
+    for (i = 0; i < seg; i++) { var k = i * 2; I.push(k, k + 1, k + 2, k + 1, k + 3, k + 2); }
+    if (capTop) { var b = P.length / 3; P.push(0, h, 0); N.push(0, 1, 0); T.push(.5, 1); for (i = 0; i <= seg; i++) { var a2 = i / seg * Math.PI * 2; P.push(Math.cos(a2) * r, h, Math.sin(a2) * r); N.push(0, 1, 0); T.push(.5, 1); } for (i = 0; i < seg; i++) I.push(b, b + 1 + i, b + 2 + i); }
+    return mesh(P, N, T, I);
+  }
+  function quad(w, h) { return mesh([-w, -h, 0, w, -h, 0, -w, h, 0, w, h, 0], [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1], [0, 1, 1, 1, 0, 0, 1, 0], [0, 1, 2, 1, 3, 2]); }
+
+    function arc(r, a0, h, n) {
+      var P = [], N = [], T = [], I = [], i, j;
+      for (j = 0; j <= 1; j++) for (i = 0; i <= n; i++) { var a = (i / n * 2 - 1) * a0; P.push(Math.sin(a) * r, j * h, Math.cos(a) * r); N.push(Math.sin(a), 0, Math.cos(a)); T.push(i / n, 1 - j); }
+      for (i = 0; i < n; i++) I.push(i, i + 1, i + n + 1, i + 1, i + n + 2, i + n + 1);
+      return mesh(P, N, T, I);
+    }
+    var G = {
+      body: rbox(.26, .3475, .15, .045, 28), liquid: rbox(.225, .27, .118, .03, 22), cap: cyl(.1055, .245, 56, true), collar: cyl(.116, .026, 56, true), label: quad(.177, .1385),
+      tBody: cyl(.092, .42, 48, true), tLiq: cyl(.08, .33, 40, true), tTube: cyl(.006, .36, 10, false), tCollar: cyl(.095, .07, 48, true), tCap: cyl(.0925, .28, 48, true), tDecal: arc(.0932, .62, .27, 24), shadow: quad(.5, .5)
+    };
+    function mkTex() { var t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([170, 215, 240, 255])); return t; }
+    var texL = mkTex(), texD = mkTex();
+    function upload(t, canvas, prem) {
+      gl.bindTexture(gl.TEXTURE_2D, t); gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false); gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, !!prem);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, canvas);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    }
+    var labelFor = null;
+    function setName(n) { if (labelFor === n) return; labelFor = n; upload(texL, drawLabel(n), false); upload(texD, drawDecal(n), true); }
+    function draw(b, M, mode, pass) {
+      gl.bindBuffer(gl.ARRAY_BUFFER, b.p); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, b.i);
+      gl.enableVertexAttribArray(L.p); gl.vertexAttribPointer(L.p, 3, gl.FLOAT, false, 32, 0);
+      gl.enableVertexAttribArray(L.n); gl.vertexAttribPointer(L.n, 3, gl.FLOAT, false, 32, 12);
+      gl.enableVertexAttribArray(L.t); gl.vertexAttribPointer(L.t, 2, gl.FLOAT, false, 32, 24);
+      gl.uniformMatrix4fv(L.M, false, M); gl.uniform1i(L.mode, mode); gl.uniform1i(L.pass, pass);
+      gl.drawElements(gl.TRIANGLES, b.n, gl.UNSIGNED_SHORT, 0);
+    }
+    var camZ = 2.5, GY = -.47;
+    /* st: {kind, s, lvl, yaw, pit, amp, time, lift} */
+    function render(st) {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2), w = Math.max(2, Math.round(cv.clientWidth * dpr)), h = Math.max(2, Math.round(cv.clientHeight * dpr));
+      if (!preserve && (cv.width !== w || cv.height !== h)) { cv.width = w; cv.height = h; }
+      var asp = cv.width / cv.height, VP = mul(persp(26 * D2R, asp, .1, 20), tr(0, 0, -camZ));
+      gl.viewport(0, 0, cv.width, cv.height); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA); gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LEQUAL);
+      gl.useProgram(pr); gl.uniformMatrix4fv(L.VP, false, VP); gl.uniform3f(L.cam, 0, 0, camZ);
+      gl.uniform1f(L.time, st.time); gl.uniform1f(L.amp, st.amp); gl.uniform1f(L.alpha, 1); gl.uniform1i(L.tex, 0); gl.activeTexture(gl.TEXTURE0);
+      var tester = st.kind === "tester", s = st.s, lift = st.lift || 0;
+      /* contact shadow */
+      gl.depthMask(false); gl.bindTexture(gl.TEXTURE_2D, texL);
+      var shw = (tester ? .34 : .62) * s * (1 - lift * .4);
+      draw(G.shadow, mul(tr(0, GY - .004, 0), mul(sc(shw * 2), rx(-Math.PI / 2))), 5, 1);
+      var base = tester ? mul(tr(0, GY + .35 * s + lift * .08, 0), mul(rx(st.pit), mul(ry(st.yaw), mul(sc(s), tr(0, -.35, 0)))))
+                        : mul(tr(0, GY + .445 * s + lift * .08, 0), mul(rx(st.pit), mul(ry(st.yaw), sc(s))));
+      var C = function (x, y, z) { return mul(base, tr(x, y, z)); };
+      if (!tester) {
+        gl.depthMask(true); draw(G.cap, C(0, .255, 0), 2, 1); draw(G.collar, C(0, .245, 0), 2, 1);
+        gl.depthMask(false);
+        var bodyM = C(0, -.0975, 0), liqM = C(0, -.1325, 0);
+        gl.uniform1f(L.top, -.27 + .54 * st.lvl);
+        draw(G.body, bodyM, 0, 0); draw(G.liquid, liqM, 1, 0); draw(G.liquid, liqM, 1, 1);
+        gl.bindTexture(gl.TEXTURE_2D, texL); draw(G.label, C(0, -.0156, .128), 3, 1);
+        draw(G.body, bodyM, 0, 1);
+      } else {
+        gl.depthMask(true); draw(G.tCollar, C(0, .42, 0), 2, 1); draw(G.tCap, C(0, .49, 0), 2, 1);
+        gl.depthMask(false);
+        gl.uniform1f(L.top, .33 * st.lvl);
+        draw(G.tBody, C(0, 0, 0), 0, 0); draw(G.tLiq, C(0, .035, 0), 1, 0); draw(G.tLiq, C(0, .035, 0), 1, 1);
+        draw(G.tTube, C(.0, .04, -.02), 0, 0);
+        gl.bindTexture(gl.TEXTURE_2D, texD); draw(G.tDecal, C(0, .075, 0), 4, 1);
+        draw(G.tBody, C(0, 0, 0), 0, 1);
+      }
+      gl.depthMask(true);
+    }
+    return { render: render, setName: setName, canvas: cv, gl: gl };
+  }
+
+  /* ----- sizes ----- */
+  var SZ = { "30": { s: .72, lvl: .55 }, "50": { s: .86, lvl: .72 }, "100": { s: 1, lvl: .93 }, "t": { s: .8, lvl: .8 } };
+  function spec(ml) { return SZ[String(ml)] || SZ["50"]; }
+
+  /* ----- live viewer in the product card ----- */
+  var main = null, mainCv = null, raf = 0, mounted = false, S = null, lastT = 0;
+  function newState() { return { kind: "bottle", key: "50", s: .6, vs: 0, lvl: .3, vl: 0, yaw: -5.2, vyaw: 0, pit: .07, amp: 1.6, time: 0, lift: 0, enter: 0, tKey: "50", tKind: "bottle", swap: 0, name: "" }; }
+  function ensure() {
+    if (main) return main;
+    mainCv = document.createElement("canvas"); mainCv.className = "pc-gl";
+    main = Viewer(mainCv, false); if (!main) { mainCv = null; return null; }
+    var drag = false, lx = 0, lt = 0;
+    mainCv.addEventListener("pointerdown", function (e) { drag = true; lx = e.clientX; lt = performance.now(); S.vyaw = 0; try { mainCv.setPointerCapture(e.pointerId); } catch (x) {} mainCv.classList.add("drag"); });
+    mainCv.addEventListener("pointermove", function (e) {
+      if (!drag) return; var now = performance.now(), dx = e.clientX - lx, dt = Math.max(1, now - lt) / 1000;
+      S.yaw += dx * .012; S.vyaw = S.vyaw * .5 + (dx * .012 / dt) * .5; S.amp = Math.min(2.4, S.amp + Math.abs(dx) * .02); lx = e.clientX; lt = now;
+    });
+    function up() { drag = false; mainCv.classList.remove("drag"); }
+    mainCv.addEventListener("pointerup", up); mainCv.addEventListener("pointercancel", up);
+    return main;
+  }
+  function spring(x, v, target, K, Cd, dt) { v += ((target - x) * K - v * Cd) * dt; return [x + v * dt, v]; }
+  function tick(now) {
+    raf = 0; if (!mounted || !main) return;
+    var dt = Math.min(.04, (now - (lastT || now)) / 1000); lastT = now; S.time += dt;
+    var tg = spec(S.tKey), r;
+    /* kind swap: shrink, switch, grow */
+    if (S.tKind !== S.kind) {
+      S.swap += dt / .28; S.lift = Math.min(1, S.swap);
+      if (S.swap >= 1) { S.kind = S.tKind; S.key = S.tKey; S.s = .3; S.vs = 0; S.lvl = spec(S.key).lvl * .6; S.vl = 0; S.swap = 0; S.yaw -= 1.6; S.amp = 2; }
+      else { S.s = Math.max(.2, S.s - dt * 1.6); }
+    } else {
+      S.lift += (0 - S.lift) * Math.min(1, dt * 6);
+      r = spring(S.s, S.vs, tg.s, 90, 12, dt); S.s = r[0]; S.vs = r[1];
+      var pl = S.lvl; r = spring(S.lvl, S.vl, tg.lvl, 34, 4.2, dt); S.lvl = Math.max(.05, Math.min(.98, r[0])); S.vl = r[1];
+      S.amp += Math.abs(S.lvl - pl) * 14; S.key = S.tKey;
+    }
+    /* idle sway back toward the front */
+    var yt = Math.round(S.yaw / (Math.PI * 2)) * Math.PI * 2 + Math.sin(S.time * .7) * .3;
+    r = spring(S.yaw, S.vyaw, yt, 7, 3.6, dt); S.yaw = r[0]; S.vyaw = r[1];
+    S.amp += (.4 - S.amp) * Math.min(1, dt * 1.6);
+    main.render({ kind: S.kind, s: S.s, lvl: S.lvl, yaw: S.yaw, pit: S.pit, amp: S.amp, time: S.time, lift: S.lift });
+    raf = requestAnimationFrame(tick);
+  }
+  var DKB = { ok: true };
+  DKB.mount = function (container, o) {
+    if (!ensure()) { DKB.ok = false; return false; }
+    container.appendChild(mainCv);
+    var fresh = !mounted;
+    if (!S || fresh) { S = newState(); }
+    main.setName(o.name); S.name = o.name;
+    var kind = o.ml === "t" ? "tester" : "bottle";
+    S.tKind = kind; S.tKey = String(o.ml);
+    if (fresh) { S.kind = kind; S.key = S.tKey; var sp = spec(S.key); S.s = sp.s * .55; S.lvl = sp.lvl * .3; S.yaw = -5.4; S.amp = 1.8; S.lift = 1; }
+    mounted = true; lastT = 0; if (!raf) raf = requestAnimationFrame(tick);
+    return true;
+  };
+  DKB.set = function (ml) { if (!S) return; S.tKind = ml === "t" ? "tester" : "bottle"; S.tKey = String(ml); if (S.tKind === S.kind) S.amp += 1.1; };
+  DKB.rename = function (n) { if (main) { main.setName(n); if (S) S.name = n; } };
+  DKB.unmount = function () { mounted = false; if (raf) { cancelAnimationFrame(raf); raf = 0; } };
+
+  /* ----- still thumbnails for the cart ----- */
+  var thumbV = null, thumbCv = null, cache = {};
+  DKB.thumb = function (ml, name) {
+    var key = ml + "|" + name; if (cache[key]) return cache[key];
+    try {
+      if (!thumbV) { thumbCv = document.createElement("canvas"); thumbCv.width = 240; thumbCv.height = 300; thumbV = Viewer(thumbCv, true); if (!thumbV) return ""; }
+      var sp = spec(ml), kind = ml === "t" ? "tester" : "bottle";
+      thumbV.setName(name);
+      thumbV.render({ kind: kind, s: sp.s, lvl: sp.lvl, yaw: -.28, pit: .09, amp: .3, time: 1.3, lift: 0 });
+      return (cache[key] = thumbCv.toDataURL("image/png"));
+    } catch (e) { return ""; }
+  };
+  DKB.clear = function () { cache = {}; };
+  window.DKB = DKB;
+  function refresh() { DKB.clear(); if (window.__renderCart) window.__renderCart(); }
+  setTimeout(refresh, 50);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
 })();
 </script>
 
