@@ -1272,6 +1272,26 @@ html.moving .nextbtn { animation-play-state: running !important; }
 @media (max-width:700px){.pc-3d{aspect-ratio:1/1;min-height:240px}.szbtn b{font-size:21px}}
 @media (min-width:1001px){html[dir=ltr] .cine-stage{left:34%} html[dir=ltr] .cine-bg{background-position:40% 50%} html[dir=ltr].hb-go .cine-img{opacity:.4}}
 @media (min-width:1001px){html[dir=ltr] .cine-bg{-webkit-mask-image:linear-gradient(90deg,#000 0,#000 38%,transparent 62%);mask-image:linear-gradient(90deg,#000 0,#000 38%,transparent 62%)}}
+
+/* V.30 product card fits the visible screen on phones and scrolls */
+.pmodal{inset:auto;top:0;left:0;right:0;height:var(--VH,100%)}
+.pcard{max-height:calc(var(--VH,100vh) - 24px);overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y}
+@media (max-width:700px){
+  .pmodal{padding:10px}
+  .pcard{padding:16px 16px 18px;gap:10px;border-radius:24px}
+  .pc-3d{aspect-ratio:auto;height:clamp(170px,29vh,260px);min-height:0}
+  .pc-body h2{font-size:30px}
+  .pc-desc{margin-top:8px;font-size:14px;line-height:1.5}
+  .pc-fl{margin-top:10px}
+  .pc-fl h4{margin-bottom:6px}
+  .pc-sz{margin-top:12px}
+  .szrow{gap:8px}
+  .szbtn{padding:8px 4px;font-size:12px}
+  .szbtn b{font-size:19px}
+  .testerbtn{padding:9px 14px;font-size:13px;margin-top:8px}
+  .pc-row{margin-top:14px;gap:12px}
+  .pc-row .price{font-size:24px}
+}
 </style>
 <style>[hidden]{display:none!important}html{background:#2a78bd}body{margin:0}img{max-width:100%}</style>
 </head>
@@ -1294,7 +1314,7 @@ html.moving .nextbtn { animation-play-state: running !important; }
 <div class="where" id="where" aria-hidden="true"><b></b><span></span></div>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="ver" aria-hidden="true">V.29</div>
+<div class="ver" aria-hidden="true">V.30</div>
 <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav class="dots-nav" id="dotsNav" aria-label="Sections"></nav>
@@ -1953,7 +1973,8 @@ html.moving .nextbtn { animation-play-state: running !important; }
   root.classList.add("pager");
   // screen height: the real full height of the screen (page shows under the browser toolbar on iPhone)
   var probe = document.createElement("div"); probe.style.cssText = "position:fixed;left:0;top:0;width:1px;height:100vh;visibility:hidden;pointer-events:none"; document.body.appendChild(probe);
-  function setH() { root.style.setProperty("--H", Math.max(probe.offsetHeight, window.innerHeight) + "px"); }
+  function setH() { root.style.setProperty("--H", Math.max(probe.offsetHeight, window.innerHeight) + "px"); var vv = Math.min(window.innerHeight, (window.visualViewport && window.visualViewport.height) || 99999); root.style.setProperty("--VH", vv + "px"); }
+  if (window.visualViewport) window.visualViewport.addEventListener("resize", function () { setH(); });
   setH(); window.addEventListener("resize", setH); window.addEventListener("orientationchange", setH);
   var dn = document.getElementById("dotsNav");
   panels.forEach(function (p, k) { var d = document.createElement("button"); d.type = "button"; d.setAttribute("aria-label", "Screen " + (k + 1)); d.addEventListener("click", function () { go(k - idx); }); dn.appendChild(d); });
@@ -2041,7 +2062,7 @@ html.moving .nextbtn { animation-play-state: running !important; }
   var tx = 0, ty = 0, tMode = 0;
   window.addEventListener("touchstart", function (e) {
     var t0 = e.touches[0]; tx = t0.clientX; ty = t0.clientY;
-    tMode = drawerOpen() ? 0 : 1;
+    tMode = (drawerOpen() || (document.getElementById("pmodal") && document.getElementById("pmodal").classList.contains("open"))) ? 0 : 1;
   }, { passive: true });
   window.addEventListener("touchmove", function (e) {
     if (!tMode) return; var t0 = e.touches[0], dy = t0.clientY - ty, dx = t0.clientX - tx, vert = Math.abs(dy) > Math.abs(dx);
