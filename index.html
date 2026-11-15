@@ -1395,7 +1395,7 @@ html[dir=rtl] .gitem .gi-b h3::after { float: left; }
 <div class="where" id="where" aria-hidden="true"><b></b><span></span></div>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="ver" aria-hidden="true">V.35</div>
+<div class="ver" aria-hidden="true">V.36</div>
 <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav class="dots-nav" id="dotsNav" aria-label="Sections"></nav>
@@ -2637,8 +2637,8 @@ html[dir=rtl] .gitem .gi-b h3::after { float: left; }
     };
     /* car hanger */
     G.car = {
-      glass: lathe([[0, 0], [.11, .004], [.19, .025], [.235, .07], [.252, .11], [.25, .13], [0, .13]], 52),
-      liq: lathe([[0, .012], [.1, .016], [.18, .036], [.222, .07], [.238, .1], [0, .1]], 44),
+      glass: lathe([[0, 0], [.12, .004], [.2, .03], [.245, .09], [.257, .15], [.252, .19], [0, .19]], 52),
+      liq: lathe([[0, .012], [.11, .016], [.19, .04], [.23, .1], [.245, .16], [0, .16]], 44),
       cap: lathe((function () { var pp = [[0, .1], [.25, .1]], q; for (q = 1; q <= 26; q++) { var t = q / 26; pp.push([.25 * Math.pow(1 - Math.pow(t, 2.4), .7), .1 + t * .42]); } pp.push([0, .52]); return pp; })(), 56),
       bead: lathe(arcPts(0, 0, 1, -Math.PI / 2, Math.PI / 2, 12).map(function (p) { return [p[0] * .05, p[1] * .05]; }), 20)
     };
@@ -2736,10 +2736,10 @@ html[dir=rtl] .gitem .gi-b h3::after { float: left; }
         Tr.push({ b: G.jar.glass, M: C(0, 0, 0), mode: 0, pass: 0 }); Tr.push({ b: G.jar.liq, M: C(0, 0, 0), mode: 1, pass: 0, top: tp3 }); Tr.push({ b: G.jar.liq, M: C(0, 0, 0), mode: 1, pass: 1, top: tp3 });
         Tr.push({ b: G.jar.glass, M: C(0, 0, 0), mode: 0, pass: 1 });
       } else if (o === "car") {
-        Op.push({ b: G.car.cap, M: C(0, 0, 0), mode: 7, pass: 1, col: [.92, .74, .5] });
-        Op.push({ b: G.car.loop, M: C(0, -.19, 0), mode: 10, pass: 1, col: CREAM, k: .5 }); Op.push({ b: G.car.tail1, M: C(0, -.19, 0), mode: 10, pass: 1, col: CREAM, k: .5 }); Op.push({ b: G.car.tail2, M: C(0, -.19, 0), mode: 10, pass: 1, col: CREAM, k: .5 });
-        Op.push({ b: G.car.bead, M: C(.0, .54, .02), mode: 7, pass: 1, col: [.9, .68, .42] });
-        var tp4 = .014 + .084 * lvl;
+        Op.push({ b: G.car.cap, M: C(0, .09, 0), mode: 7, pass: 1, col: [.92, .74, .5] });
+        Op.push({ b: G.car.loop, M: C(0, -.1, 0), mode: 10, pass: 1, col: CREAM, k: .5 }); Op.push({ b: G.car.tail1, M: C(0, -.1, 0), mode: 10, pass: 1, col: CREAM, k: .5 }); Op.push({ b: G.car.tail2, M: C(0, -.1, 0), mode: 10, pass: 1, col: CREAM, k: .5 });
+        Op.push({ b: G.car.bead, M: C(.0, .63, .02), mode: 7, pass: 1, col: [.9, .68, .42] });
+        var tp4 = .014 + .146 * lvl;
         Tr.push({ b: G.car.glass, M: C(0, 0, 0), mode: 0, pass: 0 }); Tr.push({ b: G.car.liq, M: C(0, 0, 0), mode: 1, pass: 0, top: tp4 }); Tr.push({ b: G.car.liq, M: C(0, 0, 0), mode: 1, pass: 1, top: tp4 });
         Tr.push({ b: G.car.glass, M: C(0, 0, 0), mode: 0, pass: 1 });
       } else if (o === "oil") {
