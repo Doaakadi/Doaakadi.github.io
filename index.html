@@ -1374,7 +1374,109 @@ html.moving .nextbtn { animation-play-state: running !important; }
 .gitem .gi-b h3::after { content: "+"; float: right; opacity: .7; font: 300 26px var(--f-body); transition: transform .3s; }
 html[dir=rtl] .gitem .gi-b h3::after { float: left; }
 .gitem.open .gi-b h3::after { transform: rotate(45deg); }
-</style><style>[hidden]{display:none!important}html{background:#2a78bd}body{margin:0}img{max-width:100%}</style>
+</style><style>[hidden]{display:none!important}html{background:#2a78bd}body{margin:0}img{max-width:100%}/* ===== accounts ===== */
+.pill.login{display:inline-flex;align-items:center;gap:7px}
+.pill.login svg{display:block}
+.pill.prof{padding:0;width:38px;height:38px;border-radius:50%;display:inline-grid;place-items:center;overflow:hidden;position:relative;border:2px solid rgba(255,255,255,.7)}
+.pill.prof .av,.avbig{width:100%;height:100%;display:grid;place-items:center;background:linear-gradient(145deg,#8fd0ff,#2a78bd);font-size:20px;line-height:1;background-size:cover;background-position:center}
+.av svg{width:62%;height:62%}
+.aov{position:fixed;inset:0;z-index:1300;display:grid;place-items:center;padding:16px;background:rgba(6,30,70,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s}
+.aov.open{opacity:1;visibility:visible;transition:opacity .3s}
+.abox{position:relative;width:min(420px,100%);max-height:92vh;overflow:auto;border-radius:28px;padding:30px 26px 24px;color:#fff;text-align:center;
+ background:linear-gradient(160deg,rgba(60,140,215,.92),rgba(30,95,165,.96));border:1px solid rgba(255,255,255,.3);box-shadow:0 40px 90px -20px rgba(0,20,60,.7),inset 0 1px 0 rgba(255,255,255,.35);
+ transform:translateY(18px) scale(.97);transition:transform .45s cubic-bezier(.2,.9,.25,1.15)}
+.aov.open .abox{transform:none}
+.abox h3{margin:6px 0 6px;font:500 28px/1.15 var(--f-display,serif);letter-spacing:.01em}
+.abox p{margin:0 0 18px;font-size:14px;line-height:1.55;opacity:.85}
+.abox .ax{position:absolute;top:12px;inset-inline-end:12px;width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:#fff;font-size:18px;cursor:pointer}
+.abox .alogo{width:120px;height:auto;margin:0 auto 6px;border-radius:14px;display:block}
+.abox input[type=email],.abox input.code{width:100%;box-sizing:border-box;padding:14px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.14);color:#fff;font:500 16px var(--f-body,system-ui);outline:none;text-align:center;transition:border-color .2s,background .2s}
+.abox input.code{font-size:28px;letter-spacing:.5em;text-indent:.5em;font-weight:600}
+.abox input::placeholder{color:rgba(255,255,255,.6);letter-spacing:0}
+.abox input:focus{border-color:#fff;background:rgba(255,255,255,.22)}
+.abtn{width:100%;margin-top:14px;padding:14px;border-radius:999px;border:0;background:#fff;color:#1f5fa3;font:600 14px var(--f-body,system-ui);letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.abtn:hover{transform:translateY(-2px);box-shadow:0 12px 26px -10px rgba(0,30,80,.6)}
+.abtn:disabled{opacity:.55;cursor:default;transform:none}
+.alink{margin-top:12px;background:none;border:0;color:#fff;opacity:.8;text-decoration:underline;cursor:pointer;font:500 13px var(--f-body,system-ui)}
+.alink:disabled{opacity:.45;text-decoration:none;cursor:default}
+.amsg{min-height:18px;margin-top:10px;font-size:13px;color:#ffe3e3}
+.amsg.ok{color:#d8ffe6}
+.ademo{margin-top:12px;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.16);border:1px dashed rgba(255,255,255,.5);font-size:12.5px;line-height:1.5}
+.ademo b{font-size:20px;letter-spacing:.3em;display:block;margin-top:2px}
+.avbig{width:96px;height:96px;border-radius:50%;margin:0 auto 12px;border:3px solid #fff;font-size:46px;box-shadow:0 14px 34px -12px rgba(0,20,60,.6)}
+.avgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:14px 0 4px}
+.avgrid button{aspect-ratio:1;border-radius:50%;border:2px solid transparent;background:linear-gradient(145deg,#8fd0ff,#2a78bd);font-size:22px;cursor:pointer;display:grid;place-items:center;padding:0;transition:transform .2s,border-color .2s;color:#fff}
+.avgrid button:hover{transform:scale(1.1)}
+.avgrid button.on{border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.35)}
+.avgrid button svg{width:60%;height:60%}
+.amail{font-size:13px;opacity:.8;margin-bottom:6px;word-break:break-all}
+.arow{display:flex;gap:10px;margin-top:10px}
+.arow .abtn{margin-top:4px;padding:12px 6px;font-size:12px}
+.abtn.ghost{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.4)}
+/* welcome screen (first login) */
+.wel{position:fixed;inset:0;z-index:1400;display:grid;place-items:center;text-align:center;padding:24px;overflow:hidden;background:linear-gradient(160deg,#2a78bd,#173f73);opacity:0;visibility:hidden;transition:opacity .6s,visibility 0s .6s}
+.wel.on{opacity:1;visibility:visible;transition:opacity .45s}
+.wel .orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5;width:46vmax;aspect-ratio:1;animation:orbWander 9s ease-in-out infinite alternate}
+.wel .o1{background:#8fd0ff;left:-12vmax;top:-10vmax}.wel .o2{background:#e2f1fd;right:-14vmax;bottom:-12vmax;opacity:.3;animation-delay:-3s}
+.wel .wi{position:relative;color:#fff}
+.wel .w1{font:300 clamp(18px,3vw,26px)/1 var(--f-body,system-ui);letter-spacing:.5em;text-transform:uppercase;opacity:0;animation:welUp 1s .2s cubic-bezier(.2,.8,.2,1) forwards}
+.wel .w2{font:500 clamp(54px,13vw,150px)/1.02 var(--f-display,serif);margin:.15em 0;opacity:0;animation:welUp 1.2s .5s cubic-bezier(.2,.8,.2,1) forwards;background:linear-gradient(100deg,#fff 30%,#bfe0ff 50%,#fff 70%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation-name:welUp,welShine;animation-duration:1.2s,3s;animation-delay:.5s,1s;animation-iteration-count:1,infinite}
+.wel .w3{font:400 clamp(15px,2vw,20px)/1.5 var(--f-body,system-ui);opacity:0;animation:welUp 1s 1.1s forwards;max-width:520px;margin:0 auto}
+@keyframes welUp{from{opacity:0;transform:translateY(28px) scale(.96);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+@keyframes welShine{0%,100%{background-position:100% 0}50%{background-position:0 0}}
+@media (max-width:700px){.pill.login .lt{display:none}.pill.login{padding-inline:11px}}
+.amsg{color:#d62d2d;font-weight:700}.amsg:not(:empty):not(.ok){background:#fff1f1;border-radius:10px;padding:6px 12px;display:table;margin:10px auto 0}.amsg.ok{color:#d8ffe6}
+.abox input[type=password]{width:100%;box-sizing:border-box;padding:14px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.14);color:#fff;font:500 16px var(--f-body,system-ui);outline:none;text-align:center;transition:border-color .2s,background .2s}
+.abox input[type=password]:focus{border-color:#fff;background:rgba(255,255,255,.22)}
+.abox input[type=email]{margin-bottom:0}
+.alinks{display:flex;justify-content:space-between;gap:10px;margin-top:12px;flex-wrap:wrap}.alinks .alink{margin-top:0}
+.abtn.ghost+.abtn,.abox .abtn.ghost{margin-top:10px}
+
+/* ===== motion ===== */
+.aov .abox{will-change:transform}
+.abox>.ab>*{opacity:0;animation:aIn .55s cubic-bezier(.2,.85,.25,1) forwards}
+.ab>*:nth-child(1){animation-delay:.04s}.ab>*:nth-child(2){animation-delay:.1s}.ab>*:nth-child(3){animation-delay:.16s}.ab>*:nth-child(4){animation-delay:.22s}.ab>*:nth-child(5){animation-delay:.28s}.ab>*:nth-child(6){animation-delay:.34s}.ab>*:nth-child(7){animation-delay:.4s}.ab>*:nth-child(8){animation-delay:.46s}
+@keyframes aIn{from{opacity:0;transform:translateY(16px) scale(.97);filter:blur(5px)}to{opacity:1;transform:none;filter:none}}
+.abox .alogo{animation:aIn .55s forwards,aFloat 4s ease-in-out .6s infinite}
+@keyframes aFloat{0%,100%{translate:0 0}50%{translate:0 -5px}}
+.abox{position:relative;overflow:hidden}
+.abox::before{content:"";position:absolute;inset:-40%;pointer-events:none;background:conic-gradient(from 0deg,transparent 0 70%,rgba(255,255,255,.18) 80%,transparent 90%);animation:aSpin 9s linear infinite}
+.abox>*{position:relative}
+@keyframes aSpin{to{transform:rotate(1turn)}}
+.abox.shake{animation:aShake .45s}
+@keyframes aShake{0%,100%{transform:none}18%{transform:translateX(-9px)}36%{transform:translateX(8px)}54%{transform:translateX(-6px)}72%{transform:translateX(4px)}}
+.amsg:not(:empty){animation:aPop .4s cubic-bezier(.3,1.6,.5,1)}
+@keyframes aPop{from{opacity:0;transform:translateY(-6px) scale(.85)}}
+.abox input{transition:border-color .25s,background .25s,box-shadow .3s,transform .3s}
+.abox input:focus{box-shadow:0 0 0 4px rgba(255,255,255,.22),0 10px 30px -12px rgba(0,20,60,.6);transform:translateY(-2px)}
+.abtn{position:relative;overflow:hidden}
+.abtn:active{transform:scale(.96)}
+.abtn:disabled::after{content:"";position:absolute;right:16px;top:50%;width:16px;height:16px;margin-top:-8px;border-radius:50%;border:2px solid #1f5fa3;border-top-color:transparent;animation:aSpin2 .7s linear infinite}
+@keyframes aSpin2{to{transform:rotate(1turn)}}
+.rip{position:absolute;border-radius:50%;background:rgba(255,255,255,.55);pointer-events:none;transform:scale(0);animation:aRip .65s ease-out forwards;mix-blend-mode:overlay}
+.abtn.ghost .rip{background:rgba(255,255,255,.35);mix-blend-mode:normal}
+@keyframes aRip{to{transform:scale(1);opacity:0}}
+.alink{transition:opacity .2s,letter-spacing .25s}.alink:hover{opacity:1;letter-spacing:.03em}
+.tick{width:86px;height:86px;margin:24px auto 10px;position:relative}.ab>.tick{opacity:1}
+.tick svg{width:100%;height:100%;fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.tick circle{stroke-dasharray:150;stroke-dashoffset:150;animation:aDraw .7s ease forwards;fill:rgba(255,255,255,.12)}
+.tick path{stroke-dasharray:50;stroke-dashoffset:50;animation:aDraw .45s .45s ease forwards}
+@keyframes aDraw{to{stroke-dashoffset:0}}
+.tick{animation:aPopT .7s cubic-bezier(.3,1.5,.5,1)}
+@keyframes aPopT{from{transform:scale(.4);opacity:0}}
+.avgrid button{animation:aIn .5s cubic-bezier(.2,.85,.25,1) backwards}
+.avgrid button:nth-child(n){animation-delay:calc(.25s + var(--k,0)*.04s)}
+.avbig{animation:aPopT .6s cubic-bezier(.3,1.5,.5,1)}
+.pill.prof{transition:transform .3s cubic-bezier(.3,1.6,.5,1),box-shadow .3s}.pill.prof:hover{transform:scale(1.12) rotate(-4deg);box-shadow:0 0 0 4px rgba(255,255,255,.3)}
+.pill.prof:not([hidden]){animation:aPopT .6s cubic-bezier(.3,1.5,.5,1)}
+.pill.login:not([hidden]){animation:aPopT .5s ease}
+.pill.login svg{transition:transform .35s cubic-bezier(.3,1.6,.5,1)}.pill.login:hover svg{transform:translateY(-2px) scale(1.2)}
+/* welcome extras */
+.cf{position:absolute;left:50%;top:50%;font-style:normal;font-size:calc(22px*var(--s));opacity:0;pointer-events:none;animation:cfFly 2.6s cubic-bezier(.15,.7,.3,1) forwards}
+@keyframes cfFly{0%{opacity:0;transform:translate(-50%,-50%) scale(.2)}15%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y) + 140px)) rotate(var(--r)) scale(1)}}
+.wel .w2{animation-name:welUp,welShine,welBreath}
+@media (prefers-reduced-motion:reduce){.abox *,.abox{animation:none!important}.abox>.ab>*{opacity:1}}
+</style>
 </head>
 <body>
 
@@ -1395,7 +1497,7 @@ html[dir=rtl] .gitem .gi-b h3::after { float: left; }
 <div class="where" id="where" aria-hidden="true"><b></b><span></span></div>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="ver" aria-hidden="true">V.44</div>
+<div class="ver" aria-hidden="true">V.47</div>
 <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav class="dots-nav" id="dotsNav" aria-label="Sections"></nav>
@@ -1899,8 +2001,8 @@ html[dir=rtl] .gitem .gi-b h3::after { float: left; }
   var validKey = function (k) { var q = pk(k), p = find(k); if (!p) return false; if (p.pr && !(q.sz in p.pr)) return false; if (!p.pr && q.sz) return false; if (q.bag && !p.bagOk) return false; if (q.col && !colOf(p, q.col)) return false; if (q.gift && p.m !== "p") return false; return true; };
   Object.keys(cart).forEach(function (id) { if (!validKey(id)) delete cart[id]; });
   Object.keys(fav).forEach(function (id) { if (!find(id)) delete fav[id]; });
-  function save() { try { localStorage.setItem("dk-cart", JSON.stringify(cart)); } catch (e) {} }
-  function saveFav() { try { localStorage.setItem("dk-fav", JSON.stringify(fav)); } catch (e) {} }
+  function save() { try { localStorage.setItem("dk-cart", JSON.stringify(cart)); } catch (e) {} if (window.__dk && __dk.onSave) __dk.onSave(); }
+  function saveFav() { try { localStorage.setItem("dk-fav", JSON.stringify(fav)); } catch (e) {} if (window.__dk && __dk.onSave) __dk.onSave(); }
   function totals() {
     var n = 0, sum = 0, unk = false;
     Object.keys(cart).forEach(function (id) { var p = find(id); if (p) { n += cart[id]; var pr = priceOfKey(id, p); if (pr == null) unk = true; else sum += cart[id] * pr; } });
@@ -1952,6 +2054,16 @@ html[dir=rtl] .gitem .gi-b h3::after { float: left; }
         '<button class="rm" type="button" data-fav="' + id + '" aria-label="' + t("remove") + '">' + XICO + '</button></div>';
     }).join("") : '<div class="empty">' + t("fav_empty") + '</div>';
   }
+  /* account hooks (auth.js) */
+  window.__dk = window.__dk || {};
+  __dk.getState = function () { return { cart: JSON.parse(JSON.stringify(cart)), fav: JSON.parse(JSON.stringify(fav)) }; };
+  __dk.setState = function (c, f) {
+    Object.keys(cart).forEach(function (k) { delete cart[k]; }); Object.keys(fav).forEach(function (k) { delete fav[k]; });
+    Object.keys(c || {}).forEach(function (k) { if (validKey(k) && c[k] > 0) cart[k] = c[k]; });
+    Object.keys(f || {}).forEach(function (k) { if (find(k)) fav[k] = f[k]; });
+    try { localStorage.setItem("dk-cart", JSON.stringify(cart)); localStorage.setItem("dk-fav", JSON.stringify(fav)); } catch (e) {}
+    try { renderCart(); } catch (e) {} try { renderFav(); } catch (e) {} try { renderProducts(); } catch (e) {}
+  };
   function openDrawer(id) {
     ["drawer", "fdrawer"].forEach(function (d) { var on = d === id; $("#" + d).classList.toggle("open", on); $("#" + d).setAttribute("aria-hidden", on ? "false" : "true"); });
     $("#veil").classList.toggle("open", !!id);
@@ -2875,6 +2987,239 @@ html[dir=rtl] .gitem .gi-b h3::after { float: left; }
   window.DKB = DKB;
   setTimeout(DKB.refresh, 50);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(DKB.refresh);
+})();
+/* Accounts: email + one-time code. Saved per browser (localStorage).
+   To really email the codes, fill EMAILJS below (free emailjs.com account):
+   template variables used: {{to_email}} and {{code}}. */
+(function () {
+  "use strict";
+  var EMAILJS = { service: "", template: "", key: "" };
+  var root = document.documentElement, ACC = "dk-acc", SES = "dk-user";
+  var $ = function (s, c) { return (c || document).querySelector(s); };
+  var AR = {
+    p0: "سجّلي الدخول أو أنشئي حساباً جديداً", newacc: "إنشاء حساب جديد", pw: "كلمة المرور", pw2: "تأكيد كلمة المرور", wrong: "أحد المعلومات غير صحيح", notused: "هذا البريد غير مستخدم في الموقع بعد", used: "هذا الحساب مستخدم بالفعل",
+    make: "إنشاء حساب؟", forgot: "نسيتِ كلمة المرور؟", haveacc: "لديك حساب؟ سجّلي الدخول", back: "رجوع", pf: "اكتبي بريدك وسنرسل لك رمزاً لإعادة تعيين كلمة المرور.", newpw: "كلمة مرور جديدة", savepw: "حفظ كلمة المرور", pwdone: "تم تغيير كلمة المرور، سجّلي الدخول", short: "كلمة المرور 6 أحرف على الأقل", nomatch: "كلمتا المرور غير متطابقتين",
+    login: "تسجيل الدخول", t1: "أهلاً بك", p1: "اكتبي بريدك الإلكتروني وسنرسل لك رمزاً مكوّناً من 6 أرقام.", email: "البريد الإلكتروني", send: "إرسال الرمز",
+    t2: "أدخلي الرمز", p2: "أرسلنا رمزاً إلى", verify: "تأكيد", resend: "إعادة إرسال الرمز", change: "تغيير البريد", bad: "الرمز غير صحيح", exp: "انتهت صلاحية الرمز، أعيدي الإرسال",
+    inv: "اكتبي بريداً إلكترونياً صحيحاً", fail: "تعذّر إرسال البريد، حاولي لاحقاً", sent: "تم إرسال الرمز", demo: "وضع تجريبي: لم يتم ربط خدمة البريد بعد، رمزك هو", many: "محاولات كثيرة، اطلبي رمزاً جديداً",
+    prof: "ملفي الشخصي", pick: "اختاري صورتك", upload: "رفع صورة", logout: "تسجيل الخروج", done: "تم", cart: "حفظنا سلتك ومفضلتك في حسابك",
+    wel: "أهلاً بك", welsub: "يسعدنا انضمامك إلى دعاء القاضي. عطرك القادم بانتظارك.", wait: "ثانية", verified: "تم التحقق"
+  };
+  var EN = {
+    p0: "Log in or create a new account", newacc: "Create new account", pw: "Password", pw2: "Confirm password", wrong: "One of the information is wrong", notused: "This email isn't used on the website yet", used: "This account is already used",
+    make: "Make an account?", forgot: "Forgot password?", haveacc: "Have an account? Log in", back: "Back", pf: "Enter your email and we will send you a code to reset your password.", newpw: "New password", savepw: "Save password", pwdone: "Password changed, please log in", short: "Password must be at least 6 characters", nomatch: "Passwords do not match",
+    login: "Login", t1: "Welcome", p1: "Enter your email and we will send you a 6-digit code.", email: "Email address", send: "Send code",
+    t2: "Enter the code", p2: "We sent a code to", verify: "Verify", resend: "Resend code", change: "Change email", bad: "Wrong code", exp: "Code expired, please resend",
+    inv: "Please enter a valid email", fail: "Could not send the email, try again later", sent: "Code sent", demo: "Demo mode: email sending is not connected yet. Your code is", many: "Too many tries, request a new code",
+    prof: "My profile", pick: "Choose your picture", upload: "Upload photo", logout: "Log out", done: "Done", cart: "Your cart and favourites are saved to your account",
+    wel: "Welcome", welsub: "We are so happy to have you at Doaa Kadi. Your next fragrance is waiting.", wait: "s", verified: "Verified"
+  };
+  var L = function (k) { return (root.lang === "ar" ? AR : EN)[k] || k; };
+  var load = function () { try { return JSON.parse(localStorage.getItem(ACC) || "{}") || {}; } catch (e) { return {}; } };
+  var store = function (a) { try { localStorage.setItem(ACC, JSON.stringify(a)); } catch (e) {} };
+  var me = function () { try { return localStorage.getItem(SES) || ""; } catch (e) { return ""; } };
+  var EMOJI = ["🌸", "🧴", "✨", "🦋", "🌙", "👑", "💎", "🌷", "🕊️", "🫧"];
+  var SIL = '<svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><circle cx="12" cy="8" r="4.2"/><path d="M3.5 21c.7-4.6 4.2-7 8.5-7s7.8 2.4 8.5 7z"/></svg>';
+  function avHTML(a) { if (a && a.img) return ""; if (a && a.e != null && EMOJI[a.e]) return EMOJI[a.e]; return SIL; }
+  function paintAv(el, a) { el.innerHTML = avHTML(a); el.style.backgroundImage = a && a.img ? "url(" + a.img + ")" : ""; }
+
+  /* header buttons */
+  var cartBtn = $("#cartBtn"), tools = cartBtn.parentNode;
+  var lb = document.createElement("button"); lb.type = "button"; lb.className = "pill login"; lb.id = "loginBtn";
+  lb.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c.8-4.3 4.2-6.5 8-6.5s7.2 2.2 8 6.5"/></svg><span class="lt"></span>';
+  tools.insertBefore(lb, cartBtn);
+  var pb = document.createElement("button"); pb.type = "button"; pb.className = "pill prof"; pb.id = "profBtn"; pb.hidden = true; pb.innerHTML = '<span class="av"></span>';
+  tools.insertBefore(pb, cartBtn.nextSibling);
+
+  /* modal shell */
+  var ov = document.createElement("div"); ov.className = "aov"; ov.innerHTML = '<div class="abox" role="dialog" aria-modal="true"><button class="ax" type="button" aria-label="Close">×</button><div class="ab"></div></div>';
+  document.body.appendChild(ov);
+  var ab = $(".ab", ov);
+  function open(v) { ov.classList.add("open"); if (v) v(); }
+  function close() { ov.classList.remove("open"); }
+  $(".ax", ov).addEventListener("click", close);
+  ov.addEventListener("pointerdown", function (e) { if (e.target === ov) close(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+  var logoSrc = (document.getElementById("logoImg") || {}).src || "";
+
+  /* ---- helpers ---- */
+  var pend = null; /* {email, code, exp, tries, last, demo, ok(), back()} */
+  function mkCode() { var a = new Uint32Array(1); (window.crypto || window.msCrypto).getRandomValues(a); return String(100000 + a[0] % 900000); }
+  function mkSalt() { var a = new Uint8Array(16); crypto.getRandomValues(a); return Array.prototype.map.call(a, function (x) { return ("0" + x.toString(16)).slice(-2); }).join(""); }
+  function hashPw(pw, salt) {
+    var hex = function (buf) { return Array.prototype.map.call(new Uint8Array(buf), function (x) { return ("0" + x.toString(16)).slice(-2); }).join(""); };
+    if (window.crypto && crypto.subtle && window.TextEncoder) {
+      var enc = new TextEncoder();
+      return crypto.subtle.importKey("raw", enc.encode(pw), "PBKDF2", false, ["deriveBits"]).then(function (k) { return crypto.subtle.deriveBits({ name: "PBKDF2", salt: enc.encode(salt), iterations: 120000, hash: "SHA-256" }, k, 256); }).then(hex);
+    }
+    var h = 5381, str = salt + pw; for (var r = 0; r < 2000; r++) for (var i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) | 0; return Promise.resolve("f" + (h >>> 0).toString(16));
+  }
+  function sendMail(email, code) {
+    if (!EMAILJS.service || !EMAILJS.template || !EMAILJS.key) return Promise.resolve("demo");
+    return fetch("https://api.emailjs.com/api/v1.0/email/send", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ service_id: EMAILJS.service, template_id: EMAILJS.template, user_id: EMAILJS.key, template_params: { to_email: email, code: code } }) })
+      .then(function (r) { if (!r.ok) throw new Error("send"); return "sent"; });
+  }
+  var validEmail = function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); };
+  var logo = function () { return '<img class="alogo" alt="" src="' + logoSrc + '">'; };
+  function err(m, txt, ok) { m.className = "amsg" + (ok ? " ok" : ""); m.textContent = txt || ""; if (txt && !ok) { var bx = ov.firstChild; bx.classList.remove("shake"); void bx.offsetWidth; bx.classList.add("shake"); } }
+  function enter(el, fn) { el.addEventListener("keydown", function (e) { if (e.key === "Enter") fn(); }); }
+
+  /* ---- 1. welcome page: login or create ---- */
+  function viewHome() {
+    ab.innerHTML = logo() + '<h3>' + L("t1") + '</h3><p>' + L("p0") + '</p><button class="abtn" id="h1" type="button">' + L("login") + '</button><button class="abtn ghost" id="h2" type="button">' + L("newacc") + '</button>';
+    $("#h1").addEventListener("click", function () { viewLogin(); }); $("#h2").addEventListener("click", function () { viewCreate(); });
+  }
+  /* ---- 2. login ---- */
+  function viewLogin(prefill, okMsg) {
+    ab.innerHTML = logo() + '<h3>' + L("login") + '</h3><input type="email" id="aem" autocomplete="email" inputmode="email" placeholder="' + L("email") + '"><input type="password" id="apw" autocomplete="current-password" placeholder="' + L("pw") + '" style="margin-top:10px">' +
+      '<div class="amsg" id="amsg"></div><button class="abtn" id="alog" type="button">' + L("login") + '</button>' +
+      '<div class="alinks"><button class="alink" id="amk" type="button">' + L("make") + '</button><button class="alink" id="afg" type="button">' + L("forgot") + '</button></div>';
+    var em = $("#aem"), pw = $("#apw"), m = $("#amsg"); em.value = prefill || ""; if (okMsg) err(m, okMsg, true); setTimeout(function () { (prefill ? pw : em).focus(); }, 250);
+    function go() {
+      var v = em.value.trim().toLowerCase(), all = load();
+      if (!validEmail(v) || !pw.value) { err(m, L("wrong")); return; }
+      if (!all[v] || !all[v].pw) { err(m, L("notused")); return; }
+      $("#alog").disabled = true;
+      hashPw(pw.value, all[v].pw.s).then(function (h) { $("#alog").disabled = false; if (h !== all[v].pw.h) { err(m, L("wrong")); return; } signIn(v); });
+    }
+    $("#alog").addEventListener("click", go); enter(em, go); enter(pw, go);
+    $("#amk").addEventListener("click", function () { viewCreate(em.value.trim()); }); $("#afg").addEventListener("click", function () { viewForgot(em.value.trim()); });
+  }
+  /* ---- 3. create account ---- */
+  function viewCreate(prefill) {
+    ab.innerHTML = logo() + '<h3>' + L("newacc") + '</h3><input type="email" id="aem" autocomplete="email" inputmode="email" placeholder="' + L("email") + '"><input type="password" id="apw" autocomplete="new-password" placeholder="' + L("pw") + '" style="margin-top:10px"><input type="password" id="apw2" autocomplete="new-password" placeholder="' + L("pw2") + '" style="margin-top:10px">' +
+      '<div class="amsg" id="amsg"></div><button class="abtn" id="asend" type="button">' + L("send") + '</button><div class="alinks"><button class="alink" id="abk" type="button">' + L("haveacc") + '</button></div>';
+    var em = $("#aem"), p1 = $("#apw"), p2 = $("#apw2"), m = $("#amsg"); em.value = prefill || ""; setTimeout(function () { em.focus(); }, 250);
+    function go() {
+      var v = em.value.trim().toLowerCase(), all = load();
+      if (!validEmail(v)) { err(m, L("inv")); return; }
+      if (all[v] && all[v].pw) { err(m, L("used")); return; }
+      if (p1.value.length < 6) { err(m, L("short")); return; }
+      if (p1.value !== p2.value) { err(m, L("nomatch")); return; }
+      $("#asend").disabled = true; var c = mkCode(), salt = mkSalt(), pass = p1.value;
+      Promise.all([hashPw(pass, salt), sendMail(v, c)]).then(function (r) {
+        pend = { email: v, code: c, exp: Date.now() + 600000, tries: 0, last: Date.now(), demo: r[1] === "demo", back: function () { viewCreate(v); },
+          ok: function () { var al = load(); al[v] = { created: Date.now(), welcomed: false, av: { e: null }, cart: {}, fav: {}, pw: { s: salt, h: r[0] } }; store(al); signIn(v); } };
+        viewCode();
+      }).catch(function () { $("#asend").disabled = false; err(m, L("fail")); });
+    }
+    $("#asend").addEventListener("click", go); [em, p1, p2].forEach(function (x) { enter(x, go); });
+    $("#abk").addEventListener("click", function () { viewLogin(em.value.trim()); });
+  }
+  /* ---- 4. forgot password ---- */
+  function viewForgot(prefill) {
+    ab.innerHTML = logo() + '<h3>' + L("forgot").replace("؟", "").replace("?", "") + '</h3><p>' + L("pf") + '</p><input type="email" id="aem" autocomplete="email" inputmode="email" placeholder="' + L("email") + '"><div class="amsg" id="amsg"></div><button class="abtn" id="asend" type="button">' + L("send") + '</button><div class="alinks"><button class="alink" id="abk" type="button">' + L("back") + '</button></div>';
+    var em = $("#aem"), m = $("#amsg"); em.value = prefill || ""; setTimeout(function () { em.focus(); }, 250);
+    function go() {
+      var v = em.value.trim().toLowerCase(), all = load();
+      if (!validEmail(v)) { err(m, L("inv")); return; }
+      if (!all[v] || !all[v].pw) { err(m, L("notused")); return; }
+      $("#asend").disabled = true; var c = mkCode();
+      sendMail(v, c).then(function (mode) { pend = { email: v, code: c, exp: Date.now() + 600000, tries: 0, last: Date.now(), demo: mode === "demo", back: function () { viewForgot(v); }, ok: function () { viewReset(v); } }; viewCode(); })
+        .catch(function () { $("#asend").disabled = false; err(m, L("fail")); });
+    }
+    $("#asend").addEventListener("click", go); enter(em, go); $("#abk").addEventListener("click", function () { viewLogin(em.value.trim()); });
+  }
+  function viewReset(email) {
+    ab.innerHTML = logo() + '<h3>' + L("newpw") + '</h3><p class="amail"></p><input type="password" id="apw" autocomplete="new-password" placeholder="' + L("pw") + '"><input type="password" id="apw2" autocomplete="new-password" placeholder="' + L("pw2") + '" style="margin-top:10px"><div class="amsg" id="amsg"></div><button class="abtn" id="asv" type="button">' + L("savepw") + '</button>';
+    $(".amail", ab).textContent = email; var p1 = $("#apw"), p2 = $("#apw2"), m = $("#amsg"); setTimeout(function () { p1.focus(); }, 250);
+    function go() {
+      if (p1.value.length < 6) { err(m, L("short")); return; } if (p1.value !== p2.value) { err(m, L("nomatch")); return; }
+      var salt = mkSalt(); $("#asv").disabled = true;
+      hashPw(p1.value, salt).then(function (h) { var al = load(); if (!al[email]) return; al[email].pw = { s: salt, h: h }; store(al); viewLogin(email, L("pwdone")); });
+    }
+    $("#asv").addEventListener("click", go); enter(p1, go); enter(p2, go);
+  }
+  /* ---- 5. code check (shared) ---- */
+  function viewCode(note) {
+    ab.innerHTML = logo() + '<h3>' + L("t2") + '</h3><p>' + L("p2") + '<br><b class="amail"></b></p><input class="code" id="acd" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="••••••"><div class="amsg" id="amsg"></div>' +
+      (pend.demo ? '<div class="ademo">' + L("demo") + '<b>' + pend.code + '</b></div>' : '') +
+      '<button class="abtn" id="aver" type="button">' + L("verify") + '</button><div class="alinks"><button class="alink" id="ares" type="button"></button><button class="alink" id="achg" type="button">' + L("change") + '</button></div>';
+    $(".amail", ab).textContent = pend.email;
+    var cd = $("#acd"), m = $("#amsg"), rs = $("#ares"); if (note) err(m, note, true); setTimeout(function () { cd.focus(); }, 250);
+    var tm = setInterval(function () { if (!ov.classList.contains("open") || !rs.isConnected) return clearInterval(tm); var s = 30 - Math.floor((Date.now() - pend.last) / 1000); rs.disabled = s > 0; rs.textContent = L("resend") + (s > 0 ? " (" + s + L("wait") + ")" : ""); }, 500);
+    rs.disabled = true; rs.textContent = L("resend");
+    cd.addEventListener("input", function () { cd.value = cd.value.replace(/\D/g, "").slice(0, 6); if (cd.value.length === 6) chk(); });
+    function chk() {
+      var v = cd.value.trim(); m.className = "amsg";
+      if (Date.now() > pend.exp) { m.textContent = L("exp"); return; }
+      if (pend.tries >= 5) { m.textContent = L("many"); return; }
+      if (v !== pend.code) { pend.tries++; m.textContent = L("bad"); cd.value = ""; return; }
+      var ok = pend.ok; pend = null; clearInterval(tm);
+      ab.innerHTML = '<div class="tick"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="23"/><path d="M15 27l8 8 15-17"/></svg></div><h3>' + L("verified") + '</h3>'; setTimeout(ok, 1000);
+    }
+    $("#aver").addEventListener("click", chk); enter(cd, chk);
+    rs.addEventListener("click", function () { var c = mkCode(); rs.disabled = true; sendMail(pend.email, c).then(function (mode) { pend.code = c; pend.exp = Date.now() + 600000; pend.tries = 0; pend.last = Date.now(); pend.demo = mode === "demo"; viewCode(L("sent")); }).catch(function () { m.textContent = L("fail"); }); });
+    $("#achg").addEventListener("click", function () { var b = pend.back; pend = null; clearInterval(tm); b(); });
+  }
+
+  /* ---- session / account data ---- */
+  function nameOf(email) { var n = (email.split("@")[0] || "").replace(/[._\-+0-9]+/g, " ").trim().split(" ")[0] || ""; return n ? n.charAt(0).toUpperCase() + n.slice(1) : ""; }
+  function signIn(email) {
+    var all = load(), first = false, st = window.__dk && __dk.getState ? __dk.getState() : { cart: {}, fav: {} };
+    var a = all[email] || { created: Date.now(), welcomed: false, av: { e: null }, cart: {}, fav: {} };
+    /* merge what he added as a guest with what the account already had */
+    var mc = {}; Object.keys(a.cart || {}).forEach(function (k) { mc[k] = a.cart[k]; }); Object.keys(st.cart).forEach(function (k) { mc[k] = Math.max(mc[k] || 0, st.cart[k]); });
+    var mf = {}; Object.keys(a.fav || {}).forEach(function (k) { mf[k] = 1; }); Object.keys(st.fav).forEach(function (k) { mf[k] = 1; });
+    a.cart = mc; a.fav = mf; all[email] = a; store(all);
+    try { localStorage.setItem(SES, email); } catch (e) {}
+    if (__dk.setState) __dk.setState(mc, mf);
+    close(); refresh();
+    if (first || !a.welcomed) { a.welcomed = true; all[email] = a; store(all); welcome(email); }
+  }
+  function signOut() {
+    try { localStorage.removeItem(SES); } catch (e) {}
+    if (__dk.setState) __dk.setState({}, {});
+    close(); refresh();
+  }
+  var saveT = 0;
+  __dk.onSave = function () {
+    var e = me(); if (!e) return; clearTimeout(saveT);
+    saveT = setTimeout(function () { var all = load(); if (!all[e] || !__dk.getState) return; var s = __dk.getState(); all[e].cart = s.cart; all[e].fav = s.fav; store(all); }, 120);
+  };
+
+  ov.addEventListener("pointerdown", function (e) { var b = e.target.closest(".abtn,.avgrid button"); if (!b || b.disabled) return; var r = b.getBoundingClientRect(), d = Math.max(r.width, r.height) * 2, sp = document.createElement("span"); sp.className = "rip"; sp.style.cssText = "width:" + d + "px;height:" + d + "px;left:" + (e.clientX - r.left - d / 2) + "px;top:" + (e.clientY - r.top - d / 2) + "px"; b.appendChild(sp); setTimeout(function () { sp.remove(); }, 650); });
+  function burst(host) { var em = ["🌸", "✨", "💙", "🤍", "🦋"]; for (var i = 0; i < 34; i++) { var p = document.createElement("i"); p.className = "cf"; p.textContent = em[i % 5]; var a = Math.random() * 6.283, d = 160 + Math.random() * 360; p.style.cssText = "--x:" + Math.cos(a) * d + "px;--y:" + (Math.sin(a) * d - 80) + "px;--r:" + (Math.random() * 540 - 270) + "deg;--s:" + (0.7 + Math.random() * 1.1) + ";animation-delay:" + (0.5 + Math.random() * 0.4) + "s"; host.appendChild(p); } }
+  /* ---- welcome screen (replaces the normal loading screen the first time) ---- */
+  function welcome(email) {
+    var w = document.createElement("div"); w.className = "wel";
+    var nm = nameOf(email);
+    w.innerHTML = '<i class="orb o1"></i><i class="orb o2"></i><div class="wi"><div class="w1">' + (root.lang === "ar" ? "مرحباً" : "Hello") + '</div><div class="w2"></div><div class="w3">' + L("welsub") + '</div></div>';
+    $(".w2", w).textContent = L("wel") + (nm ? (root.lang === "ar" ? " " : ", ") + nm : "");
+    document.body.appendChild(w); burst($(".wi", w)); requestAnimationFrame(function () { requestAnimationFrame(function () { w.classList.add("on"); }); });
+    setTimeout(function () { w.classList.remove("on"); setTimeout(function () { w.remove(); }, 800); }, 4200);
+  }
+
+  /* ---- profile ---- */
+  function viewProfile() {
+    var e = me(), all = load(), a = all[e]; if (!a) return;
+    var g = EMOJI.map(function (x, i) { return '<button type="button" style="--k:' + i + '" data-e="' + i + '" class="' + (a.av && a.av.e === i && !a.av.img ? "on" : "") + '">' + x + '</button>'; }).join("") + '<button type="button" data-e="-1" class="' + (!a.av || (a.av.e == null && !a.av.img) ? "on" : "") + '" aria-label="default">' + SIL + '</button>';
+    ab.innerHTML = '<div class="avbig av"></div><h3>' + L("prof") + '</h3><div class="amail"></div><p style="margin:10px 0 0">' + L("pick") + '</p><div class="avgrid">' + g + '</div>' +
+      '<div class="arow"><button class="abtn ghost" id="aup" type="button">' + L("upload") + '</button><button class="abtn ghost" id="aout" type="button">' + L("logout") + '</button></div><button class="abtn" id="adone" type="button">' + L("done") + '</button><input type="file" id="afile" accept="image/*" hidden>';
+    $(".amail", ab).textContent = e; paintAv($(".avbig", ab), a.av);
+    function upd(av) { var al = load(); al[e].av = av; store(al); a.av = av; paintAv($(".avbig", ab), av); refresh(); }
+    ab.querySelectorAll(".avgrid button").forEach(function (b) { b.addEventListener("click", function () { var i = +b.dataset.e; upd(i < 0 ? { e: null } : { e: i }); ab.querySelectorAll(".avgrid button").forEach(function (x) { x.classList.toggle("on", x === b); }); }); });
+    $("#aup").addEventListener("click", function () { $("#afile").click(); });
+    $("#afile").addEventListener("change", function (ev) {
+      var f = ev.target.files && ev.target.files[0]; if (!f) return; var r = new FileReader();
+      r.onload = function () { var im = new Image(); im.onload = function () { var s = 160, c = document.createElement("canvas"); c.width = c.height = s; var x = c.getContext("2d"), m = Math.min(im.width, im.height); x.drawImage(im, (im.width - m) / 2, (im.height - m) / 2, m, m, 0, 0, s, s); upd({ img: c.toDataURL("image/jpeg", .82) }); ab.querySelectorAll(".avgrid button").forEach(function (b) { b.classList.remove("on"); }); }; im.src = r.result; };
+      r.readAsDataURL(f);
+    });
+    $("#aout").addEventListener("click", signOut); $("#adone").addEventListener("click", close);
+  }
+
+  function refresh() {
+    var e = me(), a = e ? load()[e] : null;
+    $(".lt", lb).textContent = L("login"); lb.hidden = !!a; pb.hidden = !a;
+    if (a) { paintAv($(".av", pb), a.av); pb.setAttribute("aria-label", L("prof")); }
+  }
+  lb.addEventListener("click", function () { open(viewHome); });
+  pb.addEventListener("click", function () { open(viewProfile); });
+  new MutationObserver(function () { refresh(); if (ov.classList.contains("open")) { if (me()) viewProfile(); else if (pend) viewCode(); else viewHome(); } }).observe(root, { attributes: true, attributeFilter: ["lang"] });
+  refresh();
+  /* restore the saved cart of a returning user */
+  var cur = me(); if (cur && load()[cur] && __dk.setState) { var a0 = load()[cur]; var st0 = __dk.getState(); __dk.setState(Object.keys(st0.cart).length ? st0.cart : a0.cart, Object.keys(st0.fav).length ? st0.fav : a0.fav); }
 })();
 </script>
 
