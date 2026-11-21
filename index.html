@@ -1379,6 +1379,8 @@ html[dir=rtl] .gitem .gi-b h3::after { float: left; }
 .card.soon .soonv b{color:#fff;font-size:20px;letter-spacing:.02em;padding:10px 18px;border:1px solid rgba(255,255,255,.35);border-radius:99px;background:rgba(255,255,255,.08)}
 .card.soon .row,.card.soon button{pointer-events:none}
 .card.soon .soonv{background:rgba(8,28,78,.98)}.card.soon .soonv b{font-size:16px;white-space:nowrap;padding:9px 16px}
+/* no light rim inside gradient buttons */
+button,.btn,.abtn,.pill,a.l{background-origin:border-box}
 /* ===== accounts ===== */
 .pill.login{display:inline-flex;align-items:center;gap:7px}
 .pill.login svg{display:block}
@@ -1522,6 +1524,7 @@ a.abtn.owner{display:block;text-align:center;text-decoration:none;line-height:1;
 .abtn.hasdot::after{top:6px;inset-inline-end:10px}
 @keyframes dotp{70%{box-shadow:0 0 0 9px rgba(255,59,48,0)}100%{box-shadow:0 0 0 0 rgba(255,59,48,0)}}
 #sendOrder.btn.wa{background:linear-gradient(135deg,#9fd0ff,#1f5fae);color:#fff}
+button,.btn,.abtn,.pill{background-origin:border-box}
 </style>
 </head>
 <body>
@@ -1543,7 +1546,7 @@ a.abtn.owner{display:block;text-align:center;text-decoration:none;line-height:1;
 <div class="where" id="where" aria-hidden="true"><b></b><span></span></div>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="ver" aria-hidden="true">V.59</div>
+<div class="ver" aria-hidden="true">V.60</div>
 <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav class="dots-nav" id="dotsNav" aria-label="Sections"></nav>
