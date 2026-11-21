@@ -1,0 +1,62 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>طلبات دعاء القاضي</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,"Segoe UI",Tahoma,sans-serif;background:linear-gradient(160deg,#dff0ff,#fff);color:#12365f;min-height:100vh}
+header{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border-bottom:1px solid #cfe3f7}
+header h1{font-size:18px;margin:0;flex:1}button{font:inherit;cursor:pointer}
+.b{border:0;border-radius:12px;padding:9px 14px;background:#2d7fd3;color:#fff;font-weight:600}.b.g{background:#e6f1fc;color:#2d7fd3}.b.r{background:#fde8e8;color:#c33}
+main{max-width:760px;margin:0 auto;padding:14px 14px 60px}
+.card{background:#fff;border:1px solid #d6e7f8;border-radius:18px;padding:14px;margin-bottom:12px;box-shadow:0 6px 20px rgba(45,127,211,.08)}
+.card.new{border-color:#2d7fd3;box-shadow:0 0 0 3px rgba(45,127,211,.15)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px}.muted{color:#6b86a6;font-size:13px}
+a.l{display:inline-block;padding:7px 12px;border-radius:10px;background:#e6f1fc;color:#2d7fd3;text-decoration:none;font-weight:600;font-size:14px}
+pre{white-space:pre-wrap;background:#f4f9ff;border-radius:12px;padding:10px;margin:8px 0;font:14px/1.6 inherit}
+.st{padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700;background:#e6f1fc}.st.new{background:#ffe9b8;color:#8a5a00}.st.done{background:#d8f5df;color:#18763a}.st.cancel{background:#fde8e8;color:#c33}
+input{font:inherit;padding:11px 14px;border-radius:12px;border:1px solid #bcd6f1;width:100%}
+.login{max-width:360px;margin:12vh auto;text-align:center}.login input{margin:6px 0}
+.err{color:#c33;min-height:22px;font-size:14px}.dot{background:#e33;color:#fff;border-radius:99px;font-size:12px;padding:1px 8px;margin-inline-start:6px}
+.chat{max-height:300px;overflow:auto;display:flex;flex-direction:column;gap:6px;margin:10px 0;padding:4px}
+.m{max-width:80%;padding:8px 12px;border-radius:16px;font-size:14.5px;line-height:1.5;word-break:break-word}.m.me{align-self:flex-start;background:#2d7fd3;color:#fff}.m.sh{align-self:flex-end;background:#fff;color:#12365f;border:1px solid #cfe3f7}
+.cin{display:flex;gap:8px}[hidden]{display:none!important}
+</style></head><body>
+<div id="lg" class="login"><h2>لوحة الطلبات</h2><input id="em" type="email" placeholder="البريد الإلكتروني" autocomplete="email" dir="ltr"><input id="pw" type="password" placeholder="كلمة المرور" autocomplete="current-password"><div class="err" id="le"></div><button class="b" id="lb" style="width:100%">دخول</button></div>
+<div id="app" hidden><header><h1>الطلبات <span id="cnt" class="dot" hidden></span></h1><button class="b g" id="nt">🔔 تفعيل التنبيهات</button><button class="b g" id="out">خروج</button></header><main id="list"></main></div>
+<script>
+(function(){"use strict";
+var SB="https://ukdsyoyvmdynougrilyl.supabase.co",KEY="sb_publishable_bhFbfsh-g55NPRD-RUci2Q_-I5aP4Eu",SK="dk-owner";
+var $=function(s){return document.querySelector(s)};var sess=null;try{sess=JSON.parse(localStorage.getItem(SK)||"null")}catch(e){}
+function raw(p,o,t){o=o||{};var h={apikey:KEY,"Content-Type":"application/json",Authorization:"Bearer "+(t||KEY)};if(o.prefer)h.Prefer=o.prefer;return fetch(SB+p,{method:o.method||"GET",headers:h,body:o.body?JSON.stringify(o.body):undefined}).then(function(r){return r.text().then(function(x){var j=null;try{j=x?JSON.parse(x):null}catch(e){}if(!r.ok){var e=new Error("http");e.status=r.status;throw e}return j})})}
+function save(s){sess=s;try{s?localStorage.setItem(SK,JSON.stringify(s)):localStorage.removeItem(SK)}catch(e){}}
+function tok(){if(!sess)return Promise.reject();if(sess.x-60000>Date.now())return Promise.resolve(sess.a);return raw("/auth/v1/token?grant_type=refresh_token",{method:"POST",body:{refresh_token:sess.r}}).then(function(j){save({a:j.access_token,r:j.refresh_token,x:Date.now()+j.expires_in*1000,id:j.user.id});return sess.a})}
+function rest(p,o){return tok().then(function(t){return raw("/rest/v1/"+p,o,t)})}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function login(){var e=$("#em").value.trim().toLowerCase(),p=$("#pw").value;$("#le").textContent="";$("#lb").disabled=true;
+ raw("/auth/v1/token?grant_type=password",{method:"POST",body:{email:e,password:p}}).then(function(j){save({a:j.access_token,r:j.refresh_token,x:Date.now()+j.expires_in*1000,id:j.user.id});return start()}).catch(function(){$("#le").textContent="البريد أو كلمة المرور غير صحيحة";}).then(function(){$("#lb").disabled=false})}
+$("#lb").onclick=login;$("#pw").onkeydown=function(e){if(e.key==="Enter")login()};
+$("#out").onclick=function(){save(null);location.reload()};
+var maxId=null,gMax=null,orders=[],unread={},openId=null,chatT=0,flashT=0,aud=null;
+function beep(){try{aud=aud||new (window.AudioContext||window.webkitAudioContext)();[880,1175].forEach(function(f,i){var o=aud.createOscillator(),g=aud.createGain();o.frequency.value=f;o.connect(g);g.connect(aud.destination);var t=aud.currentTime+i*.18;g.gain.setValueAtTime(.2,t);g.gain.exponentialRampToValueAtTime(.001,t+.3);o.start(t);o.stop(t+.3)})}catch(e){}}
+function alertNew(txt){beep();try{if(window.Notification&&Notification.permission==="granted")new Notification("دعاء القاضي",{body:txt})}catch(e){}if(navigator.vibrate)navigator.vibrate([200,100,200]);var n=0,t0=document.title;clearInterval(flashT);flashT=setInterval(function(){document.title=n++%2?t0:"🔔 "+txt;if(n>12){clearInterval(flashT);document.title=t0}},900)}
+$("#nt").onclick=function(){try{Notification.requestPermission().then(function(p){$("#nt").textContent=p==="granted"?"🔔 التنبيهات مفعّلة":"🔕 غير مسموح"})}catch(e){}beep()};
+var ST={new:["جديد","new"],confirmed:["تم التأكيد",""],done:["تم التسليم","done"],cancel:["ملغي","cancel"]};
+function card(o){var d=new Date(o.created_at).toLocaleString("ar-EG"),s=ST[o.status]||ST.new,u=unread[o.id]||0,ph=esc(o.phone||"");
+ var loc=o.loc&&o.loc.lat?'<a class="l" target="_blank" rel="noopener" href="https://www.google.com/maps?q='+o.loc.lat+','+o.loc.lng+'">📍 الموقع على الخريطة</a>':"";
+ var wa=o.phone?'<a class="l" target="_blank" rel="noopener" href="https://wa.me/2'+ph.replace(/^0/,"0")+'">واتساب</a>':"";
+ return '<div class="card '+(o.status==="new"?"new":"")+'" data-id="'+o.id+'"><div><b>طلب #'+o.id+'</b> <span class="st '+s[1]+'">'+s[0]+'</span>'+(u?'<span class="dot">'+u+' رسالة</span>':"")+'<div class="muted">'+esc(d)+' · '+esc(o.email)+'</div></div>'+
+ '<div class="row"><a class="l" href="tel:'+ph+'">📞 '+ph+'</a>'+wa+loc+'</div>'+(o.addr?'<div class="muted" style="margin-top:6px">🏠 '+esc(o.addr)+'</div>':"")+'<pre>'+esc(o.body)+'</pre>'+
+ '<div class="row"><button class="b g" data-s="confirmed">تأكيد</button><button class="b g" data-s="done">تم التسليم</button><button class="b r" data-s="cancel">إلغاء</button><button class="b" data-chat="1">💬 المحادثة</button></div><div class="cbox" hidden></div></div>'}
+function draw(){var l=$("#list");var keep=openId;l.innerHTML=orders.length?orders.map(card).join(""):'<p class="muted">لا توجد طلبات بعد</p>';var n=orders.filter(function(o){return o.status==="new"}).length;$("#cnt").hidden=!n;$("#cnt").textContent=n;if(keep)openChat(keep,true)}
+$("#list").addEventListener("click",function(e){var c=e.target.closest(".card");if(!c)return;var id=+c.dataset.id,b=e.target.closest("button");if(!b)return;
+ if(b.dataset.s){rest("orders?id=eq."+id,{method:"PATCH",body:{status:b.dataset.s},prefer:"return=minimal"}).then(pullOrders)}
+ if(b.dataset.chat){if(openId===id){openId=null;clearInterval(chatT);draw()}else{openId=id;unread[id]=0;draw()}}});
+function openChat(id,redraw){var c=document.querySelector('.card[data-id="'+id+'"] .cbox');if(!c)return;var o=orders.filter(function(x){return x.id===id})[0];c.hidden=false;c.innerHTML='<div class="chat"></div><div class="cin"><input placeholder="اكتب رسالة للعميل…" maxlength="500"><button class="b">إرسال</button></div>';
+ var box=c.querySelector(".chat"),inp=c.querySelector("input");
+ function pull(){rest("messages?order_id=eq."+id+"&select=id,sender,body&order=created_at.asc").then(function(r){var near=box.scrollHeight-box.scrollTop-box.clientHeight<80||!box.children.length;box.innerHTML=r.map(function(m){return'<div class="m '+(m.sender==="owner"?"me":"sh")+'">'+esc(m.body)+'</div>'}).join("");if(near)box.scrollTop=box.scrollHeight})}
+ function send(){var v=inp.value.trim();if(!v)return;inp.value="";rest("messages",{method:"POST",prefer:"return=minimal",body:{order_id:id,user_id:o.user_id,sender:"owner",body:v}}).then(pull,function(){inp.value=v})}
+ c.querySelector("button").onclick=send;inp.onkeydown=function(e){if(e.key==="Enter")send()};pull();clearInterval(chatT);chatT=setInterval(pull,3000);if(!redraw)inp.focus()}
+function pullOrders(){return rest("orders?select=*&order=created_at.desc&limit=100").then(function(r){var top=r.length?r[0].id:0;if(maxId!==null&&top>maxId){var n=r.filter(function(o){return o.id>maxId})[0];alertNew("طلب جديد #"+n.id+" — "+n.phone)}maxId=Math.max(maxId||0,top);orders=r;if(!(document.activeElement&&document.activeElement.tagName==="INPUT"))draw()})}
+function pullMsgs(){return rest("messages?select=id,order_id,sender&sender=eq.guest&order=id.desc&limit=100").then(function(r){var top=r.length?r[0].id:0;if(gMax!==null&&top>gMax){r.filter(function(m){return m.id>gMax&&m.order_id!==openId}).forEach(function(m){unread[m.order_id]=(unread[m.order_id]||0)+1});alertNew("رسالة جديدة من عميل");}gMax=Math.max(gMax||0,top)})}
+function start(){return rest("profiles?id=eq."+sess.id+"&select=is_owner").then(function(r){if(!r[0]||!r[0].is_owner){save(null);$("#le").textContent="هذا الحساب ليس حساب المالك";throw 0}$("#lg").hidden=true;$("#app").hidden=false;if(window.Notification&&Notification.permission==="granted")$("#nt").textContent="🔔 التنبيهات مفعّلة";
+  return Promise.all([pullOrders(),pullMsgs()]).then(function(){setInterval(function(){pullOrders().catch(function(){});pullMsgs().catch(function(){})},5000)})})}
+if(sess)start().catch(function(){$("#lg").hidden=false});
+})();
+</script></body></html>
