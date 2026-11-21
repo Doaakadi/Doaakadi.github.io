@@ -1476,6 +1476,27 @@ html[dir=rtl] .gitem .gi-b h3::after { float: left; }
 @keyframes cfFly{0%{opacity:0;transform:translate(-50%,-50%) scale(.2)}15%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y) + 140px)) rotate(var(--r)) scale(1)}}
 .wel .w2{animation-name:welUp,welShine,welBreath}
 @media (prefers-reduced-motion:reduce){.abox *,.abox{animation:none!important}.abox>.ab>*{opacity:1}}
+.abox .abk{position:absolute;top:12px;inset-inline-start:12px;width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:#fff;cursor:pointer;display:grid;place-items:center;z-index:3;transition:transform .25s cubic-bezier(.3,1.6,.5,1),background .2s}
+.abox .abk:hover{background:rgba(255,255,255,.25);transform:translateX(-3px)}.abox .abk[hidden]{display:none}
+.abox .abk:not([hidden]){animation:aPopT .4s cubic-bezier(.3,1.5,.5,1)}
+[dir=rtl] .abox .abk svg,html[lang=ar] .abox .abk svg{transform:scaleX(-1)}
+html[lang=ar] .abox .abk:hover{transform:translateX(3px)}
+
+.aback{position:absolute;top:12px;inset-inline-start:12px;width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:#fff;cursor:pointer;display:grid;place-items:center;opacity:0;transform:scale(.6);pointer-events:none;transition:opacity .3s,transform .4s cubic-bezier(.3,1.6,.5,1),background .2s;z-index:3}
+.aback.show{opacity:1;transform:none;pointer-events:auto}.aback:hover{background:rgba(255,255,255,.28);transform:translateX(-2px)}
+html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
+.abox input[type=tel],.abox input[type=text]{width:100%;box-sizing:border-box;padding:14px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.14);color:#fff;font:500 16px var(--f-body,system-ui);outline:none;text-align:center}
+.abox input[type=tel]:focus,.abox input[type=text]:focus{border-color:#fff;background:rgba(255,255,255,.22)}
+.wel.ord .w2{font-size:clamp(40px,10vw,110px)}
+.odots{display:flex;gap:12px;justify-content:center;margin-top:26px}.odots i{width:12px;height:12px;border-radius:50%;background:#fff;animation:odot 1s ease-in-out infinite}.odots i:nth-child(2){animation-delay:.15s}.odots i:nth-child(3){animation-delay:.3s}
+@keyframes odot{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-12px);opacity:1}}
+.abox>.aback{position:absolute}
+.wel .w2{padding-bottom:.12em}
+.abox .chat{max-height:46vh;min-height:160px;overflow:auto;display:flex;flex-direction:column;gap:8px;padding:10px 2px;margin:8px 0;text-align:start;-webkit-overflow-scrolling:touch}
+.cm{display:flex}.cm span{max-width:82%;padding:9px 13px;border-radius:18px;font-size:14.5px;line-height:1.5;word-break:break-word;animation:aIn .35s both}
+.cm.me{justify-content:flex-end}.cm.me span{background:#fff;color:#1b4f8a;border-end-end-radius:5px}
+.cm.sh{justify-content:flex-start}.cm.sh span{background:rgba(255,255,255,.22);color:#fff;border:1px solid rgba(255,255,255,.3);border-end-start-radius:5px}
+.chin{display:flex;gap:8px}.chin input{flex:1;margin:0}.chin .abtn{width:auto;margin:0;padding:0 18px}
 </style>
 </head>
 <body>
@@ -1497,7 +1518,7 @@ html[dir=rtl] .gitem .gi-b h3::after { float: left; }
 <div class="where" id="where" aria-hidden="true"><b></b><span></span></div>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="ver" aria-hidden="true">V.47</div>
+<div class="ver" aria-hidden="true">V.49</div>
 <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav class="dots-nav" id="dotsNav" aria-label="Sections"></nav>
@@ -2988,15 +3009,14 @@ html[dir=rtl] .gitem .gi-b h3::after { float: left; }
   setTimeout(DKB.refresh, 50);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(DKB.refresh);
 })();
-/* Accounts: email + one-time code. Saved per browser (localStorage).
-   To really email the codes, fill EMAILJS below (free emailjs.com account):
-   template variables used: {{to_email}} and {{code}}. */
+/* Accounts on Supabase (email code + password). No secrets here: the key below is the public one. */
 (function () {
   "use strict";
-  var EMAILJS = { service: "", template: "", key: "" };
-  var root = document.documentElement, ACC = "dk-acc", SES = "dk-user";
+  var SB = "https://ukdsyoyvmdynougrilyl.supabase.co", KEY = "sb_publishable_bhFbfsh-g55NPRD-RUci2Q_-I5aP4Eu";
+  var root = document.documentElement, SES = "dk-sb";
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var AR = {
+    needlogin: "سجّلي الدخول أولاً لإتمام الطلب", dt: "بيانات التوصيل", dp: "اكتبي رقم هاتفك لنتواصل معك بخصوص الطلب", phone: "رقم الموبايل (مثال 01012345678)", addr: "العنوان (اختياري)", loc: "إضافة موقعي (اختياري)", locok: "تم حفظ موقعك", locbad: "تعذّر تحديد الموقع", phbad: "اكتبي رقم موبايل مصري صحيح", savedet: "حفظ ومتابعة الطلب", back2: "رجوع", ordering: "إتمام الطلب", cust: "بيانات العميل", dmy: "بيانات التوصيل والهاتف",
     p0: "سجّلي الدخول أو أنشئي حساباً جديداً", newacc: "إنشاء حساب جديد", pw: "كلمة المرور", pw2: "تأكيد كلمة المرور", wrong: "أحد المعلومات غير صحيح", notused: "هذا البريد غير مستخدم في الموقع بعد", used: "هذا الحساب مستخدم بالفعل",
     make: "إنشاء حساب؟", forgot: "نسيتِ كلمة المرور؟", haveacc: "لديك حساب؟ سجّلي الدخول", back: "رجوع", pf: "اكتبي بريدك وسنرسل لك رمزاً لإعادة تعيين كلمة المرور.", newpw: "كلمة مرور جديدة", savepw: "حفظ كلمة المرور", pwdone: "تم تغيير كلمة المرور، سجّلي الدخول", short: "كلمة المرور 6 أحرف على الأقل", nomatch: "كلمتا المرور غير متطابقتين",
     login: "تسجيل الدخول", t1: "أهلاً بك", p1: "اكتبي بريدك الإلكتروني وسنرسل لك رمزاً مكوّناً من 6 أرقام.", email: "البريد الإلكتروني", send: "إرسال الرمز",
@@ -3006,6 +3026,7 @@ html[dir=rtl] .gitem .gi-b h3::after { float: left; }
     wel: "أهلاً بك", welsub: "يسعدنا انضمامك إلى دعاء القاضي. عطرك القادم بانتظارك.", wait: "ثانية", verified: "تم التحقق"
   };
   var EN = {
+    needlogin: "Please log in first to complete your order", dt: "Delivery details", dp: "Enter your phone number so we can contact you about the order", phone: "Mobile number (e.g. 01012345678)", addr: "Address (optional)", loc: "Add my location (optional)", locok: "Location saved", locbad: "Could not get your location", phbad: "Enter a valid Egyptian mobile number", savedet: "Save & continue order", back2: "Back", ordering: "Completing order", cust: "Customer", dmy: "Delivery & phone",
     p0: "Log in or create a new account", newacc: "Create new account", pw: "Password", pw2: "Confirm password", wrong: "One of the information is wrong", notused: "This email isn't used on the website yet", used: "This account is already used",
     make: "Make an account?", forgot: "Forgot password?", haveacc: "Have an account? Log in", back: "Back", pf: "Enter your email and we will send you a code to reset your password.", newpw: "New password", savepw: "Save password", pwdone: "Password changed, please log in", short: "Password must be at least 6 characters", nomatch: "Passwords do not match",
     login: "Login", t1: "Welcome", p1: "Enter your email and we will send you a 6-digit code.", email: "Email address", send: "Send code",
@@ -3013,15 +3034,36 @@ html[dir=rtl] .gitem .gi-b h3::after { float: left; }
     inv: "Please enter a valid email", fail: "Could not send the email, try again later", sent: "Code sent", demo: "Demo mode: email sending is not connected yet. Your code is", many: "Too many tries, request a new code",
     prof: "My profile", pick: "Choose your picture", upload: "Upload photo", logout: "Log out", done: "Done", cart: "Your cart and favourites are saved to your account",
     wel: "Welcome", welsub: "We are so happy to have you at Doaa Kadi. Your next fragrance is waiting.", wait: "s", verified: "Verified"
-  };
+  };  AR.chat = "رسائلي"; EN.chat = "My messages"; AR.msgph = "اكتبي رسالتك…"; EN.msgph = "Type a message…"; AR.sendm = "إرسال"; EN.sendm = "Send"; AR.nomsg = "لا توجد رسائل بعد"; EN.nomsg = "No messages yet"; AR.neterr = "تعذّر الاتصال، حاولي مرة أخرى"; EN.neterr = "Connection problem, please try again"; AR.orderno = "طلب رقم"; EN.orderno = "Order #"; AR.noorder = "لا توجد طلبات بعد"; EN.noorder = "No orders yet"; AR.tooq = "انتظري قليلاً ثم أعيدي المحاولة"; EN.tooq = "Please wait a moment and try again";
   var L = function (k) { return (root.lang === "ar" ? AR : EN)[k] || k; };
-  var load = function () { try { return JSON.parse(localStorage.getItem(ACC) || "{}") || {}; } catch (e) { return {}; } };
-  var store = function (a) { try { localStorage.setItem(ACC, JSON.stringify(a)); } catch (e) {} };
-  var me = function () { try { return localStorage.getItem(SES) || ""; } catch (e) { return ""; } };
   var EMOJI = ["🌸", "🧴", "✨", "🦋", "🌙", "👑", "💎", "🌷", "🕊️", "🫧"];
   var SIL = '<svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><circle cx="12" cy="8" r="4.2"/><path d="M3.5 21c.7-4.6 4.2-7 8.5-7s7.8 2.4 8.5 7z"/></svg>';
   function avHTML(a) { if (a && a.img) return ""; if (a && a.e != null && EMOJI[a.e]) return EMOJI[a.e]; return SIL; }
   function paintAv(el, a) { el.innerHTML = avHTML(a); el.style.backgroundImage = a && a.img ? "url(" + a.img + ")" : ""; }
+
+  /* ---------- Supabase layer ---------- */
+  var sess = (function () { try { return JSON.parse(localStorage.getItem(SES) || "null"); } catch (e) { return null; } })();
+  var P = null; /* my profile row */
+  function saveSess(s) { sess = s; try { if (s) localStorage.setItem(SES, JSON.stringify(s)); else localStorage.removeItem(SES); } catch (e) {} }
+  function toSess(j) { return { a: j.access_token, r: j.refresh_token, x: Date.now() + (j.expires_in || 3600) * 1000, id: j.user && j.user.id, email: j.user && j.user.email }; }
+  function raw(path, opt, tok) {
+    opt = opt || {}; var h = { apikey: KEY, "Content-Type": "application/json", Authorization: "Bearer " + (tok || KEY) };
+    if (opt.prefer) h.Prefer = opt.prefer;
+    return fetch(SB + path, { method: opt.method || "GET", headers: h, body: opt.body ? JSON.stringify(opt.body) : undefined }).then(function (r) {
+      return r.text().then(function (t) { var j = null; try { j = t ? JSON.parse(t) : null; } catch (e) {} if (!r.ok) { var er = new Error((j && (j.error_code || j.code || j.msg || j.message)) || "http"); er.status = r.status; er.j = j; throw er; } return j; });
+    });
+  }
+  var refreshing = null;
+  function token() {
+    if (!sess) return Promise.reject(new Error("nosess"));
+    if (sess.x - 60000 > Date.now()) return Promise.resolve(sess.a);
+    if (!refreshing) refreshing = raw("/auth/v1/token?grant_type=refresh_token", { method: "POST", body: { refresh_token: sess.r } }).then(function (j) { saveSess(toSess(j)); refreshing = null; return sess.a; }, function (e) { refreshing = null; if (e.status >= 400 && e.status < 500) saveSess(null); throw e; });
+    return refreshing;
+  }
+  function rest(path, opt) { return token().then(function (t) { return raw("/rest/v1/" + path, opt, t); }); }
+  function loadProfile() { return rest("profiles?id=eq." + sess.id + "&select=*").then(function (r) { P = (r && r[0]) || { id: sess.id, email: sess.email, cart: {}, fav: {} }; return P; }); }
+  function patchProfile(o) { for (var k in o) if (P) P[k] = o[k]; return rest("profiles?id=eq." + sess.id, { method: "PATCH", body: o, prefer: "return=minimal" }); }
+  var me = function () { return sess ? sess.email : ""; };
 
   /* header buttons */
   var cartBtn = $("#cartBtn"), tools = cartBtn.parentNode;
@@ -3032,173 +3074,239 @@ html[dir=rtl] .gitem .gi-b h3::after { float: left; }
   tools.insertBefore(pb, cartBtn.nextSibling);
 
   /* modal shell */
-  var ov = document.createElement("div"); ov.className = "aov"; ov.innerHTML = '<div class="abox" role="dialog" aria-modal="true"><button class="ax" type="button" aria-label="Close">×</button><div class="ab"></div></div>';
+  var ov = document.createElement("div"); ov.className = "aov";
+  ov.innerHTML = '<div class="abox" role="dialog" aria-modal="true"><button class="aback" type="button" aria-label="Back"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><button class="ax" type="button" aria-label="Close">×</button><div class="ab"></div></div>';
   document.body.appendChild(ov);
-  var ab = $(".ab", ov);
+  var ab = $(".ab", ov), bk = $(".aback", ov), bkFn = null, pend = null, poll = 0;
+  bk.addEventListener("click", function () { if (bkFn) bkFn(); });
+  function setBack(fn) { bkFn = fn; bk.classList.toggle("show", !!fn); }
   function open(v) { ov.classList.add("open"); if (v) v(); }
-  function close() { ov.classList.remove("open"); }
+  function close() { ov.classList.remove("open"); setBack(null); pend = null; clearInterval(poll); }
   $(".ax", ov).addEventListener("click", close);
   ov.addEventListener("pointerdown", function (e) { if (e.target === ov) close(); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
   var logoSrc = (document.getElementById("logoImg") || {}).src || "";
 
-  /* ---- helpers ---- */
-  var pend = null; /* {email, code, exp, tries, last, demo, ok(), back()} */
-  function mkCode() { var a = new Uint32Array(1); (window.crypto || window.msCrypto).getRandomValues(a); return String(100000 + a[0] % 900000); }
-  function mkSalt() { var a = new Uint8Array(16); crypto.getRandomValues(a); return Array.prototype.map.call(a, function (x) { return ("0" + x.toString(16)).slice(-2); }).join(""); }
-  function hashPw(pw, salt) {
-    var hex = function (buf) { return Array.prototype.map.call(new Uint8Array(buf), function (x) { return ("0" + x.toString(16)).slice(-2); }).join(""); };
-    if (window.crypto && crypto.subtle && window.TextEncoder) {
-      var enc = new TextEncoder();
-      return crypto.subtle.importKey("raw", enc.encode(pw), "PBKDF2", false, ["deriveBits"]).then(function (k) { return crypto.subtle.deriveBits({ name: "PBKDF2", salt: enc.encode(salt), iterations: 120000, hash: "SHA-256" }, k, 256); }).then(hex);
-    }
-    var h = 5381, str = salt + pw; for (var r = 0; r < 2000; r++) for (var i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) | 0; return Promise.resolve("f" + (h >>> 0).toString(16));
-  }
-  function sendMail(email, code) {
-    if (!EMAILJS.service || !EMAILJS.template || !EMAILJS.key) return Promise.resolve("demo");
-    return fetch("https://api.emailjs.com/api/v1.0/email/send", { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ service_id: EMAILJS.service, template_id: EMAILJS.template, user_id: EMAILJS.key, template_params: { to_email: email, code: code } }) })
-      .then(function (r) { if (!r.ok) throw new Error("send"); return "sent"; });
-  }
+  function normPhone(v) { var d = String(v || "").replace(/[\s\-+()]/g, "").replace(/[٠-٩]/g, function (c) { return c.charCodeAt(0) - 1632; }); if (/^20/.test(d)) d = "0" + d.slice(2); return /^01[0125]\d{8}$/.test(d) ? d : ""; }
   var validEmail = function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); };
   var logo = function () { return '<img class="alogo" alt="" src="' + logoSrc + '">'; };
   function err(m, txt, ok) { m.className = "amsg" + (ok ? " ok" : ""); m.textContent = txt || ""; if (txt && !ok) { var bx = ov.firstChild; bx.classList.remove("shake"); void bx.offsetWidth; bx.classList.add("shake"); } }
   function enter(el, fn) { el.addEventListener("keydown", function (e) { if (e.key === "Enter") fn(); }); }
+  function busy(b, on) { if (b) b.disabled = !!on; }
+  function netErr(m, e) { err(m, e && e.status === 429 ? L("tooq") : L("neterr")); }
+  function exists(email) { return raw("/rest/v1/rpc/email_exists", { method: "POST", body: { p: email } }); }
 
-  /* ---- 1. welcome page: login or create ---- */
-  function viewHome() {
-    ab.innerHTML = logo() + '<h3>' + L("t1") + '</h3><p>' + L("p0") + '</p><button class="abtn" id="h1" type="button">' + L("login") + '</button><button class="abtn ghost" id="h2" type="button">' + L("newacc") + '</button>';
+  /* ---- 1. welcome page ---- */
+  function viewHome(note) {
+    setBack(null);
+    ab.innerHTML = logo() + '<h3>' + L("t1") + '</h3><p>' + L("p0") + '</p>' + (note ? '<p style="color:#fff;font-weight:700;margin-top:-6px">' + note + '</p>' : '') + '<button class="abtn" id="h1" type="button">' + L("login") + '</button><button class="abtn ghost" id="h2" type="button">' + L("newacc") + '</button>';
     $("#h1").addEventListener("click", function () { viewLogin(); }); $("#h2").addEventListener("click", function () { viewCreate(); });
   }
   /* ---- 2. login ---- */
   function viewLogin(prefill, okMsg) {
+    setBack(function () { viewHome(); });
     ab.innerHTML = logo() + '<h3>' + L("login") + '</h3><input type="email" id="aem" autocomplete="email" inputmode="email" placeholder="' + L("email") + '"><input type="password" id="apw" autocomplete="current-password" placeholder="' + L("pw") + '" style="margin-top:10px">' +
       '<div class="amsg" id="amsg"></div><button class="abtn" id="alog" type="button">' + L("login") + '</button>' +
       '<div class="alinks"><button class="alink" id="amk" type="button">' + L("make") + '</button><button class="alink" id="afg" type="button">' + L("forgot") + '</button></div>';
-    var em = $("#aem"), pw = $("#apw"), m = $("#amsg"); em.value = prefill || ""; if (okMsg) err(m, okMsg, true); setTimeout(function () { (prefill ? pw : em).focus(); }, 250);
+    var em = $("#aem"), pw = $("#apw"), m = $("#amsg"), bt = $("#alog"); em.value = prefill || ""; if (okMsg) err(m, okMsg, true); setTimeout(function () { (prefill ? pw : em).focus(); }, 250);
     function go() {
-      var v = em.value.trim().toLowerCase(), all = load();
+      var v = em.value.trim().toLowerCase();
       if (!validEmail(v) || !pw.value) { err(m, L("wrong")); return; }
-      if (!all[v] || !all[v].pw) { err(m, L("notused")); return; }
-      $("#alog").disabled = true;
-      hashPw(pw.value, all[v].pw.s).then(function (h) { $("#alog").disabled = false; if (h !== all[v].pw.h) { err(m, L("wrong")); return; } signIn(v); });
+      busy(bt, 1);
+      exists(v).then(function (ex) {
+        if (!ex) { busy(bt, 0); err(m, L("notused")); return; }
+        return raw("/auth/v1/token?grant_type=password", { method: "POST", body: { email: v, password: pw.value } }).then(function (j) { signIn(j, false); }, function (e) {
+          busy(bt, 0);
+          if (e.message === "email_not_confirmed") { raw("/auth/v1/resend", { method: "POST", body: { type: "signup", email: v } }).catch(function () {}); pend = { email: v, type: "signup", last: Date.now(), back: function () { viewLogin(v); }, ok: function (j) { signIn(j, true); } }; viewCode(); return; }
+          if (e.status === 400) err(m, L("wrong")); else netErr(m, e);
+        });
+      }).catch(function (e) { busy(bt, 0); netErr(m, e); });
     }
-    $("#alog").addEventListener("click", go); enter(em, go); enter(pw, go);
+    bt.addEventListener("click", go); enter(em, go); enter(pw, go);
     $("#amk").addEventListener("click", function () { viewCreate(em.value.trim()); }); $("#afg").addEventListener("click", function () { viewForgot(em.value.trim()); });
   }
   /* ---- 3. create account ---- */
   function viewCreate(prefill) {
-    ab.innerHTML = logo() + '<h3>' + L("newacc") + '</h3><input type="email" id="aem" autocomplete="email" inputmode="email" placeholder="' + L("email") + '"><input type="password" id="apw" autocomplete="new-password" placeholder="' + L("pw") + '" style="margin-top:10px"><input type="password" id="apw2" autocomplete="new-password" placeholder="' + L("pw2") + '" style="margin-top:10px">' +
+    setBack(function () { viewHome(); });
+    ab.innerHTML = logo() + '<h3>' + L("newacc") + '</h3><input type="email" id="aem" autocomplete="email" inputmode="email" placeholder="' + L("email") + '"><input type="tel" id="aph" autocomplete="tel" inputmode="numeric" placeholder="' + L("phone") + '" style="margin-top:10px"><input type="password" id="apw" autocomplete="new-password" placeholder="' + L("pw") + '" style="margin-top:10px"><input type="password" id="apw2" autocomplete="new-password" placeholder="' + L("pw2") + '" style="margin-top:10px">' +
       '<div class="amsg" id="amsg"></div><button class="abtn" id="asend" type="button">' + L("send") + '</button><div class="alinks"><button class="alink" id="abk" type="button">' + L("haveacc") + '</button></div>';
-    var em = $("#aem"), p1 = $("#apw"), p2 = $("#apw2"), m = $("#amsg"); em.value = prefill || ""; setTimeout(function () { em.focus(); }, 250);
+    var em = $("#aem"), ph = $("#aph"), p1 = $("#apw"), p2 = $("#apw2"), m = $("#amsg"), bt = $("#asend"); em.value = prefill || ""; setTimeout(function () { em.focus(); }, 250);
     function go() {
-      var v = em.value.trim().toLowerCase(), all = load();
+      var v = em.value.trim().toLowerCase(), phn = normPhone(ph.value);
       if (!validEmail(v)) { err(m, L("inv")); return; }
-      if (all[v] && all[v].pw) { err(m, L("used")); return; }
+      if (!phn) { err(m, L("phbad")); return; }
       if (p1.value.length < 6) { err(m, L("short")); return; }
       if (p1.value !== p2.value) { err(m, L("nomatch")); return; }
-      $("#asend").disabled = true; var c = mkCode(), salt = mkSalt(), pass = p1.value;
-      Promise.all([hashPw(pass, salt), sendMail(v, c)]).then(function (r) {
-        pend = { email: v, code: c, exp: Date.now() + 600000, tries: 0, last: Date.now(), demo: r[1] === "demo", back: function () { viewCreate(v); },
-          ok: function () { var al = load(); al[v] = { created: Date.now(), welcomed: false, av: { e: null }, cart: {}, fav: {}, pw: { s: salt, h: r[0] } }; store(al); signIn(v); } };
+      busy(bt, 1);
+      raw("/auth/v1/signup", { method: "POST", body: { email: v, password: p1.value, data: { phone: phn } } }).then(function (j) {
+        busy(bt, 0);
+        if (j && j.user && j.user.identities && !j.user.identities.length) { err(m, L("used")); return; }
+        if (j && j.identities && !j.identities.length) { err(m, L("used")); return; }
+        pend = { email: v, type: "signup", phone: phn, last: Date.now(), back: function () { viewCreate(v); }, ok: function (s) { signIn(s, true, phn); } };
         viewCode();
-      }).catch(function () { $("#asend").disabled = false; err(m, L("fail")); });
+      }).catch(function (e) { busy(bt, 0); if (e.message === "user_already_exists") err(m, L("used")); else netErr(m, e); });
     }
-    $("#asend").addEventListener("click", go); [em, p1, p2].forEach(function (x) { enter(x, go); });
+    bt.addEventListener("click", go); [em, ph, p1, p2].forEach(function (x) { enter(x, go); });
     $("#abk").addEventListener("click", function () { viewLogin(em.value.trim()); });
   }
   /* ---- 4. forgot password ---- */
   function viewForgot(prefill) {
+    setBack(function () { viewLogin(prefill); });
     ab.innerHTML = logo() + '<h3>' + L("forgot").replace("؟", "").replace("?", "") + '</h3><p>' + L("pf") + '</p><input type="email" id="aem" autocomplete="email" inputmode="email" placeholder="' + L("email") + '"><div class="amsg" id="amsg"></div><button class="abtn" id="asend" type="button">' + L("send") + '</button><div class="alinks"><button class="alink" id="abk" type="button">' + L("back") + '</button></div>';
-    var em = $("#aem"), m = $("#amsg"); em.value = prefill || ""; setTimeout(function () { em.focus(); }, 250);
+    var em = $("#aem"), m = $("#amsg"), bt = $("#asend"); em.value = prefill || ""; setTimeout(function () { em.focus(); }, 250);
     function go() {
-      var v = em.value.trim().toLowerCase(), all = load();
+      var v = em.value.trim().toLowerCase();
       if (!validEmail(v)) { err(m, L("inv")); return; }
-      if (!all[v] || !all[v].pw) { err(m, L("notused")); return; }
-      $("#asend").disabled = true; var c = mkCode();
-      sendMail(v, c).then(function (mode) { pend = { email: v, code: c, exp: Date.now() + 600000, tries: 0, last: Date.now(), demo: mode === "demo", back: function () { viewForgot(v); }, ok: function () { viewReset(v); } }; viewCode(); })
-        .catch(function () { $("#asend").disabled = false; err(m, L("fail")); });
+      busy(bt, 1);
+      exists(v).then(function (ex) {
+        if (!ex) { busy(bt, 0); err(m, L("notused")); return; }
+        return raw("/auth/v1/recover", { method: "POST", body: { email: v } }).then(function () { busy(bt, 0); pend = { email: v, type: "recovery", last: Date.now(), back: function () { viewForgot(v); }, ok: function (s) { viewReset(v, s.access_token); } }; viewCode(); });
+      }).catch(function (e) { busy(bt, 0); netErr(m, e); });
     }
-    $("#asend").addEventListener("click", go); enter(em, go); $("#abk").addEventListener("click", function () { viewLogin(em.value.trim()); });
+    bt.addEventListener("click", go); enter(em, go); $("#abk").addEventListener("click", function () { viewLogin(em.value.trim()); });
   }
-  function viewReset(email) {
+  function viewReset(email, tok) {
+    setBack(function () { viewLogin(email); });
     ab.innerHTML = logo() + '<h3>' + L("newpw") + '</h3><p class="amail"></p><input type="password" id="apw" autocomplete="new-password" placeholder="' + L("pw") + '"><input type="password" id="apw2" autocomplete="new-password" placeholder="' + L("pw2") + '" style="margin-top:10px"><div class="amsg" id="amsg"></div><button class="abtn" id="asv" type="button">' + L("savepw") + '</button>';
-    $(".amail", ab).textContent = email; var p1 = $("#apw"), p2 = $("#apw2"), m = $("#amsg"); setTimeout(function () { p1.focus(); }, 250);
+    $(".amail", ab).textContent = email; var p1 = $("#apw"), p2 = $("#apw2"), m = $("#amsg"), bt = $("#asv"); setTimeout(function () { p1.focus(); }, 250);
     function go() {
       if (p1.value.length < 6) { err(m, L("short")); return; } if (p1.value !== p2.value) { err(m, L("nomatch")); return; }
-      var salt = mkSalt(); $("#asv").disabled = true;
-      hashPw(p1.value, salt).then(function (h) { var al = load(); if (!al[email]) return; al[email].pw = { s: salt, h: h }; store(al); viewLogin(email, L("pwdone")); });
+      busy(bt, 1);
+      raw("/auth/v1/user", { method: "PUT", body: { password: p1.value } }, tok).then(function () { busy(bt, 0); viewLogin(email, L("pwdone")); }, function (e) { busy(bt, 0); if (e.message === "same_password") err(m, L("nomatch")); else netErr(m, e); });
     }
-    $("#asv").addEventListener("click", go); enter(p1, go); enter(p2, go);
+    bt.addEventListener("click", go); enter(p1, go); enter(p2, go);
   }
   /* ---- 5. code check (shared) ---- */
   function viewCode(note) {
-    ab.innerHTML = logo() + '<h3>' + L("t2") + '</h3><p>' + L("p2") + '<br><b class="amail"></b></p><input class="code" id="acd" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="••••••"><div class="amsg" id="amsg"></div>' +
-      (pend.demo ? '<div class="ademo">' + L("demo") + '<b>' + pend.code + '</b></div>' : '') +
+    setBack(function () { var b = pend && pend.back; pend = null; clearInterval(tm); if (b) b(); });
+    ab.innerHTML = logo() + '<h3>' + L("t2") + '</h3><p>' + L("p2") + '<br><b class="amail"></b></p><input class="code" id="acd" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="••••••"><div class="amsg" id="amsg"></div>' +
       '<button class="abtn" id="aver" type="button">' + L("verify") + '</button><div class="alinks"><button class="alink" id="ares" type="button"></button><button class="alink" id="achg" type="button">' + L("change") + '</button></div>';
     $(".amail", ab).textContent = pend.email;
-    var cd = $("#acd"), m = $("#amsg"), rs = $("#ares"); if (note) err(m, note, true); setTimeout(function () { cd.focus(); }, 250);
-    var tm = setInterval(function () { if (!ov.classList.contains("open") || !rs.isConnected) return clearInterval(tm); var s = 30 - Math.floor((Date.now() - pend.last) / 1000); rs.disabled = s > 0; rs.textContent = L("resend") + (s > 0 ? " (" + s + L("wait") + ")" : ""); }, 500);
-    rs.disabled = true; rs.textContent = L("resend");
-    cd.addEventListener("input", function () { cd.value = cd.value.replace(/\D/g, "").slice(0, 6); if (cd.value.length === 6) chk(); });
+    var cd = $("#acd"), m = $("#amsg"), rs = $("#ares"), bt = $("#aver"), p = pend, tm; if (note) err(m, note, true); setTimeout(function () { cd.focus(); }, 250);
+    function tick() { if (!ov.classList.contains("open") || !rs.isConnected) { clearInterval(tm); return; } var s = 60 - Math.floor((Date.now() - p.last) / 1000); rs.disabled = s > 0; rs.textContent = L("resend") + (s > 0 ? " (" + s + L("wait") + ")" : ""); }
+    tm = setInterval(tick, 500); tick();
+    cd.addEventListener("input", function () { cd.value = cd.value.replace(/\D/g, "").slice(0, 8); });
     function chk() {
-      var v = cd.value.trim(); m.className = "amsg";
-      if (Date.now() > pend.exp) { m.textContent = L("exp"); return; }
-      if (pend.tries >= 5) { m.textContent = L("many"); return; }
-      if (v !== pend.code) { pend.tries++; m.textContent = L("bad"); cd.value = ""; return; }
-      var ok = pend.ok; pend = null; clearInterval(tm);
-      ab.innerHTML = '<div class="tick"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="23"/><path d="M15 27l8 8 15-17"/></svg></div><h3>' + L("verified") + '</h3>'; setTimeout(ok, 1000);
+      var v = cd.value.trim(); m.className = "amsg"; if (v.length < 6) { err(m, L("bad")); return; }
+      busy(bt, 1);
+      raw("/auth/v1/verify", { method: "POST", body: { type: p.type, email: p.email, token: v } }).then(function (j) {
+        pend = null; clearInterval(tm);
+        ab.innerHTML = '<div class="tick"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="23"/><path d="M15 27l8 8 15-17"/></svg></div><h3>' + L("verified") + '</h3>'; setBack(null);
+        setTimeout(function () { p.ok(j); }, 900);
+      }, function (e) { busy(bt, 0); cd.value = ""; if (e.status === 429) netErr(m, e); else if (e.status >= 500 || !e.status) netErr(m, e); else err(m, e.message === "otp_expired" ? L("exp") : L("bad")); });
     }
-    $("#aver").addEventListener("click", chk); enter(cd, chk);
-    rs.addEventListener("click", function () { var c = mkCode(); rs.disabled = true; sendMail(pend.email, c).then(function (mode) { pend.code = c; pend.exp = Date.now() + 600000; pend.tries = 0; pend.last = Date.now(); pend.demo = mode === "demo"; viewCode(L("sent")); }).catch(function () { m.textContent = L("fail"); }); });
-    $("#achg").addEventListener("click", function () { var b = pend.back; pend = null; clearInterval(tm); b(); });
+    bt.addEventListener("click", chk); enter(cd, chk);
+    rs.addEventListener("click", function () {
+      rs.disabled = true; var rq = p.type === "signup" ? raw("/auth/v1/resend", { method: "POST", body: { type: "signup", email: p.email } }) : raw("/auth/v1/recover", { method: "POST", body: { email: p.email } });
+      rq.then(function () { p.last = Date.now(); err(m, L("sent"), true); }, function (e) { p.last = Date.now(); netErr(m, e); });
+    });
+    $("#achg").addEventListener("click", function () { var b = p.back; pend = null; clearInterval(tm); b(); });
   }
 
   /* ---- session / account data ---- */
   function nameOf(email) { var n = (email.split("@")[0] || "").replace(/[._\-+0-9]+/g, " ").trim().split(" ")[0] || ""; return n ? n.charAt(0).toUpperCase() + n.slice(1) : ""; }
-  function signIn(email) {
-    var all = load(), first = false, st = window.__dk && __dk.getState ? __dk.getState() : { cart: {}, fav: {} };
-    var a = all[email] || { created: Date.now(), welcomed: false, av: { e: null }, cart: {}, fav: {} };
-    /* merge what he added as a guest with what the account already had */
-    var mc = {}; Object.keys(a.cart || {}).forEach(function (k) { mc[k] = a.cart[k]; }); Object.keys(st.cart).forEach(function (k) { mc[k] = Math.max(mc[k] || 0, st.cart[k]); });
-    var mf = {}; Object.keys(a.fav || {}).forEach(function (k) { mf[k] = 1; }); Object.keys(st.fav).forEach(function (k) { mf[k] = 1; });
-    a.cart = mc; a.fav = mf; all[email] = a; store(all);
-    try { localStorage.setItem(SES, email); } catch (e) {}
+  function mergeIn() {
+    var st = window.__dk && __dk.getState ? __dk.getState() : { cart: {}, fav: {} }, sc = (P && P.cart) || {}, sf = (P && P.fav) || {};
+    var mc = {}; Object.keys(sc).forEach(function (k) { mc[k] = sc[k]; }); Object.keys(st.cart).forEach(function (k) { mc[k] = Math.max(mc[k] || 0, st.cart[k]); });
+    var mf = {}; Object.keys(sf).forEach(function (k) { mf[k] = 1; }); Object.keys(st.fav).forEach(function (k) { mf[k] = 1; });
     if (__dk.setState) __dk.setState(mc, mf);
-    close(); refresh();
-    if (first || !a.welcomed) { a.welcomed = true; all[email] = a; store(all); welcome(email); }
+    patchProfile({ cart: mc, fav: mf }).catch(function () {});
+  }
+  function signIn(j, isNew, phone) {
+    saveSess(toSess(j));
+    loadProfile().then(function () {
+      if (phone && !P.phone) patchProfile({ phone: phone }).catch(function () {});
+      mergeIn(); close(); refresh(); if (isNew) welcome(me());
+    }).catch(function () { P = { cart: {}, fav: {} }; close(); refresh(); });
   }
   function signOut() {
-    try { localStorage.removeItem(SES); } catch (e) {}
-    if (__dk.setState) __dk.setState({}, {});
-    close(); refresh();
+    saveSess(null); P = null; if (__dk.setState) __dk.setState({}, {}); close(); refresh();
   }
   var saveT = 0;
   __dk.onSave = function () {
-    var e = me(); if (!e) return; clearTimeout(saveT);
-    saveT = setTimeout(function () { var all = load(); if (!all[e] || !__dk.getState) return; var s = __dk.getState(); all[e].cart = s.cart; all[e].fav = s.fav; store(all); }, 120);
+    if (!sess || !P) return; clearTimeout(saveT);
+    saveT = setTimeout(function () { if (!__dk.getState) return; var s = __dk.getState(); patchProfile({ cart: s.cart, fav: s.fav }).catch(function () {}); }, 700);
   };
 
   ov.addEventListener("pointerdown", function (e) { var b = e.target.closest(".abtn,.avgrid button"); if (!b || b.disabled) return; var r = b.getBoundingClientRect(), d = Math.max(r.width, r.height) * 2, sp = document.createElement("span"); sp.className = "rip"; sp.style.cssText = "width:" + d + "px;height:" + d + "px;left:" + (e.clientX - r.left - d / 2) + "px;top:" + (e.clientY - r.top - d / 2) + "px"; b.appendChild(sp); setTimeout(function () { sp.remove(); }, 650); });
   function burst(host) { var em = ["🌸", "✨", "💙", "🤍", "🦋"]; for (var i = 0; i < 34; i++) { var p = document.createElement("i"); p.className = "cf"; p.textContent = em[i % 5]; var a = Math.random() * 6.283, d = 160 + Math.random() * 360; p.style.cssText = "--x:" + Math.cos(a) * d + "px;--y:" + (Math.sin(a) * d - 80) + "px;--r:" + (Math.random() * 540 - 270) + "deg;--s:" + (0.7 + Math.random() * 1.1) + ";animation-delay:" + (0.5 + Math.random() * 0.4) + "s"; host.appendChild(p); } }
-  /* ---- welcome screen (replaces the normal loading screen the first time) ---- */
   function welcome(email) {
-    var w = document.createElement("div"); w.className = "wel";
-    var nm = nameOf(email);
+    var w = document.createElement("div"); w.className = "wel"; var nm = nameOf(email);
     w.innerHTML = '<i class="orb o1"></i><i class="orb o2"></i><div class="wi"><div class="w1">' + (root.lang === "ar" ? "مرحباً" : "Hello") + '</div><div class="w2"></div><div class="w3">' + L("welsub") + '</div></div>';
     $(".w2", w).textContent = L("wel") + (nm ? (root.lang === "ar" ? " " : ", ") + nm : "");
     document.body.appendChild(w); burst($(".wi", w)); requestAnimationFrame(function () { requestAnimationFrame(function () { w.classList.add("on"); }); });
     setTimeout(function () { w.classList.remove("on"); setTimeout(function () { w.remove(); }, 800); }, 4200);
   }
 
+  /* ---- delivery details (phone required, location optional) ---- */
+  function viewDetails(done, backFn) {
+    setBack(backFn || null);
+    ab.innerHTML = logo() + '<h3>' + L("dt") + '</h3><p>' + L("dp") + '</p><input type="tel" id="aph" autocomplete="tel" inputmode="numeric" placeholder="' + L("phone") + '"><input type="text" id="aad" autocomplete="street-address" placeholder="' + L("addr") + '" style="margin-top:10px"><button class="abtn ghost" id="aloc" type="button">📍 ' + L("loc") + '</button><div class="amsg" id="amsg"></div><button class="abtn" id="asv" type="button">' + L("savedet") + '</button>';
+    var ph = $("#aph"), ad = $("#aad"), m = $("#amsg"), lc = (P && P.loc) || null, bt = $("#asv"); ph.value = (P && P.phone) || ""; ad.value = (P && P.addr) || "";
+    if (lc) $("#aloc").textContent = "✅ " + L("locok");
+    $("#aloc").addEventListener("click", function () {
+      var b = $("#aloc"); if (!navigator.geolocation) { err(m, L("locbad")); return; } b.disabled = true;
+      navigator.geolocation.getCurrentPosition(function (p) { lc = { lat: +p.coords.latitude.toFixed(6), lng: +p.coords.longitude.toFixed(6) }; b.disabled = false; b.textContent = "✅ " + L("locok"); err(m, ""); }, function () { b.disabled = false; err(m, L("locbad")); }, { enableHighAccuracy: true, timeout: 12000 });
+    });
+    function go() { var p = normPhone(ph.value); if (!p) { err(m, L("phbad")); return; } busy(bt, 1); patchProfile({ phone: p, addr: ad.value.trim(), loc: lc }).then(function () { close(); if (done) done(); }, function (e) { busy(bt, 0); netErr(m, e); }); }
+    bt.addEventListener("click", go); enter(ph, go);
+  }
+
+  /* ---- "completing order": save it on the server, then open the messages page ---- */
+  function placeOrder(href) {
+    var txt = ""; try { txt = decodeURIComponent((href.split("?text=")[1] || "")); } catch (x) {}
+    var st = __dk.getState(), full = txt;
+    var w = document.createElement("div"); w.className = "wel ord";
+    w.innerHTML = '<i class="orb o1"></i><i class="orb o2"></i><div class="wi"><div class="w2"></div><div class="odots"><i></i><i></i><i></i></div></div>';
+    $(".w2", w).textContent = (root.lang === "ar" ? "إتمام الطلب" : "Completing order") + "…";
+    document.body.appendChild(w); requestAnimationFrame(function () { requestAnimationFrame(function () { w.classList.add("on"); }); });
+    function hide() { w.classList.remove("on"); setTimeout(function () { w.remove(); }, 700); }
+    var wait = new Promise(function (r) { setTimeout(r, 2400); });
+    var job = rest("orders", { method: "POST", prefer: "return=representation", body: { user_id: sess.id, email: sess.email, phone: P.phone, addr: P.addr || null, loc: P.loc || null, items: st.cart, body: full, status: "new" } });
+    Promise.all([job, wait]).then(function (r) {
+      var o = r[0] && r[0][0]; if (__dk.setState) __dk.setState({}, st.fav); patchProfile({ cart: {} }).catch(function () {});
+      hide(); setTimeout(function () { open(function () { viewChat(o ? o.id : null); }); }, 500);
+    }, function () {
+      hide(); open(function () { setBack(null); ab.innerHTML = logo() + '<p style="color:#fff;font-weight:700">' + L("neterr") + '</p><a class="abtn" target="_blank" rel="noopener" href="' + href + '">WhatsApp</a>'; });
+    });
+  }
+  document.addEventListener("click", function (ev) {
+    var a = ev.target.closest && ev.target.closest("#sendOrder"); if (!a) return;
+    ev.preventDefault(); ev.stopPropagation();
+    if (!sess) { open(function () { viewHome(L("needlogin")); }); return; }
+    var go = function () { if (!P.phone) { open(function () { viewDetails(function () { placeOrder(a.href); }); }); return; } placeOrder(a.href); };
+    if (P) go(); else loadProfile().then(go, function () { open(function () { viewHome(L("neterr")); }); });
+  }, true);
+
+  /* ---- chat with the shop ---- */
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function viewChat(orderId, backFn) {
+    setBack(backFn || null);
+    if (!orderId) { ab.innerHTML = logo() + '<h3>' + L("chat") + '</h3><p>' + L("noorder") + '</p>'; return; }
+    ab.innerHTML = '<h3>' + L("chat") + '</h3><p class="amail">' + L("orderno") + ' ' + orderId + '</p><div class="chat" id="chl"></div><div class="chin"><input type="text" id="cmi" maxlength="500" placeholder="' + L("msgph") + '"><button class="abtn" id="cms" type="button">' + L("sendm") + '</button></div>';
+    var list = $("#chl"), inp = $("#cmi"), last = "";
+    function draw(rows) {
+      var key = rows.map(function (r) { return r.id; }).join(","); if (key === last) return; last = key;
+      var near = list.scrollHeight - list.scrollTop - list.clientHeight < 80 || !list.children.length;
+      list.innerHTML = rows.length ? rows.map(function (r) { return '<div class="cm ' + (r.sender === "guest" ? "me" : "sh") + '"><span>' + esc(r.body) + '</span></div>'; }).join("") : '<div class="empty">' + L("nomsg") + '</div>';
+      if (near) list.scrollTop = list.scrollHeight;
+    }
+    function pull() { rest("messages?order_id=eq." + orderId + "&select=id,sender,body,created_at&order=created_at.asc").then(draw, function () {}); }
+    function send() { var v = inp.value.trim(); if (!v) return; inp.value = ""; rest("messages", { method: "POST", prefer: "return=minimal", body: { order_id: orderId, user_id: sess.id, sender: "guest", body: v } }).then(pull, function () { inp.value = v; }); }
+    $("#cms").addEventListener("click", send); enter(inp, send); pull(); clearInterval(poll); poll = setInterval(function () { if (!ov.classList.contains("open") || !list.isConnected) { clearInterval(poll); return; } pull(); }, 3500);
+  }
+  function openMyChat(backFn) {
+    rest("orders?select=id&order=created_at.desc&limit=1").then(function (r) { viewChat(r && r[0] ? r[0].id : null, backFn); }, function () { ab.innerHTML = '<p>' + L("neterr") + '</p>'; });
+  }
+
   /* ---- profile ---- */
   function viewProfile() {
-    var e = me(), all = load(), a = all[e]; if (!a) return;
-    var g = EMOJI.map(function (x, i) { return '<button type="button" style="--k:' + i + '" data-e="' + i + '" class="' + (a.av && a.av.e === i && !a.av.img ? "on" : "") + '">' + x + '</button>'; }).join("") + '<button type="button" data-e="-1" class="' + (!a.av || (a.av.e == null && !a.av.img) ? "on" : "") + '" aria-label="default">' + SIL + '</button>';
+    var a = (P && P.avatar) || {}, e = me(); setBack(null);
+    var g = EMOJI.map(function (x, i) { return '<button type="button" style="--k:' + i + '" data-e="' + i + '" class="' + (a.e === i && !a.img ? "on" : "") + '">' + x + '</button>'; }).join("") + '<button type="button" data-e="-1" class="' + (a.e == null && !a.img ? "on" : "") + '" aria-label="default">' + SIL + '</button>';
     ab.innerHTML = '<div class="avbig av"></div><h3>' + L("prof") + '</h3><div class="amail"></div><p style="margin:10px 0 0">' + L("pick") + '</p><div class="avgrid">' + g + '</div>' +
-      '<div class="arow"><button class="abtn ghost" id="aup" type="button">' + L("upload") + '</button><button class="abtn ghost" id="aout" type="button">' + L("logout") + '</button></div><button class="abtn" id="adone" type="button">' + L("done") + '</button><input type="file" id="afile" accept="image/*" hidden>';
-    $(".amail", ab).textContent = e; paintAv($(".avbig", ab), a.av);
-    function upd(av) { var al = load(); al[e].av = av; store(al); a.av = av; paintAv($(".avbig", ab), av); refresh(); }
+      '<div class="arow"><button class="abtn ghost" id="aup" type="button">' + L("upload") + '</button><button class="abtn ghost" id="aout" type="button">' + L("logout") + '</button></div><button class="abtn ghost" id="amsgs" type="button">💬 ' + L("chat") + '</button><button class="abtn ghost" id="adel" type="button">📍 ' + L("dmy") + '</button><button class="abtn" id="adone" type="button">' + L("done") + '</button><input type="file" id="afile" accept="image/*" hidden>';
+    $(".amail", ab).textContent = e; paintAv($(".avbig", ab), a);
+    function upd(av) { patchProfile({ avatar: av }).catch(function () {}); a = av; paintAv($(".avbig", ab), av); refresh(); }
     ab.querySelectorAll(".avgrid button").forEach(function (b) { b.addEventListener("click", function () { var i = +b.dataset.e; upd(i < 0 ? { e: null } : { e: i }); ab.querySelectorAll(".avgrid button").forEach(function (x) { x.classList.toggle("on", x === b); }); }); });
     $("#aup").addEventListener("click", function () { $("#afile").click(); });
     $("#afile").addEventListener("change", function (ev) {
@@ -3206,20 +3314,21 @@ html[dir=rtl] .gitem .gi-b h3::after { float: left; }
       r.onload = function () { var im = new Image(); im.onload = function () { var s = 160, c = document.createElement("canvas"); c.width = c.height = s; var x = c.getContext("2d"), m = Math.min(im.width, im.height); x.drawImage(im, (im.width - m) / 2, (im.height - m) / 2, m, m, 0, 0, s, s); upd({ img: c.toDataURL("image/jpeg", .82) }); ab.querySelectorAll(".avgrid button").forEach(function (b) { b.classList.remove("on"); }); }; im.src = r.result; };
       r.readAsDataURL(f);
     });
-    $("#aout").addEventListener("click", signOut); $("#adone").addEventListener("click", close);
+    $("#aout").addEventListener("click", signOut); $("#adel").addEventListener("click", function () { viewDetails(null, viewProfile); }); $("#adone").addEventListener("click", close);
+    $("#amsgs").addEventListener("click", function () { openMyChat(viewProfile); });
   }
 
   function refresh() {
-    var e = me(), a = e ? load()[e] : null;
-    $(".lt", lb).textContent = L("login"); lb.hidden = !!a; pb.hidden = !a;
-    if (a) { paintAv($(".av", pb), a.av); pb.setAttribute("aria-label", L("prof")); }
+    var a = sess ? (P ? P.avatar || {} : {}) : null;
+    $(".lt", lb).textContent = L("login"); lb.hidden = !!sess; pb.hidden = !sess;
+    if (sess) { paintAv($(".av", pb), a); pb.setAttribute("aria-label", L("prof")); }
   }
   lb.addEventListener("click", function () { open(viewHome); });
-  pb.addEventListener("click", function () { open(viewProfile); });
-  new MutationObserver(function () { refresh(); if (ov.classList.contains("open")) { if (me()) viewProfile(); else if (pend) viewCode(); else viewHome(); } }).observe(root, { attributes: true, attributeFilter: ["lang"] });
+  pb.addEventListener("click", function () { open(function () { if (P) viewProfile(); else loadProfile().then(viewProfile, function () { ab.innerHTML = '<p>' + L("neterr") + '</p>'; }); }); });
+  new MutationObserver(function () { refresh(); if (ov.classList.contains("open")) { if (sess && P && !$(".chat", ab)) viewProfile(); else if (pend) viewCode(); else if (!sess) viewHome(); } }).observe(root, { attributes: true, attributeFilter: ["lang"] });
   refresh();
-  /* restore the saved cart of a returning user */
-  var cur = me(); if (cur && load()[cur] && __dk.setState) { var a0 = load()[cur]; var st0 = __dk.getState(); __dk.setState(Object.keys(st0.cart).length ? st0.cart : a0.cart, Object.keys(st0.fav).length ? st0.fav : a0.fav); }
+  /* returning visitor: restore account + cart */
+  if (sess) token().then(loadProfile).then(function () { mergeIn(); refresh(); }, function () { refresh(); });
 })();
 </script>
 
