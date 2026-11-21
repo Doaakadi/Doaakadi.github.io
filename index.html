@@ -1524,7 +1524,7 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
 <div class="where" id="where" aria-hidden="true"><b></b><span></span></div>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="ver" aria-hidden="true">V.51</div>
+<div class="ver" aria-hidden="true">V.52</div>
 <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav class="dots-nav" id="dotsNav" aria-label="Sections"></nav>
@@ -3051,7 +3051,7 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
     inv: "Please enter a valid email", fail: "Could not send the email, try again later", sent: "Code sent", demo: "Demo mode: email sending is not connected yet. Your code is", many: "Too many tries, request a new code",
     prof: "My profile", pick: "Choose your picture", upload: "Upload photo", logout: "Log out", done: "Done", cart: "Your cart and favourites are saved to your account",
     wel: "Welcome", welsub: "We are so happy to have you at Doaa Kadi. Your next fragrance is waiting.", wait: "s", verified: "Verified"
-  };  AR.chat = "رسائلي"; EN.chat = "My messages"; AR.msgph = "اكتبي رسالتك…"; EN.msgph = "Type a message…"; AR.sendm = "إرسال"; EN.sendm = "Send"; AR.nomsg = "لا توجد رسائل بعد"; EN.nomsg = "No messages yet"; AR.neterr = "تعذّر الاتصال، حاولي مرة أخرى"; EN.neterr = "Connection problem, please try again"; AR.orderno = "طلب رقم"; EN.orderno = "Order #"; AR.noorder = "لا توجد طلبات بعد"; EN.noorder = "No orders yet"; AR.tooq = "انتظري قليلاً ثم أعيدي المحاولة"; EN.tooq = "Please wait a moment and try again";
+  };  AR.avfail = "تعذّر حفظ الصورة في حسابك"; EN.avfail = "Could not save the picture to your account"; AR.chat = "رسائلي"; EN.chat = "My messages"; AR.msgph = "اكتبي رسالتك…"; EN.msgph = "Type a message…"; AR.sendm = "إرسال"; EN.sendm = "Send"; AR.nomsg = "لا توجد رسائل بعد"; EN.nomsg = "No messages yet"; AR.neterr = "تعذّر الاتصال، حاولي مرة أخرى"; EN.neterr = "Connection problem, please try again"; AR.orderno = "طلب رقم"; EN.orderno = "Order #"; AR.noorder = "لا توجد طلبات بعد"; EN.noorder = "No orders yet"; AR.tooq = "انتظري قليلاً ثم أعيدي المحاولة"; EN.tooq = "Please wait a moment and try again";
   var L = function (k) { return (root.lang === "ar" ? AR : EN)[k] || k; };
   var EMOJI = ["🌸", "🧴", "✨", "🦋", "🌙", "👑", "💎", "🌷", "🕊️", "🫧"];
   var SIL = '<svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><circle cx="12" cy="8" r="4.2"/><path d="M3.5 21c.7-4.6 4.2-7 8.5-7s7.8 2.4 8.5 7z"/></svg>';
@@ -3078,8 +3078,14 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
     return refreshing;
   }
   function rest(path, opt) { return token().then(function (t) { return raw("/rest/v1/" + path, opt, t); }); }
-  function loadProfile() { return rest("profiles?id=eq." + sess.id + "&select=*").then(function (r) { P = (r && r[0]) || { id: sess.id, email: sess.email, cart: {}, fav: {} }; return P; }); }
-  function patchProfile(o) { for (var k in o) if (P) P[k] = o[k]; return rest("profiles?id=eq." + sess.id, { method: "PATCH", body: o, prefer: "return=minimal" }); }
+  function loadProfile() {
+    return rest("profiles?id=eq." + sess.id + "&select=*").then(function (r) {
+      if (r && r[0]) { P = r[0]; return P; }
+      /* no row yet: create it (needs the "profile insert" policy from supabase_fix.sql) */
+      return rest("profiles", { method: "POST", prefer: "return=representation", body: { id: sess.id, email: sess.email, cart: {}, fav: {} } }).then(function (r2) { P = (r2 && r2[0]) || { id: sess.id, email: sess.email, cart: {}, fav: {} }; return P; }, function () { P = { id: sess.id, email: sess.email, cart: {}, fav: {} }; return P; });
+    });
+  }
+  function patchProfile(o) { return rest("profiles?id=eq." + sess.id, { method: "PATCH", body: o, prefer: "return=representation" }).then(function (r) { if (!r || !r.length) throw new Error("norow"); for (var k in o) if (P) P[k] = o[k]; return r; }); }
   var me = function () { return sess ? sess.email : ""; };
 
   /* header buttons */
@@ -3321,9 +3327,9 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
     var a = (P && P.avatar) || {}, e = me(); setBack(null);
     var g = EMOJI.map(function (x, i) { return '<button type="button" style="--k:' + i + '" data-e="' + i + '" class="' + (a.e === i && !a.img ? "on" : "") + '">' + x + '</button>'; }).join("") + '<button type="button" data-e="-1" class="' + (a.e == null && !a.img ? "on" : "") + '" aria-label="default">' + SIL + '</button>';
     ab.innerHTML = '<div class="avbig av"></div><h3>' + L("prof") + '</h3><div class="amail"></div><p style="margin:10px 0 0">' + L("pick") + '</p><div class="avgrid">' + g + '</div>' +
-      '<div class="arow"><button class="abtn ghost" id="aup" type="button">' + L("upload") + '</button><button class="abtn ghost" id="aout" type="button">' + L("logout") + '</button></div><button class="abtn ghost" id="amsgs" type="button">💬 ' + L("chat") + '</button><button class="abtn ghost" id="adel" type="button">📍 ' + L("dmy") + '</button><button class="abtn" id="adone" type="button">' + L("done") + '</button><input type="file" id="afile" accept="image/*" hidden>';
+      '<div class="amsg" id="amsg"></div><div class="arow"><button class="abtn ghost" id="aup" type="button">' + L("upload") + '</button><button class="abtn ghost" id="aout" type="button">' + L("logout") + '</button></div><button class="abtn ghost" id="amsgs" type="button">💬 ' + L("chat") + '</button><button class="abtn ghost" id="adel" type="button">📍 ' + L("dmy") + '</button><button class="abtn" id="adone" type="button">' + L("done") + '</button><input type="file" id="afile" accept="image/*" hidden>';
     $(".amail", ab).textContent = e; paintAv($(".avbig", ab), a);
-    function upd(av) { patchProfile({ avatar: av }).catch(function () {}); a = av; paintAv($(".avbig", ab), av); refresh(); }
+    function upd(av) { patchProfile({ avatar: av }).then(function () { err($("#amsg"), ""); }, function () { err($("#amsg"), L("avfail")); }); a = av; paintAv($(".avbig", ab), av); refresh(); }
     ab.querySelectorAll(".avgrid button").forEach(function (b) { b.addEventListener("click", function () { var i = +b.dataset.e; upd(i < 0 ? { e: null } : { e: i }); ab.querySelectorAll(".avgrid button").forEach(function (x) { x.classList.toggle("on", x === b); }); }); });
     $("#aup").addEventListener("click", function () { $("#afile").click(); });
     $("#afile").addEventListener("change", function (ev) {
