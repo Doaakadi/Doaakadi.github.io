@@ -1525,6 +1525,8 @@ a.abtn.owner{display:block;text-align:center;text-decoration:none;line-height:1;
 @keyframes dotp{70%{box-shadow:0 0 0 9px rgba(255,59,48,0)}100%{box-shadow:0 0 0 0 rgba(255,59,48,0)}}
 #sendOrder.btn.wa{background:linear-gradient(135deg,#9fd0ff,#1f5fae);color:#fff}
 button,.btn,.abtn,.pill{background-origin:border-box}
+
+.abox .ax,.abox .aback{z-index:5}
 </style>
 </head>
 <body>
@@ -1546,7 +1548,7 @@ button,.btn,.abtn,.pill{background-origin:border-box}
 <div class="where" id="where" aria-hidden="true"><b></b><span></span></div>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="ver" aria-hidden="true">V.60</div>
+<div class="ver" aria-hidden="true">V.61</div>
 <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav class="dots-nav" id="dotsNav" aria-label="Sections"></nav>
@@ -3355,7 +3357,7 @@ button,.btn,.abtn,.pill{background-origin:border-box}
   /* ---- chat with the shop ---- */
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function viewChat(orderId, backFn) {
-    setBack(backFn || null);
+    setBack(backFn || function () { viewProfile(); });
     if (!orderId) { ab.innerHTML = logo() + '<h3>' + L("chat") + '</h3><p>' + L("noorder") + '</p>'; return; }
     ab.innerHTML = '<h3>' + L("chat") + '</h3><p class="amail">' + L("orderno") + ' ' + orderId + '</p><div class="chat" id="chl"></div><div class="chin"><input type="text" id="cmi" maxlength="500" placeholder="' + L("msgph") + '"><button class="abtn" id="cms" type="button">' + L("sendm") + '</button></div>';
     var list = $("#chl"), inp = $("#cmi"), last = "";

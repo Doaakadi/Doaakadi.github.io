@@ -19,7 +19,7 @@ input{font:inherit;padding:11px 14px;border-radius:12px;border:1px solid #bcd6f1
 .cin{display:flex;gap:8px}[hidden]{display:none!important}
 </style></head><body>
 <div id="lg" class="login"><h2>لوحة الطلبات</h2><input id="em" type="email" placeholder="البريد الإلكتروني" autocomplete="email" dir="ltr"><input id="pw" type="password" placeholder="كلمة المرور" autocomplete="current-password"><div class="err" id="le"></div><button class="b" id="lb" style="width:100%">دخول</button></div>
-<div id="app" hidden><header><h1>الطلبات <span id="cnt" class="dot" hidden></span></h1><button class="b g" id="nt">🔔 تفعيل التنبيهات</button><button class="b g" id="out">خروج</button></header><main id="list"></main></div>
+<div id="app" hidden><header><h1>الطلبات <span id="cnt" class="dot" hidden></span></h1><button class="b g" id="nt">🔔 تفعيل التنبيهات</button><a class="b g" href="index.html" style="text-decoration:none">← المتجر</a><button class="b g" id="out">خروج</button></header><main id="list"></main></div>
 <script>
 (function(){"use strict";
 var SB="https://ukdsyoyvmdynougrilyl.supabase.co",KEY="sb_publishable_bhFbfsh-g55NPRD-RUci2Q_-I5aP4Eu",SK="dk-owner";
@@ -46,7 +46,7 @@ function card(o){var d=new Date(o.created_at).toLocaleString("ar-EG"),s=ST[o.sta
  '<div class="row"><button class="b g" data-s="confirmed">تأكيد</button><button class="b g" data-s="done">تم التسليم</button><button class="b r" data-s="cancel">إلغاء</button><button class="b" data-chat="1">💬 المحادثة</button><button class="b r" data-del="1">🗑 حذف</button></div><div class="cbox" hidden></div></div>'}
 function draw(){var l=$("#list");var keep=openId;l.innerHTML=orders.length?orders.map(card).join(""):'<p class="muted">لا توجد طلبات بعد</p>';var n=orders.filter(function(o){return o.status==="new"}).length;$("#cnt").hidden=!n;$("#cnt").textContent=n;if(keep)openChat(keep,true)}
 $("#list").addEventListener("click",function(e){var c=e.target.closest(".card");if(!c)return;var id=+c.dataset.id,b=e.target.closest("button");if(!b)return;
- if(b.dataset.del){if(!confirm("حذف الطلب #"+id+" وكل رسائله نهائياً؟"))return;rest("orders?id=eq."+id,{method:"DELETE",prefer:"return=representation"}).then(function(r){if(!r||!r.length){alert("لم يتم الحذف. شغّل ملف supabase_delete.sql في Supabase أولاً");return}if(openId===id){openId=null;clearInterval(chatT)}orders=orders.filter(function(x){return x.id!==id});draw()},function(){alert("تعذّر الحذف، حاول مرة أخرى")});return}
+ if(b.dataset.del){if(!b.dataset.sure){b.dataset.sure="1";b.textContent="⚠ اضغط للتأكيد";setTimeout(function(){b.dataset.sure="";b.textContent="🗑 حذف"},4000);return}rest("orders?id=eq."+id,{method:"DELETE",prefer:"return=representation"}).then(function(r){if(!r||!r.length){b.textContent="لم يتم الحذف – شغّل supabase_delete.sql";return}if(openId===id){openId=null;clearInterval(chatT)}orders=orders.filter(function(x){return x.id!==id});draw()},function(){b.textContent="تعذّر الحذف، حاول مرة أخرى"});return}
  if(b.dataset.s){rest("orders?id=eq."+id,{method:"PATCH",body:{status:b.dataset.s},prefer:"return=minimal"}).then(pullOrders)}
  if(b.dataset.chat){if(openId===id){openId=null;clearInterval(chatT);draw()}else{openId=id;unread[id]=0;draw()}}});
 function openChat(id,redraw){var c=document.querySelector('.card[data-id="'+id+'"] .cbox');if(!c)return;var o=orders.filter(function(x){return x.id===id})[0];c.hidden=false;c.innerHTML='<div class="chat"></div><div class="cin"><input placeholder="اكتب رسالة للعميل…" maxlength="500"><button class="b">إرسال</button></div>';
