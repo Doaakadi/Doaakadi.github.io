@@ -1524,7 +1524,7 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
 <div class="where" id="where" aria-hidden="true"><b></b><span></span></div>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="ver" aria-hidden="true">V.53</div>
+<div class="ver" aria-hidden="true">V.55</div>
 <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav class="dots-nav" id="dotsNav" aria-label="Sections"></nav>
@@ -3249,10 +3249,12 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
   }
   function signIn(j, isNew, phone) {
     saveSess(toSess(j));
+    close(); refresh();
+    if (isNew) welcome(me());
     loadProfile().then(function () {
       if (phone && !P.phone) patchProfile({ phone: phone }).catch(function () {});
-      mergeIn(); close(); refresh(); if (isNew) welcome(me());
-    }).catch(function () { P = { cart: {}, fav: {} }; close(); refresh(); });
+      mergeIn(); refresh();
+    }).catch(function () { P = P || { cart: {}, fav: {} }; refresh(); });
   }
   function signOut() {
     saveSess(null); P = null; if (__dk.setState) __dk.setState({}, {}); close(); refresh();
@@ -3341,7 +3343,7 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
     ab.innerHTML = '<div class="avbig av"></div><h3>' + L("prof") + '</h3><div class="amail"></div><p style="margin:10px 0 0">' + L("pick") + '</p><div class="avgrid">' + g + '</div>' +
       '<div class="amsg" id="amsg"></div><div class="arow"><button class="abtn ghost" id="aup" type="button">' + L("upload") + '</button><button class="abtn ghost" id="aout" type="button">' + L("logout") + '</button></div><button class="abtn ghost" id="amsgs" type="button">💬 ' + L("chat") + '</button><button class="abtn ghost" id="adel" type="button">📍 ' + L("dmy") + '</button><button class="abtn" id="adone" type="button">' + L("done") + '</button><input type="file" id="afile" accept="image/*" hidden>';
     $(".amail", ab).textContent = e; paintAv($(".avbig", ab), a);
-    function upd(av) { patchProfile({ avatar: av }).then(function () { err($("#amsg"), ""); }, function () { err($("#amsg"), L("avfail")); }); a = av; paintAv($(".avbig", ab), av); refresh(); }
+    function upd(av) { patchProfile({ avatar: av }).then(function () { err($("#amsg"), ""); }, function (er) { err($("#amsg"), L("avfail") + " (" + ((er && er.status) || "") + " " + ((er && er.message) || "") + ")"); }); a = av; paintAv($(".avbig", ab), av); refresh(); }
     ab.querySelectorAll(".avgrid button").forEach(function (b) { b.addEventListener("click", function () { var i = +b.dataset.e; upd(i < 0 ? { e: null } : { e: i }); ab.querySelectorAll(".avgrid button").forEach(function (x) { x.classList.toggle("on", x === b); }); }); });
     $("#aup").addEventListener("click", function () { $("#afile").click(); });
     $("#afile").addEventListener("change", function (ev) {
@@ -3359,7 +3361,7 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
     if (sess) { paintAv($(".av", pb), a); pb.setAttribute("aria-label", L("prof")); }
   }
   lb.addEventListener("click", function () { open(viewHome); });
-  pb.addEventListener("click", function () { open(function () { if (P) { viewProfile(); return; } ab.innerHTML = '<div class="odots"><i></i><i></i><i></i></div>'; loadProfile().then(viewProfile, function () { refresh(); if (!sess) viewHome(); else { ab.innerHTML = logo() + '<p style="color:#fff;font-weight:700">' + L("neterr") + '</p><button class="abtn" id="rt" type="button">' + L("retry") + '</button>'; $("#rt").addEventListener("click", function () { pb.click(); close(); }); } }); }); });
+  pb.addEventListener("click", function () { open(function () { if (P) { viewProfile(); return; } ab.innerHTML = '<div class="odots"><i></i><i></i><i></i></div>'; loadProfile().then(viewProfile, function (er) { refresh(); if (!sess) viewHome(); else { ab.innerHTML = logo() + '<p style="color:#fff;font-weight:700">' + L("neterr") + '</p><p dir="ltr" style="font-size:12px;opacity:.8">' + esc((er && er.status) || "") + ' ' + esc((er && er.message) || "") + '</p><button class="abtn" id="rt" type="button">' + L("retry") + '</button>'; $("#rt").addEventListener("click", function () { pb.click(); close(); }); } }); }); });
   new MutationObserver(function () { refresh(); if (ov.classList.contains("open")) { if (sess && P && !$(".chat", ab)) viewProfile(); else if (pend) viewCode(); else if (!sess) viewHome(); } }).observe(root, { attributes: true, attributeFilter: ["lang"] });
   refresh();
   /* returning visitor: restore account + cart */
