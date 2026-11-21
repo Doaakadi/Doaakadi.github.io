@@ -1374,7 +1374,12 @@ html.moving .nextbtn { animation-play-state: running !important; }
 .gitem .gi-b h3::after { content: "+"; float: right; opacity: .7; font: 300 26px var(--f-body); transition: transform .3s; }
 html[dir=rtl] .gitem .gi-b h3::after { float: left; }
 .gitem.open .gi-b h3::after { transform: rotate(45deg); }
-</style><style>[hidden]{display:none!important}html{background:#2a78bd}body{margin:0}img{max-width:100%}/* ===== accounts ===== */
+</style><style>[hidden]{display:none!important}html{background:#2a78bd}body{margin:0}img{max-width:100%}.card.soon{position:relative;overflow:hidden;cursor:default}
+.card.soon .soonv{position:absolute;inset:0;z-index:5;display:grid;place-items:center;background:rgba(8,28,78,.9);border-radius:inherit;pointer-events:auto}
+.card.soon .soonv b{color:#fff;font-size:20px;letter-spacing:.02em;padding:10px 18px;border:1px solid rgba(255,255,255,.35);border-radius:99px;background:rgba(255,255,255,.08)}
+.card.soon .row,.card.soon button{pointer-events:none}
+.card.soon .soonv{background:rgba(8,28,78,.98)}.card.soon .soonv b{font-size:16px;white-space:nowrap;padding:9px 16px}
+/* ===== accounts ===== */
 .pill.login{display:inline-flex;align-items:center;gap:7px}
 .pill.login svg{display:block}
 .pill.prof{padding:0;width:38px;height:38px;border-radius:50%;display:inline-grid;place-items:center;overflow:hidden;position:relative;border:2px solid rgba(255,255,255,.7)}
@@ -1497,6 +1502,7 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
 .cm.me{justify-content:flex-end}.cm.me span{background:#fff;color:#1b4f8a;border-end-end-radius:5px}
 .cm.sh{justify-content:flex-start}.cm.sh span{background:rgba(255,255,255,.22);color:#fff;border:1px solid rgba(255,255,255,.3);border-end-start-radius:5px}
 .chin{display:flex;gap:8px}.chin input{flex:1;margin:0}.chin .abtn{width:auto;margin:0;padding:0 18px}
+.avgrid button,.avbig,.pill.prof .av{background-origin:border-box;background-clip:border-box;background-repeat:no-repeat}.avgrid button{overflow:hidden}
 </style>
 </head>
 <body>
@@ -1518,7 +1524,7 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
 <div class="where" id="where" aria-hidden="true"><b></b><span></span></div>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="ver" aria-hidden="true">V.49</div>
+<div class="ver" aria-hidden="true">V.51</div>
 <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav class="dots-nav" id="dotsNav" aria-label="Sections"></nav>
@@ -1710,7 +1716,7 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
     { id: "fw1", cat: "fawhat", m: "w", u: "ml", en: "Wooden Diffuser", ar: "فواحة خشبية", pr: { "50": 250, "100": 430 }, groups: [{ k: "s", keys: ["50", "100"] }], bagOk: true },
     { id: "fw2", cat: "fawhat", m: "c", u: "ml", en: "Car Diffuser", ar: "فواحة سيارة", pr: { "10": 60, "15": 85 }, groups: [{ k: "s", keys: ["10", "15"] }], bagOk: true },
     // oil perfume: one card, four cap colours (price and size to be set)
-    { id: "oi1", cat: "oils", m: "o", en: "Oil Perfume", ar: "عطر زيتي", pr: { "1": null }, groups: [{ k: "s", keys: ["1"] }], colors: [{ id: "purple", en: "Purple", ar: "بنفسجي", rgb: [.62, .45, .78], hex: "#9d73c7" }, { id: "blue", en: "Blue", ar: "أزرق", rgb: [.1, .2, .62], hex: "#1c34a0" }, { id: "pearl", en: "Pearl white", ar: "أبيض لؤلؤي", rgb: [.95, .95, .92], hex: "#f2f2ec" }, { id: "black", en: "Black", ar: "أسود", rgb: [.07, .07, .08], hex: "#161618" }] },
+    { id: "oi1", cat: "oils", m: "o", u: "ml", en: "Oil Perfume", ar: "عطر زيتي", pr: { "3": 20, "30": 190 }, groups: [{ k: "s", keys: ["3", "30"] }], colors: [{ id: "purple", en: "Purple", ar: "بنفسجي", rgb: [.62, .45, .78], hex: "#9d73c7" }, { id: "blue", en: "Blue", ar: "أزرق", rgb: [.1, .2, .62], hex: "#1c34a0" }, { id: "pearl", en: "Pearl white", ar: "أبيض لؤلؤي", rgb: [.95, .95, .92], hex: "#f2f2ec" }, { id: "black", en: "Black", ar: "أسود", rgb: [.07, .07, .08], hex: "#161618" }] },
     // gifts: one text card that opens the gift maker, and the two gift bags inside it
     { id: "gk1", cat: "gifts", plain: true, en: "Make a gift", ar: "إصنع هديتك", d: { ar: "سيتم تغليف هديتك بشكل كامل ليكون قابل للإهداء", en: "Your gift will be fully wrapped, ready to give" } },
     { id: "gb1", cat: "giftitem", plain: true, en: "Makeup Bag", ar: "حقيبة ميكب", price: null, d: { ar: "دلّعي نفسك أو أهدي شخص غالي عليكِ مع حقيبة الميكب الأنيقة 💗✨\n\nحقيبة عملية وأنيقة، تجمع لكِ أغراض المكياج والعناية بكل سهولة وترتيب، وتناسب الاستخدام اليومي والسفر والمشاوير.\n\nتصميمها الجميل يخليها هدية مميزة لكل بنت تحب الأناقة والترتيب، سواء لنفسك أو لشخص تحبينه.", en: "Treat yourself, or give someone dear to you, the elegant makeup bag 💗✨\n\nA practical, stylish bag that keeps your makeup and care essentials neat and easy to find. Perfect for every day, travel and outings.\n\nIts lovely design makes it a special gift for anyone who loves elegance and order, for yourself or someone you love." } },
@@ -1718,7 +1724,6 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
     // herbal products: price per bag, no pictures. g = grams
     { id: "h1", cat: "henna", m: "g", u: "g", en: "Madinah Henna", ar: "حنة المدينة", pr: { "100": 90, "250": 170, "500": 290 }, groups: [{ k: "s", keys: ["100", "250", "500"] }] },
     { id: "h2", cat: "henna", m: "g", u: "g", en: "Baladi Henna", ar: "الحنة البلدي", pr: { "100": 75, "250": 130, "500": 210 }, groups: [{ k: "s", keys: ["100", "250", "500"] }] },
-    { id: "h3", cat: "henna", m: "g", u: "g", en: "Sudani Henna", ar: "الحنة السوداني", pr: { "100": 65, "250": 105, "500": 160 }, groups: [{ k: "s", keys: ["100", "250", "500"] }] },
     { id: "me1", cat: "mushat", m: "g", u: "g", en: "Red Mushat", ar: "المشاط الأحمر", pr: { "100": 130, "250": 250, "500": 450 }, groups: [{ k: "s", keys: ["100", "250", "500"] }] },
     { id: "s1", cat: "sidr", m: "g", u: "g", en: "Ground Sidr", ar: "السدر المطحون", pr: { "100": 85, "250": 155, "500": 265 }, groups: [{ k: "s", keys: ["100", "250", "500"] }] },
     { id: "de1", cat: "dates", m: "g", u: "g", en: "Date Seed", ar: "نواة التمر", pr: { "100": 85, "250": 155, "500": 265 }, groups: [{ k: "s", keys: ["100", "250", "500"] }] },
@@ -1729,7 +1734,7 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
   ];
 
   P.forEach(function (p) {
-    if (p.cat === "perfumes" && p.d) { p.m = "p"; p.u = "ml"; p.pr = { "30": 55, "50": 65, "100": 155, "t5": 35, "t10": 60, "e50": null, "e100": null }; p.pf = ["30", "50", "100"]; p.groups = [{ k: "std", keys: ["30", "50", "100"] }, { k: "tst", keys: ["t5", "t10"] }, { k: "eco", keys: ["e50", "e100"] }]; }
+    if (p.cat === "perfumes" && p.d) { p.m = "p"; p.u = "ml"; p.pr = { "30": 165, "50": 240, "100": 420, "t5": 35, "t10": 60, "e30": 125, "e50": 200, "e100": 370 }; p.pf = ["30", "50", "100"]; p.groups = [{ k: "std", keys: ["30", "50", "100"] }, { k: "tst", keys: ["t5", "t10"] }, { k: "eco", keys: ["e30", "e50", "e100"] }]; }
   });
 
   var FLAR = {"Fruity": "فواكه", "Musky": "مسك", "Amber": "عنبر", "Warm": "دافئ", "Sweet": "حلو", "Spicy": "توابل", "Modern": "عصري", "Floral": "زهري", "Woody": "خشبي", "Ambery": "عنبري", "Vanilla": "فانيليا", "Gourmand": "جورماند", "Leather": "جلد", "Fresh": "منعش", "Citrus": "حمضيات", "Aquatic": "بحري", "Aromatic": "عطري", "Feminine": "أنثوي", "Oud": "عود"};
@@ -1851,7 +1856,8 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
   function card(p, i) {
     if (p.empty) return '<article class="card empty" aria-hidden="true"><span class="sk w1"></span><span class="sk w2"></span><span class="sk w3"></span><em>' + t("soon") + '</em></article>';
     var nm = nameOf(p), alt = p.d || p.plain ? "" : (lang === "ar" ? p.en : p.ar), txt = p.d || p.m === "g";
-    return '<article class="card' + (txt ? ' txt' : '') + (p.m === "g" ? ' herb' : '') + (p.plain ? ' plaincard' : '') + '" data-open="' + p.id + '" tabindex="0" role="button" aria-label="' + nm + '">' + visOf(p, i) +
+    var soon = p.m === "g";
+    return '<article class="card' + (txt ? ' txt' : '') + (p.m === "g" ? ' herb' : '') + (soon ? ' soon' : '') + (p.plain ? ' plaincard' : '') + '"' + (soon ? ' aria-disabled="true"' : ' data-open="' + p.id + '" tabindex="0" role="button"') + ' aria-label="' + nm + '">' + (soon ? '<span class="soonv"><b>' + (lang === "ar" ? "سيتوفر قريباً" : "Coming soon") + '</b></span>' : '') + visOf(p, i) +
       '<h3>' + nm + (alt ? '<small>' + alt + '</small>' : '') + '</h3>' + (p.d ? '<p class="desc">' + p.d[lang] + '</p>' : '') +
       (p.plain ? '' : '<div class="row">' + priceHtml(p) + acts(p) + '</div>') + '</article>';
   }
@@ -1924,7 +1930,7 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
     $("#pcard").className = "pcard" + (d3 ? "" : " solo");
     var cg = groupOf(p, modalKey), ui = "";
     if (p.groups.length > 1) ui += '<div class="tyrow">' + p.groups.map(function (g) { return '<button type="button" class="tybtn' + (g === cg ? ' on' : '') + '" data-ty="' + g.k + '">' + t("ty_" + g.k) + '</button>'; }).join("") + '</div>';
-    if (!(p.m === "o")) ui += '<h4>' + (p.u === "g" ? t("pack_t") : t("sz_t")) + '</h4><div class="szrow" style="grid-template-columns:repeat(' + cg.keys.length + ',1fr)">' + cg.keys.map(function (k) {
+    ui += '<h4>' + (p.u === "g" ? t("pack_t") : t("sz_t")) + '</h4><div class="szrow" style="grid-template-columns:repeat(' + cg.keys.length + ',1fr)">' + cg.keys.map(function (k) {
       var pr = p.pr[k]; return '<button type="button" class="szbtn' + (modalKey === k ? ' on' : '') + '" data-sz="' + k + '"><b>' + num(k.replace(/\D/g, "")) + '</b> ' + (p.u === "g" ? t("g") : t("ml")) + '<em>' + (pr == null ? t("na") : num(pr) + ' ' + cur()) + '</em></button>'; }).join("") + '</div>';
     if (p.colors) ui += '<h4>' + t("colour") + '</h4><div class="swrow">' + p.colors.map(function (c) { return '<button type="button" class="sw' + (modalCol === c.id ? ' on' : '') + '" data-sw="' + c.id + '" style="--c:' + c.hex + '" aria-label="' + (lang === "ar" ? c.ar : c.en) + '" title="' + (lang === "ar" ? c.ar : c.en) + '"></button>'; }).join("") + '<span class="swname" id="swName">' + (function () { var c = colOf(p, modalCol); return c ? (lang === "ar" ? c.ar : c.en) : ""; })() + '</span></div>';
     if (p.bagOk) ui += '<button type="button" class="bagbtn' + (modalBag ? ' on' : '') + '" data-bag="1"><img alt="" src="' + BAG_IMG + '"><span><b>' + t("bag_add") + '</b><em>+' + num(BAGP) + ' ' + cur() + '</em></span><i class="tick">' + CHECK + '</i></button>';
@@ -2010,7 +2016,7 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
   var has3d = function (p) { return !!(p && p.m && p.m !== "g"); };
   var colOf = function (p, id) { return ((p && p.colors) || []).filter(function (c) { return c.id === id; })[0]; };
   var szLabel = function (s, p) {
-    if (!s || !p) return ""; var u = p.u === "g" ? t("g") : t("ml"); if (p.m === "o") return "";
+    if (!s || !p) return ""; var u = p.u === "g" ? t("g") : t("ml"); if (p.m === "o") return num(s) + " " + u + (s === "30" ? " · " + (lang === "ar" ? "قطارة" : "dropper") : " · " + (lang === "ar" ? "رول أون" : "roll-on"));
     if (p.m === "p" && s.charAt(0) === "t") return t("tester") + " · " + num(s.slice(1)) + " " + u;
     if (p.m === "p" && s.charAt(0) === "e") return t("eco") + " · " + num(s.slice(1)) + " " + u;
     return num(s) + " " + u;
@@ -2037,7 +2043,7 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
     L.push(t("sum") + ": " + (tt.unk ? (tt.sum ? tt.sum + " " + cur() + " + " + t("na") : t("na")) : tt.sum + " " + cur()));
     return L.join("\n");
   }
-  function thumbOf(id, p) { var q = pk(id); if (!window.DKB || !DKB.thumb || !has3d(p)) return ""; var c = colOf(p, q.col) || (p.colors && p.colors[0]); return DKB.thumb({ m: p.m, key: q.sz || (p.m === "o" ? "1" : "50"), name: labName(p), col: c ? c.rgb : null, gift: q.gift }); }
+  function thumbOf(id, p) { var q = pk(id); if (!window.DKB || !DKB.thumb || !has3d(p)) return ""; var c = colOf(p, q.col) || (p.colors && p.colors[0]); return DKB.thumb({ m: p.m, key: q.sz || (p.m === "o" ? "3" : "50"), name: labName(p), col: c ? c.rgb : null, gift: q.gift }); }
   function miniVis(p, id) { if (has3d(p)) { var u = thumbOf(id || p.id, p); return u ? '<span class="mv mv3"><img alt="" src="' + u + '"></span>' : ""; } return p.img ? '<span class="mv ph" style="--img:var(--ph-' + p.id + ')"></span>' : (p.t ? '<span class="mv">' + art(p, P.indexOf(p)) + '</span>' : ""); }
   function cartIds() { return Object.keys(cart).filter(function (id) { return find(id) && cart[id] > 0; }); }
   function renderCart() {
@@ -2789,6 +2795,12 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
       liq: lathe([[0, .03], [.056, .03], [.064, .045], [.064, .55], [0, .55]], 32),
       cap: lathe([[0, .5], [.082, .5], [.082, .7], [.074, .765], [.04, .795], [0, .8]], 40), ball: lathe(arcPts(0, 0, 1, -Math.PI / 2, Math.PI / 2, 10).map(function (p) { return [p[0] * .03, p[1] * .03]; }), 14)
     };
+    G.drop = {
+      glass: lathe([[0, 0], [.1, 0], [.12, .02], [.12, .46], [.1, .52], [.06, .56], [0, .56]], 40),
+      liq: lathe([[0, .03], [.098, .03], [.11, .045], [.11, .44], [.095, .5], [.058, .54], [0, .54]], 32),
+      collar: lathe([[.052, .5], [.095, .5], [.095, .6], [.068, .625], [.052, .625]], 36),
+      bulb: lathe([[0, .6], [.056, .6], [.07, .7], [.068, .84], [.045, .95], [0, .99]], 32)
+    };
     /* burlap bag */
     G.bag = {
       body: rbox(.27, .29, .045, .04, 16), ruffle: rbox(.255, .075, .05, .035, 12),
@@ -2826,8 +2838,8 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
     }
     var PINE = [.9, .74, .52], BEECH = [.86, .62, .38], CREAM = [.95, .9, .76], RED = [.74, .05, .1], PURP = [.55, .24, .82], PURPD = [.46, .18, .72];
     var GY = -.47;
-    var NK = { e50: .78, e100: .78, wood: 1.45, car: 1.05, oil: 1.1 };
-    var SH = { std: .62, tst: .34, e50: .34, e100: .46, wood: .6, car: 0, oil: .26 };
+    var NK = { e50: .78, e100: .78, wood: 1.45, car: 1.05, oil: 1.1, drop: 1.1 };
+    var SH = { std: .62, tst: .34, e50: .34, e100: .46, wood: .6, car: 0, oil: .26, drop: .36 };
 
     function gift(Tr, C, g, y, r, z, size, bandG, bandR) {
       if (g < .02) return;
@@ -2877,6 +2889,11 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
         var tp4 = .014 + .146 * lvl;
         Tr.push({ b: G.car.glass, M: C(0, 0, 0), mode: 0, pass: 0 }); Tr.push({ b: G.car.liq, M: C(0, 0, 0), mode: 1, pass: 0, top: tp4 }); Tr.push({ b: G.car.liq, M: C(0, 0, 0), mode: 1, pass: 1, top: tp4 });
         Tr.push({ b: G.car.glass, M: C(0, 0, 0), mode: 0, pass: 1 });
+      } else if (o === "drop") {
+        var cd = st.col || [.62, .45, .78], tp6 = .035 + .5 * lvl;
+        Op.push({ b: G.drop.bulb, M: C(0, 0, 0), mode: 6, pass: 1, col: cd, k: 70 }); Op.push({ b: G.drop.collar, M: C(0, 0, 0), mode: 6, pass: 1, col: [.8, .82, .86], k: 60 });
+        Tr.push({ b: G.drop.glass, M: C(0, 0, 0), mode: 0, pass: 0 }); Tr.push({ b: G.drop.liq, M: C(0, 0, 0), mode: 1, pass: 0, top: tp6 }); Tr.push({ b: G.drop.liq, M: C(0, 0, 0), mode: 1, pass: 1, top: tp6 });
+        Tr.push({ b: G.drop.glass, M: C(0, 0, 0), mode: 0, pass: 1 });
       } else if (o === "oil") {
         var cc = st.col || [.62, .45, .78], tp5 = .035 + .5 * lvl;
         Op.push({ b: G.oil.cap, M: C(0, 0, 0), mode: 6, pass: 1, col: cc, k: 70 }); Op.push({ b: G.oil.ball, M: C(0, .5, 0), mode: 6, pass: 1, col: [.8, .82, .86], k: 60 });
@@ -2920,10 +2937,10 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
   var SPEC = {
     p30: { o: "std", s: .72, lvl: .55 }, p50: { o: "std", s: .86, lvl: .72 }, p100: { o: "std", s: 1, lvl: .93 },
     pt5: { o: "tst", s: .95, lvl: .8 }, pt10: { o: "tst", s: 1.2, lvl: .8 },
-    pe50: { o: "e50", s: .88, lvl: .75 }, pe100: { o: "e100", s: 1, lvl: .78 },
+    pe30: { o: "e50", s: .7, lvl: .75 }, pe50: { o: "e50", s: .88, lvl: .75 }, pe100: { o: "e100", s: 1, lvl: .78 },
     w50: { o: "wood", s: .8, lvl: .62 }, w100: { o: "wood", s: 1, lvl: .76 },
     c10: { o: "car", s: .78, lvl: .5 }, c15: { o: "car", s: 1, lvl: .7 },
-    o1: { o: "oil", s: 1, lvl: .72 }
+    o3: { o: "oil", s: 1, lvl: .72 }, o30: { o: "drop", s: .8, lvl: .78 }
   };
   function spec(id) { return SPEC[id] || SPEC.p50; }
   function hex(c) { return c; }
