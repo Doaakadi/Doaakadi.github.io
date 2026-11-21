@@ -1524,7 +1524,7 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
 <div class="where" id="where" aria-hidden="true"><b></b><span></span></div>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="ver" aria-hidden="true">V.52</div>
+<div class="ver" aria-hidden="true">V.53</div>
 <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav class="dots-nav" id="dotsNav" aria-label="Sections"></nav>
@@ -3033,13 +3033,13 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
   var root = document.documentElement, SES = "dk-sb";
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var AR = {
-    needlogin: "سجّلي الدخول أولاً لإتمام الطلب", dt: "بيانات التوصيل", dp: "اكتبي رقم هاتفك لنتواصل معك بخصوص الطلب", phone: "رقم الموبايل (مثال 01012345678)", addr: "العنوان (اختياري)", loc: "إضافة موقعي (اختياري)", locok: "تم حفظ موقعك", locbad: "تعذّر تحديد الموقع", phbad: "اكتبي رقم موبايل مصري صحيح", savedet: "حفظ ومتابعة الطلب", back2: "رجوع", ordering: "إتمام الطلب", cust: "بيانات العميل", dmy: "بيانات التوصيل والهاتف",
-    p0: "سجّلي الدخول أو أنشئي حساباً جديداً", newacc: "إنشاء حساب جديد", pw: "كلمة المرور", pw2: "تأكيد كلمة المرور", wrong: "أحد المعلومات غير صحيح", notused: "هذا البريد غير مستخدم في الموقع بعد", used: "هذا الحساب مستخدم بالفعل",
-    make: "إنشاء حساب؟", forgot: "نسيتِ كلمة المرور؟", haveacc: "لديك حساب؟ سجّلي الدخول", back: "رجوع", pf: "اكتبي بريدك وسنرسل لك رمزاً لإعادة تعيين كلمة المرور.", newpw: "كلمة مرور جديدة", savepw: "حفظ كلمة المرور", pwdone: "تم تغيير كلمة المرور، سجّلي الدخول", short: "كلمة المرور 6 أحرف على الأقل", nomatch: "كلمتا المرور غير متطابقتين",
-    login: "تسجيل الدخول", t1: "أهلاً بك", p1: "اكتبي بريدك الإلكتروني وسنرسل لك رمزاً مكوّناً من 6 أرقام.", email: "البريد الإلكتروني", send: "إرسال الرمز",
-    t2: "أدخلي الرمز", p2: "أرسلنا رمزاً إلى", verify: "تأكيد", resend: "إعادة إرسال الرمز", change: "تغيير البريد", bad: "الرمز غير صحيح", exp: "انتهت صلاحية الرمز، أعيدي الإرسال",
-    inv: "اكتبي بريداً إلكترونياً صحيحاً", fail: "تعذّر إرسال البريد، حاولي لاحقاً", sent: "تم إرسال الرمز", demo: "وضع تجريبي: لم يتم ربط خدمة البريد بعد، رمزك هو", many: "محاولات كثيرة، اطلبي رمزاً جديداً",
-    prof: "ملفي الشخصي", pick: "اختاري صورتك", upload: "رفع صورة", logout: "تسجيل الخروج", done: "تم", cart: "حفظنا سلتك ومفضلتك في حسابك",
+    needlogin: "سجّل الدخول أولاً لإتمام الطلب", dt: "بيانات التوصيل", dp: "اكتب رقم هاتفك لنتواصل معك بخصوص الطلب", phone: "رقم الموبايل (مثال 01012345678)", addr: "العنوان (اختياري)", loc: "إضافة موقعي (اختياري)", locok: "تم حفظ موقعك", locbad: "تعذّر تحديد الموقع", phbad: "اكتب رقم موبايل مصري صحيح", savedet: "حفظ ومتابعة الطلب", back2: "رجوع", ordering: "إتمام الطلب", cust: "بيانات العميل", dmy: "بيانات التوصيل والهاتف",
+    p0: "سجّل الدخول أو أنشئ حساباً جديداً", newacc: "إنشاء حساب جديد", pw: "كلمة المرور", pw2: "تأكيد كلمة المرور", wrong: "أحد المعلومات غير صحيح", notused: "هذا البريد غير مستخدم في الموقع بعد", used: "هذا الحساب مستخدم بالفعل",
+    make: "إنشاء حساب؟", forgot: "نسيت كلمة المرور؟", haveacc: "لديك حساب؟ سجّل الدخول", back: "رجوع", pf: "اكتب بريدك وسنرسل لك رمزاً لإعادة تعيين كلمة المرور.", newpw: "كلمة مرور جديدة", savepw: "حفظ كلمة المرور", pwdone: "تم تغيير كلمة المرور، سجّل الدخول", short: "كلمة المرور 6 أحرف على الأقل", nomatch: "كلمتا المرور غير متطابقتين",
+    login: "تسجيل الدخول", t1: "أهلاً بك", p1: "اكتب بريدك الإلكتروني وسنرسل لك رمزاً مكوّناً من 6 أرقام.", email: "البريد الإلكتروني", send: "إرسال الرمز",
+    t2: "أدخل الرمز", p2: "أرسلنا رمزاً إلى", verify: "تأكيد", resend: "إعادة إرسال الرمز", change: "تغيير البريد", bad: "الرمز غير صحيح", exp: "انتهت صلاحية الرمز، أعد الإرسال",
+    inv: "اكتب بريداً إلكترونياً صحيحاً", fail: "تعذّر إرسال البريد، حاول لاحقاً", sent: "تم إرسال الرمز", demo: "وضع تجريبي: لم يتم ربط خدمة البريد بعد، رمزك هو", many: "محاولات كثيرة، اطلب رمزاً جديداً",
+    prof: "ملفي الشخصي", pick: "اختيار صورة الملف الشخصي", upload: "رفع صورة", logout: "تسجيل الخروج", done: "تم", cart: "حفظنا سلتك ومفضلتك في حسابك",
     wel: "أهلاً بك", welsub: "يسعدنا انضمامك إلى دعاء القاضي. عطرك القادم بانتظارك.", wait: "ثانية", verified: "تم التحقق"
   };
   var EN = {
@@ -3051,7 +3051,7 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
     inv: "Please enter a valid email", fail: "Could not send the email, try again later", sent: "Code sent", demo: "Demo mode: email sending is not connected yet. Your code is", many: "Too many tries, request a new code",
     prof: "My profile", pick: "Choose your picture", upload: "Upload photo", logout: "Log out", done: "Done", cart: "Your cart and favourites are saved to your account",
     wel: "Welcome", welsub: "We are so happy to have you at Doaa Kadi. Your next fragrance is waiting.", wait: "s", verified: "Verified"
-  };  AR.avfail = "تعذّر حفظ الصورة في حسابك"; EN.avfail = "Could not save the picture to your account"; AR.chat = "رسائلي"; EN.chat = "My messages"; AR.msgph = "اكتبي رسالتك…"; EN.msgph = "Type a message…"; AR.sendm = "إرسال"; EN.sendm = "Send"; AR.nomsg = "لا توجد رسائل بعد"; EN.nomsg = "No messages yet"; AR.neterr = "تعذّر الاتصال، حاولي مرة أخرى"; EN.neterr = "Connection problem, please try again"; AR.orderno = "طلب رقم"; EN.orderno = "Order #"; AR.noorder = "لا توجد طلبات بعد"; EN.noorder = "No orders yet"; AR.tooq = "انتظري قليلاً ثم أعيدي المحاولة"; EN.tooq = "Please wait a moment and try again";
+  };  AR.retry = "حاول مرة أخرى"; EN.retry = "Try again"; AR.avfail = "تعذّر حفظ الصورة في حسابك"; EN.avfail = "Could not save the picture to your account"; AR.chat = "رسائلي"; EN.chat = "My messages"; AR.msgph = "اكتب رسالتك…"; EN.msgph = "Type a message…"; AR.sendm = "إرسال"; EN.sendm = "Send"; AR.nomsg = "لا توجد رسائل بعد"; EN.nomsg = "No messages yet"; AR.neterr = "تعذّر الاتصال، حاول مرة أخرى"; EN.neterr = "Connection problem, please try again"; AR.orderno = "طلب رقم"; EN.orderno = "Order #"; AR.noorder = "لا توجد طلبات بعد"; EN.noorder = "No orders yet"; AR.tooq = "انتظر قليلاً ثم أعد المحاولة"; EN.tooq = "Please wait a moment and try again";
   var L = function (k) { return (root.lang === "ar" ? AR : EN)[k] || k; };
   var EMOJI = ["🌸", "🧴", "✨", "🦋", "🌙", "👑", "💎", "🌷", "🕊️", "🫧"];
   var SIL = '<svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><circle cx="12" cy="8" r="4.2"/><path d="M3.5 21c.7-4.6 4.2-7 8.5-7s7.8 2.4 8.5 7z"/></svg>';
@@ -3074,10 +3074,22 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
   function token() {
     if (!sess) return Promise.reject(new Error("nosess"));
     if (sess.x - 60000 > Date.now()) return Promise.resolve(sess.a);
-    if (!refreshing) refreshing = raw("/auth/v1/token?grant_type=refresh_token", { method: "POST", body: { refresh_token: sess.r } }).then(function (j) { saveSess(toSess(j)); refreshing = null; return sess.a; }, function (e) { refreshing = null; if (e.status >= 400 && e.status < 500) saveSess(null); throw e; });
+    if (!refreshing) refreshing = raw("/auth/v1/token?grant_type=refresh_token", { method: "POST", body: { refresh_token: sess.r } }).then(function (j) { saveSess(toSess(j)); refreshing = null; return sess.a; }, function (e) {
+      refreshing = null;
+      /* another tab may already have refreshed it: use that session */
+      var other = null; try { other = JSON.parse(localStorage.getItem(SES) || "null"); } catch (x) {}
+      if (other && other.r !== sess.r && other.x - 60000 > Date.now()) { sess = other; return sess.a; }
+      if (e.status >= 400 && e.status < 500) saveSess(null);
+      throw e;
+    });
     return refreshing;
   }
-  function rest(path, opt) { return token().then(function (t) { return raw("/rest/v1/" + path, opt, t); }); }
+  function rest(path, opt) {
+    return token().then(function (t) { return raw("/rest/v1/" + path, opt, t); }).catch(function (e) {
+      if (e && e.status === 401 && sess) { sess.x = 0; return token().then(function (t) { return raw("/rest/v1/" + path, opt, t); }); }
+      throw e;
+    });
+  }
   function loadProfile() {
     return rest("profiles?id=eq." + sess.id + "&select=*").then(function (r) {
       if (r && r[0]) { P = r[0]; return P; }
@@ -3347,7 +3359,7 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
     if (sess) { paintAv($(".av", pb), a); pb.setAttribute("aria-label", L("prof")); }
   }
   lb.addEventListener("click", function () { open(viewHome); });
-  pb.addEventListener("click", function () { open(function () { if (P) viewProfile(); else loadProfile().then(viewProfile, function () { ab.innerHTML = '<p>' + L("neterr") + '</p>'; }); }); });
+  pb.addEventListener("click", function () { open(function () { if (P) { viewProfile(); return; } ab.innerHTML = '<div class="odots"><i></i><i></i><i></i></div>'; loadProfile().then(viewProfile, function () { refresh(); if (!sess) viewHome(); else { ab.innerHTML = logo() + '<p style="color:#fff;font-weight:700">' + L("neterr") + '</p><button class="abtn" id="rt" type="button">' + L("retry") + '</button>'; $("#rt").addEventListener("click", function () { pb.click(); close(); }); } }); }); });
   new MutationObserver(function () { refresh(); if (ov.classList.contains("open")) { if (sess && P && !$(".chat", ab)) viewProfile(); else if (pend) viewCode(); else if (!sess) viewHome(); } }).observe(root, { attributes: true, attributeFilter: ["lang"] });
   refresh();
   /* returning visitor: restore account + cart */
