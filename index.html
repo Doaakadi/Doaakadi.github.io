@@ -1508,6 +1508,13 @@ html[dir=rtl] .aback svg,html[lang=ar] .aback svg{transform:scaleX(-1)}
 .pill.prof.owner::after{content:"👑";position:absolute;top:-9px;inset-inline-end:-4px;font-size:15px;z-index:3;filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
 .pill.prof{overflow:visible}.pill.prof .av{border-radius:50%}
 a.abtn.owner{display:block;text-align:center;text-decoration:none;line-height:1;background:linear-gradient(135deg,#ffe9a8,#f2c14e);color:#5a3b00;font-weight:800}
+.wel.simple{background:radial-gradient(circle at 50% 40%,#4f9ee0,#173f73 70%)}
+.wel.simple .wt{font-family:"Pinyon Script","Cormorant Garamond",cursive;font-size:clamp(64px,19vw,150px);line-height:1.1;color:#fff;text-shadow:0 0 40px rgba(180,225,255,.65),0 6px 30px rgba(0,30,80,.45);white-space:nowrap}
+.wel.simple .wt.ar{font-family:"Aref Ruqaa","Amiri",serif;font-weight:700;font-size:clamp(60px,18vw,140px)}
+.wel.simple .wt span{display:inline-block;opacity:0;transform:translateY(26px) scale(.9);filter:blur(12px);animation:wtIn .9s calc(.35s + var(--i)*.11s) cubic-bezier(.2,.8,.2,1) forwards,wtGlow 2.4s calc(1.6s + var(--i)*.06s) ease-in-out infinite alternate}
+.wel.simple .wt.ar span{animation-delay:calc(.35s + var(--i)*.4s),calc(1.6s + var(--i)*.2s)}
+@keyframes wtIn{to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes wtGlow{from{text-shadow:0 0 30px rgba(180,225,255,.5),0 6px 30px rgba(0,30,80,.45)}to{text-shadow:0 0 60px rgba(215,240,255,.95),0 6px 30px rgba(0,30,80,.45)}}
 </style>
 </head>
 <body>
@@ -1529,7 +1536,7 @@ a.abtn.owner{display:block;text-align:center;text-decoration:none;line-height:1;
 <div class="where" id="where" aria-hidden="true"><b></b><span></span></div>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="ver" aria-hidden="true">V.56</div>
+<div class="ver" aria-hidden="true">V.57</div>
 <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav class="dots-nav" id="dotsNav" aria-label="Sections"></nav>
@@ -3255,7 +3262,7 @@ a.abtn.owner{display:block;text-align:center;text-decoration:none;line-height:1;
   function signIn(j, isNew, phone) {
     saveSess(toSess(j));
     close(); refresh();
-    if (isNew) welcome(me());
+    if (isNew) welcome();
     loadProfile().then(function () {
       if (phone && !P.phone) patchProfile({ phone: phone }).catch(function () {});
       mergeIn(); refresh();
@@ -3272,12 +3279,13 @@ a.abtn.owner{display:block;text-align:center;text-decoration:none;line-height:1;
 
   ov.addEventListener("pointerdown", function (e) { var b = e.target.closest(".abtn,.avgrid button"); if (!b || b.disabled) return; var r = b.getBoundingClientRect(), d = Math.max(r.width, r.height) * 2, sp = document.createElement("span"); sp.className = "rip"; sp.style.cssText = "width:" + d + "px;height:" + d + "px;left:" + (e.clientX - r.left - d / 2) + "px;top:" + (e.clientY - r.top - d / 2) + "px"; b.appendChild(sp); setTimeout(function () { sp.remove(); }, 650); });
   function burst(host) { var em = ["🌸", "✨", "💙", "🤍", "🦋"]; for (var i = 0; i < 34; i++) { var p = document.createElement("i"); p.className = "cf"; p.textContent = em[i % 5]; var a = Math.random() * 6.283, d = 160 + Math.random() * 360; p.style.cssText = "--x:" + Math.cos(a) * d + "px;--y:" + (Math.sin(a) * d - 80) + "px;--r:" + (Math.random() * 540 - 270) + "deg;--s:" + (0.7 + Math.random() * 1.1) + ";animation-delay:" + (0.5 + Math.random() * 0.4) + "s"; host.appendChild(p); } }
-  function welcome(email) {
-    var w = document.createElement("div"); w.className = "wel"; var nm = nameOf(email);
-    w.innerHTML = '<i class="orb o1"></i><i class="orb o2"></i><div class="wi"><div class="w1">' + (root.lang === "ar" ? "مرحباً" : "Hello") + '</div><div class="w2"></div><div class="w3">' + L("welsub") + '</div></div>';
-    $(".w2", w).textContent = L("wel") + (nm ? (root.lang === "ar" ? " " : ", ") + nm : "");
-    document.body.appendChild(w); burst($(".wi", w)); requestAnimationFrame(function () { requestAnimationFrame(function () { w.classList.add("on"); }); });
-    setTimeout(function () { w.classList.remove("on"); setTimeout(function () { w.remove(); }, 800); }, 4200);
+  function welcome() {
+    var ar = root.lang === "ar", w = document.createElement("div"); w.className = "wel simple";
+    var parts = ar ? ["أهلاً", "بك"] : "Welcome".split(""), h = '<div class="wt' + (ar ? " ar" : "") + '" aria-label="' + (ar ? "أهلاً بك" : "Welcome") + '">';
+    parts.forEach(function (c, n) { h += '<span style="--i:' + n + '">' + c + '</span>' + (ar && n === 0 ? " " : ""); });
+    w.innerHTML = h + '</div>';
+    document.body.appendChild(w); requestAnimationFrame(function () { requestAnimationFrame(function () { w.classList.add("on"); }); });
+    setTimeout(function () { w.classList.remove("on"); setTimeout(function () { w.remove(); }, 800); }, 3600);
   }
 
   /* ---- delivery details (phone required, location optional) ---- */
@@ -3369,7 +3377,7 @@ a.abtn.owner{display:block;text-align:center;text-decoration:none;line-height:1;
   pb.addEventListener("click", function () { open(function () { if (P) { viewProfile(); return; } ab.innerHTML = '<div class="odots"><i></i><i></i><i></i></div>'; loadProfile().then(viewProfile, function (er) { refresh(); if (!sess) viewHome(); else { ab.innerHTML = logo() + '<p style="color:#fff;font-weight:700">' + L("neterr") + '</p><p dir="ltr" style="font-size:12px;opacity:.8">' + esc((er && er.status) || "") + ' ' + esc((er && er.message) || "") + '</p><button class="abtn" id="rt" type="button">' + L("retry") + '</button>'; $("#rt").addEventListener("click", function () { pb.click(); close(); }); } }); }); });
   new MutationObserver(function () { refresh(); if (ov.classList.contains("open")) { if (sess && P && !$(".chat", ab)) viewProfile(); else if (pend) viewCode(); else if (!sess) viewHome(); } }).observe(root, { attributes: true, attributeFilter: ["lang"] });
   refresh();
-  if (/[?&]welcome\b/.test(location.search)) setTimeout(function () { welcome("doaa@x.com"); }, 1800);
+  if (/[?&]welcome\b/.test(location.search)) setTimeout(function () { welcome(); }, 1800);
   /* returning visitor: restore account + cart */
   if (sess) token().then(loadProfile).then(function () { mergeIn(); refresh(); }, function () { refresh(); });
 })();
