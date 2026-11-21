@@ -1515,6 +1515,13 @@ a.abtn.owner{display:block;text-align:center;text-decoration:none;line-height:1;
 .wel.simple .wt.ar span{animation-delay:calc(.35s + var(--i)*.4s),calc(1.6s + var(--i)*.2s)}
 @keyframes wtIn{to{opacity:1;transform:none;filter:blur(0)}}
 @keyframes wtGlow{from{text-shadow:0 0 30px rgba(180,225,255,.5),0 6px 30px rgba(0,30,80,.45)}to{text-shadow:0 0 60px rgba(215,240,255,.95),0 6px 30px rgba(0,30,80,.45)}}
+.cm.me span{background:#fff;color:#12365f}
+.cm.sh span{background:#164a8f;color:#fff;border:1px solid rgba(255,255,255,.4)}
+.pill.prof{position:relative}.abtn{position:relative}
+.hasdot::after{content:"";position:absolute;top:-3px;inset-inline-end:-3px;width:13px;height:13px;border-radius:50%;background:#ff3b30;border:2px solid #fff;box-shadow:0 0 0 0 rgba(255,59,48,.7);animation:dotp 1.6s infinite}
+.abtn.hasdot::after{top:6px;inset-inline-end:10px}
+@keyframes dotp{70%{box-shadow:0 0 0 9px rgba(255,59,48,0)}100%{box-shadow:0 0 0 0 rgba(255,59,48,0)}}
+#sendOrder.btn.wa{background:linear-gradient(135deg,#9fd0ff,#1f5fae);color:#fff}
 </style>
 </head>
 <body>
@@ -1536,7 +1543,7 @@ a.abtn.owner{display:block;text-align:center;text-decoration:none;line-height:1;
 <div class="where" id="where" aria-hidden="true"><b></b><span></span></div>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="ver" aria-hidden="true">V.57</div>
+<div class="ver" aria-hidden="true">V.58</div>
 <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav class="dots-nav" id="dotsNav" aria-label="Sections"></nav>
@@ -1695,7 +1702,7 @@ a.abtn.owner{display:block;text-align:center;text-decoration:none;line-height:1;
       <h3 data-i18n="op_sum">Order summary</h3>
       <div class="op-rows" id="opRows"></div>
       <div class="total"><span data-i18n="total">Total</span><b id="opTotal">0 EGP</b></div>
-      <a class="btn wa" id="sendOrder" href="#" target="_blank" rel="noopener" data-i18n="contact_wa">Contact us on WhatsApp</a>
+      <a class="btn wa" id="sendOrder" href="#" target="_blank" rel="noopener" data-i18n="contact_wa">Complete order</a>
       <p class="op-note" data-i18n="op_note"></p>
     </aside>
   </div>
@@ -1760,7 +1767,7 @@ a.abtn.owner{display:block;text-align:center;text-decoration:none;line-height:1;
       e_cat_perfumes: "Eau de parfum", e_cat_fawhat: "Air scents", e_cat_oils: "Alcohol free", e_cat_mine: "Made for you",
       mine_t: "Make your own perfume", mine_p: "Choose the notes you love, how strong it should be and the bottle you like, and we blend a scent that is only yours. Message us on WhatsApp to start.", mine_btn: "Start on WhatsApp", mine_msg: "Hello Doaa Kadi, I would like to make my own perfume.",
       pay_card: "Card payment available", flavours: "Flavours", fl_hint: "Tap a flavour to choose your scent", fl_pick: "Choose your flavour",  details: "Details", close: "Close", fav_add: "Add to favourites", fav_on: "In your favourites", fav_added: "Added to favourites", fav_removed: "Removed from favourites", your_fav: "Favourites", fav_empty: "No favourites yet. Tap the heart on any card.",
-      complete: "Complete order", contact_wa: "Contact us on WhatsApp", back_shop: "Back to shop", op_title: "Your order", op_sum: "Order summary", op_note: "Card payment is coming soon. For now we confirm your order with you on WhatsApp.", remove: "Remove", items: "Items", each: "each",
+      complete: "Complete order", contact_wa: "Complete order", back_shop: "Back to shop", op_title: "Your order", op_sum: "Order summary", op_note: "Card payment is coming soon. For now we confirm your order with you in messages.", remove: "Remove", items: "Items", each: "each",
       cart: "Cart", sure: "Are you sure?", yes: "Yes, send", no: "Not yet", brand: "DOAA KADI", mono: "DK", brand_sub: "Luxury Perfumes", foot: "© Doaa Kadi · Luxury Perfumes", n_home: "Home", n_perfumes: "Perfumes", n_fawhat: "Air Scents", n_oils: "Oil Perfumes", n_addons: "Sidr & Henna", n_story: "Our Story", n_contact: "Order",
       greet: "Welcome to Doaa Kadi",
       na: "NA", ml: "ml", sz_t: "Size", tester: "Tester perfume", from_p: "From", h_gifts: "Gifts", e_gifts: "Ready to give", d_gifts: "Wrapped with a ribbon and ready to give.", h_hair: "Hair care", tab_hair: "Hair oil", e_hair: "Scented oils & mists", d_hair: "Scented oils and mists that keep your hair smelling good all day.",
@@ -1788,7 +1795,7 @@ a.abtn.owner{display:block;text-align:center;text-decoration:none;line-height:1;
       e_cat_perfumes: "أو دو بارفان", e_cat_fawhat: "معطرات الجو", e_cat_oils: "بدون كحول", e_cat_mine: "مخصوص ليك",
       mine_t: "اصنع عطرك بنفسك", mine_p: "اختار النفحات اللي بتحبها وقوة العطر والزجاجة اللي تعجبك، ونحضّرلك ريحة تكون ليك لوحدك. كلمنا على واتساب عشان نبدأ.", mine_btn: "ابدأ على واتساب", mine_msg: "هلا والله دعاء القاضي، عايز أعمل عطري الخاص.",
       pay_card: "الدفع بالكرت متوفر", flavours: "النفحات", fl_hint: "اضغط على النفحة اللي تعجبك", fl_pick: "اختار نفحتك",  details: "التفاصيل", close: "إغلاق", fav_add: "ضيف للمفضلة", fav_on: "في مفضلتك", fav_added: "اتضاف للمفضلة", fav_removed: "اتشال من المفضلة", your_fav: "المفضلة", fav_empty: "مفيش مفضلة لسه. دوس على القلب في أي كارت.",
-      complete: "إتمام الطلب", contact_wa: "كلمنا على واتساب", back_shop: "الرجوع للمتجر", op_title: "طلبك", op_sum: "ملخص الطلب", op_note: "الدفع بالكارت قريبًا. دلوقتي بنأكد طلبك معاك على واتساب.", remove: "حذف", items: "القطع", each: "للواحدة",
+      complete: "إتمام الطلب", contact_wa: "إتمام الطلب", back_shop: "الرجوع للمتجر", op_title: "طلبك", op_sum: "ملخص الطلب", op_note: "الدفع بالكارت قريبًا. دلوقتي بنأكد طلبك معاك في الرسائل.", remove: "حذف", items: "القطع", each: "للواحدة",
       cart: "السلة", sure: "متأكد يا قمر؟", yes: "أيوه، ابعت", no: "لسه", brand: "دعاء القاضي", mono: "DK", brand_sub: "عطور فاخرة", foot: "© دعاء القاضي · عطور فاخرة", n_home: "الرئيسية", n_perfumes: "عطور", n_fawhat: "فوحات", n_oils: "عطور زيتية", n_addons: "سدر وحنة", n_story: "حكايتنا", n_contact: "اطلب",
       greet: "حيّاك الله في دعاء القاضي",
       na: "غير محدد", ml: "مل", sz_t: "الحجم", tester: "تجرُبة العطر", from_p: "يبدأ من", h_gifts: "هدايا", e_gifts: "للإهداء", d_gifts: "جاهزة للإهداء ومغلفة بشريط حلو.", h_hair: "العناية بالشعر", tab_hair: "زيت الشعر", e_hair: "زيوت وبخاخات عطرية", d_hair: "زيوت وبخاخات عطرية تدلّع شعرك وريحتها تفضل طول اليوم.",
@@ -3063,7 +3070,7 @@ a.abtn.owner{display:block;text-align:center;text-decoration:none;line-height:1;
     inv: "Please enter a valid email", fail: "Could not send the email, try again later", sent: "Code sent", demo: "Demo mode: email sending is not connected yet. Your code is", many: "Too many tries, request a new code",
     prof: "My profile", pick: "Choose your picture", upload: "Upload photo", logout: "Log out", done: "Done", cart: "Your cart and favourites are saved to your account",
     wel: "Welcome", welsub: "We are so happy to have you at Doaa Kadi. Your next fragrance is waiting.", wait: "s", verified: "Verified"
-  };  AR.ownerp = "لوحة المالك: الطلبات والرسائل"; EN.ownerp = "Owner panel: orders & messages"; AR.retry = "حاول مرة أخرى"; EN.retry = "Try again"; AR.ownerp = "لوحة الطلبات والرسائل (المالك)"; EN.ownerp = "Orders & messages (owner)"; AR.avfail = "تعذّر حفظ الصورة في حسابك"; EN.avfail = "Could not save the picture to your account"; AR.chat = "رسائلي"; EN.chat = "My messages"; AR.msgph = "اكتب رسالتك…"; EN.msgph = "Type a message…"; AR.sendm = "إرسال"; EN.sendm = "Send"; AR.nomsg = "لا توجد رسائل بعد"; EN.nomsg = "No messages yet"; AR.neterr = "تعذّر الاتصال، حاول مرة أخرى"; EN.neterr = "Connection problem, please try again"; AR.orderno = "طلب رقم"; EN.orderno = "Order #"; AR.noorder = "لا توجد طلبات بعد"; EN.noorder = "No orders yet"; AR.tooq = "انتظر قليلاً ثم أعد المحاولة"; EN.tooq = "Please wait a moment and try again";
+  };  AR.ownerp = "لوحة المالك: الطلبات والرسائل"; EN.ownerp = "Owner panel: orders & messages"; AR.retry = "حاول مرة أخرى"; EN.retry = "Try again"; AR.ownerp = "لوحة الطلبات والرسائل (المالك)"; EN.ownerp = "Orders & messages (owner)"; AR.ownerp = "لوحة الطلبات والرسائل"; EN.ownerp = "Orders & messages panel"; AR.avfail = "تعذّر حفظ الصورة في حسابك"; EN.avfail = "Could not save the picture to your account"; AR.chat = "رسائلي"; EN.chat = "My messages"; AR.msgph = "اكتب رسالتك…"; EN.msgph = "Type a message…"; AR.sendm = "إرسال"; EN.sendm = "Send"; AR.nomsg = "لا توجد رسائل بعد"; EN.nomsg = "No messages yet"; AR.neterr = "تعذّر الاتصال، حاول مرة أخرى"; EN.neterr = "Connection problem, please try again"; AR.orderno = "طلب رقم"; EN.orderno = "Order #"; AR.noorder = "لا توجد طلبات بعد"; EN.noorder = "No orders yet"; AR.tooq = "انتظر قليلاً ثم أعد المحاولة"; EN.tooq = "Please wait a moment and try again";
   var L = function (k) { return (root.lang === "ar" ? AR : EN)[k] || k; };
   var EMOJI = ["🌸", "🧴", "✨", "🦋", "🌙", "👑", "💎", "🌷", "🕊️", "🫧"];
   var SIL = '<svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><circle cx="12" cy="8" r="4.2"/><path d="M3.5 21c.7-4.6 4.2-7 8.5-7s7.8 2.4 8.5 7z"/></svg>';
@@ -3265,7 +3272,7 @@ a.abtn.owner{display:block;text-align:center;text-decoration:none;line-height:1;
     if (isNew) welcome();
     loadProfile().then(function () {
       if (phone && !P.phone) patchProfile({ phone: phone }).catch(function () {});
-      mergeIn(); refresh();
+      mergeIn(); refresh(); checkUnread();
     }).catch(function () { P = P || { cart: {}, fav: {} }; refresh(); });
   }
   function signOut() {
@@ -3328,6 +3335,20 @@ a.abtn.owner{display:block;text-align:center;text-decoration:none;line-height:1;
     if (P) go(); else loadProfile().then(go, function () { open(function () { viewHome(L("neterr")); }); });
   }, true);
 
+  /* ---- red dot: the shop replied ---- */
+  var topOwner = 0;
+  function seenKey() { return "dk-seen-" + (sess ? sess.id : ""); }
+  function getSeen() { try { return +localStorage.getItem(seenKey()) || 0; } catch (e) { return 0; } }
+  function setSeen(n) { try { localStorage.setItem(seenKey(), String(n)); } catch (e) {} }
+  function unreadNow() { return !!sess && topOwner > getSeen(); }
+  function dots(on) { pb.classList.toggle("hasdot", !!on); var b = $("#amsgs"); if (b) b.classList.toggle("hasdot", !!on); }
+  function checkUnread() {
+    if (!sess || (P && P.is_owner)) return;
+    rest("messages?select=id&sender=eq.owner&order=id.desc&limit=1").then(function (r) { topOwner = r && r[0] ? r[0].id : 0; dots(unreadNow()); }, function () {});
+  }
+  function markSeen() { if (topOwner) setSeen(topOwner); dots(false); }
+  setInterval(function () { if (document.visibilityState !== "hidden") checkUnread(); }, 8000);
+
   /* ---- chat with the shop ---- */
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function viewChat(orderId, backFn) {
@@ -3338,6 +3359,7 @@ a.abtn.owner{display:block;text-align:center;text-decoration:none;line-height:1;
     function draw(rows) {
       var key = rows.map(function (r) { return r.id; }).join(","); if (key === last) return; last = key;
       var near = list.scrollHeight - list.scrollTop - list.clientHeight < 80 || !list.children.length;
+      if (rows.some(function (r) { return r.sender === "owner"; })) { var mo = Math.max.apply(null, rows.map(function (r) { return r.sender === "owner" ? r.id : 0; })); if (mo > topOwner) topOwner = mo; markSeen(); }
       list.innerHTML = rows.length ? rows.map(function (r) { return '<div class="cm ' + (r.sender === "guest" ? "me" : "sh") + '"><span>' + esc(r.body) + '</span></div>'; }).join("") : '<div class="empty">' + L("nomsg") + '</div>';
       if (near) list.scrollTop = list.scrollHeight;
     }
@@ -3354,7 +3376,7 @@ a.abtn.owner{display:block;text-align:center;text-decoration:none;line-height:1;
     var a = (P && P.avatar) || {}, e = me(); setBack(null);
     var g = EMOJI.map(function (x, i) { return '<button type="button" style="--k:' + i + '" data-e="' + i + '" class="' + (a.e === i && !a.img ? "on" : "") + '">' + x + '</button>'; }).join("") + '<button type="button" data-e="-1" class="' + (a.e == null && !a.img ? "on" : "") + '" aria-label="default">' + SIL + '</button>';
     ab.innerHTML = '<div class="avbig av"></div><h3>' + L("prof") + (P && P.is_owner ? ' 👑' : '') + '</h3><div class="amail"></div><p style="margin:10px 0 0">' + L("pick") + '</p><div class="avgrid">' + g + '</div>' +
-      '<div class="amsg" id="amsg"></div><div class="arow"><button class="abtn ghost" id="aup" type="button">' + L("upload") + '</button><button class="abtn ghost" id="aout" type="button">' + L("logout") + '</button></div>' + (P && P.is_owner ? '<a class="abtn owner" id="aown" href="dk-owner-7f3a9c2e.html" target="_blank" rel="noopener">👑 ' + L("ownerp") + '</a>' : '') + '<button class="abtn ghost" id="amsgs" type="button">💬 ' + L("chat") + '</button>' + '<button class="abtn ghost" id="adel" type="button">📍 ' + L("dmy") + '</button><button class="abtn" id="adone" type="button">' + L("done") + '</button><input type="file" id="afile" accept="image/*" hidden>';
+      '<div class="amsg" id="amsg"></div><div class="arow"><button class="abtn ghost" id="aup" type="button">' + L("upload") + '</button><button class="abtn ghost" id="aout" type="button">' + L("logout") + '</button></div>' + (P && P.is_owner ? '<a class="abtn owner" id="aown" href="dk-owner-7f3a9c2e.html" target="_blank" rel="noopener">👑 ' + L("ownerp") + '</a>' : '') + (P && P.is_owner ? '' : '<button class="abtn ghost" id="amsgs" type="button">💬 ' + L("chat") + '</button>') + '<button class="abtn ghost" id="adel" type="button">📍 ' + L("dmy") + '</button><button class="abtn" id="adone" type="button">' + L("done") + '</button><input type="file" id="afile" accept="image/*" hidden>';
     $(".amail", ab).textContent = e; paintAv($(".avbig", ab), a);
     function upd(av) { patchProfile({ avatar: av }).then(function () { err($("#amsg"), ""); }, function (er) { err($("#amsg"), L("avfail") + " (" + ((er && er.status) || "") + " " + ((er && er.message) || "") + ")"); }); a = av; paintAv($(".avbig", ab), av); refresh(); }
     ab.querySelectorAll(".avgrid button").forEach(function (b) { b.addEventListener("click", function () { var i = +b.dataset.e; upd(i < 0 ? { e: null } : { e: i }); ab.querySelectorAll(".avgrid button").forEach(function (x) { x.classList.toggle("on", x === b); }); }); });
@@ -3365,13 +3387,14 @@ a.abtn.owner{display:block;text-align:center;text-decoration:none;line-height:1;
       r.readAsDataURL(f);
     });
     $("#aout").addEventListener("click", signOut); $("#adel").addEventListener("click", function () { viewDetails(null, viewProfile); }); $("#adone").addEventListener("click", close);
-    $("#amsgs").addEventListener("click", function () { openMyChat(viewProfile); });
+    if ($("#amsgs")) $("#amsgs").addEventListener("click", function () { openMyChat(viewProfile); });
+    dots(unreadNow());
   }
 
   function refresh() {
     var a = sess ? (P ? P.avatar || {} : {}) : null;
     $(".lt", lb).textContent = L("login"); lb.hidden = !!sess; pb.hidden = !sess;
-    pb.classList.toggle("owner", !!(P && P.is_owner)); if (sess) { paintAv($(".av", pb), a); pb.setAttribute("aria-label", L("prof")); }
+    pb.classList.toggle("owner", !!(P && P.is_owner)); if (!sess) pb.classList.remove("hasdot"); if (sess) { paintAv($(".av", pb), a); pb.setAttribute("aria-label", L("prof")); }
   }
   lb.addEventListener("click", function () { open(viewHome); });
   pb.addEventListener("click", function () { open(function () { if (P) { viewProfile(); return; } ab.innerHTML = '<div class="odots"><i></i><i></i><i></i></div>'; loadProfile().then(viewProfile, function (er) { refresh(); if (!sess) viewHome(); else { ab.innerHTML = logo() + '<p style="color:#fff;font-weight:700">' + L("neterr") + '</p><p dir="ltr" style="font-size:12px;opacity:.8">' + esc((er && er.status) || "") + ' ' + esc((er && er.message) || "") + '</p><button class="abtn" id="rt" type="button">' + L("retry") + '</button>'; $("#rt").addEventListener("click", function () { pb.click(); close(); }); } }); }); });
@@ -3379,7 +3402,7 @@ a.abtn.owner{display:block;text-align:center;text-decoration:none;line-height:1;
   refresh();
   if (/[?&]welcome\b/.test(location.search)) setTimeout(function () { welcome(); }, 1800);
   /* returning visitor: restore account + cart */
-  if (sess) token().then(loadProfile).then(function () { mergeIn(); refresh(); }, function () { refresh(); });
+  if (sess) token().then(loadProfile).then(function () { mergeIn(); refresh(); checkUnread(); }, function () { refresh(); });
 })();
 </script>
 
