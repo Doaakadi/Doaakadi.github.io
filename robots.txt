@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://doaakadi.github.io/sitemap.xml
