@@ -1545,6 +1545,32 @@ html[dir=rtl] .pwrow{padding:7px 8px 7px 18px}
 .pwr .abtn:disabled{opacity:.6;cursor:not-allowed}
 /* gradient buttons: paint the gradient under the border too, so the rounded ends are not empty */
 .btn,.abtn,#sendOrder{background-origin:border-box!important;background-clip:border-box!important}
+
+/* code box: paste button on the right */
+.codew{position:relative}
+.codew input.code{padding-right:58px!important;padding-left:58px!important}
+.cpaste{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.18);color:#fff;display:grid;place-items:center;cursor:pointer;transition:background .2s,transform .2s}
+.cpaste:active{background:rgba(255,255,255,.34);transform:translateY(-50%) scale(.92)}
+/* messages = whole screen */
+.aov.chatfull{padding:0;place-items:stretch;background:linear-gradient(170deg,#2f7cc4,#16407a)}
+.aov.chatfull .abox{width:100%;max-width:none;height:100%;max-height:none;border-radius:0;border:0;box-shadow:none;padding:0;display:flex;flex-direction:column;overflow:hidden;background:none;transform:none!important}
+.aov.chatfull .abox::before{display:none}
+.aov.chatfull .ab{flex:1;min-height:0;display:flex;flex-direction:column;padding:0;margin:0}
+.aov.chatfull .ab>*{opacity:1!important;animation:none!important}
+.aov.chatfull .ab h3{margin:0;padding:calc(env(safe-area-inset-top) + 16px) 60px 2px;font-size:24px}
+.aov.chatfull .ab .amail{margin:0;padding:0 60px 12px;font-size:13px;opacity:.85;border-bottom:1px solid rgba(255,255,255,.22)}
+.aov.chatfull .abox .chat{flex:1;min-height:0;max-height:none;margin:0;padding:14px 16px;gap:10px}
+.aov.chatfull .abox .chat .cm span{font-size:15.5px;max-width:78%}
+.aov.chatfull .chin{padding:10px 12px calc(env(safe-area-inset-bottom) + 10px);background:rgba(10,40,90,.35);border-top:1px solid rgba(255,255,255,.2);align-items:center}
+.aov.chatfull .chin input{border-radius:999px!important;text-align:start!important;padding:13px 18px!important}
+.aov.chatfull .chin .abtn{border-radius:999px;height:46px}
+.aov.chatfull .aback,.aov.chatfull .ax{top:calc(env(safe-area-inset-top) + 12px)}
+/* smoother welcome */
+.wel.simple .wt span{filter:none!important;transform:translate3d(0,22px,0);will-change:transform,opacity;animation:wtIn 1.3s calc(.3s + var(--i)*.16s) cubic-bezier(.22,1,.36,1) forwards!important}
+.wel.simple .wt.ar span{animation-delay:calc(.3s + var(--i)*.45s)!important}
+.wel.simple .wt{text-shadow:0 0 36px rgba(180,225,255,.6),0 6px 30px rgba(0,30,80,.4)}
+@keyframes wtIn{from{opacity:0;transform:translate3d(0,22px,0)}to{opacity:1;transform:none}}
+.wel{transition:opacity 1s ease,visibility 0s 1s!important}.wel.on{transition:opacity .9s ease!important}
 /* only the floating things are hidden */
 #petals,.floaters{display:none!important}
 </style>
@@ -1568,7 +1594,7 @@ html[dir=rtl] .pwrow{padding:7px 8px 7px 18px}
 <div class="where" id="where" aria-hidden="true"><b></b><span></span></div>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="ver" aria-hidden="true">V.71</div>
+<div class="ver" aria-hidden="true">V.72</div>
 <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav class="dots-nav" id="dotsNav" aria-label="Sections"></nav>
@@ -3084,7 +3110,7 @@ html[dir=rtl] .pwrow{padding:7px 8px 7px 18px}
     t2: "أدخل الرمز", p2: "أرسلنا رمزاً إلى", verify: "تأكيد", resend: "إعادة إرسال الرمز", change: "تغيير البريد", bad: "الرمز غير صحيح", exp: "انتهت صلاحية الرمز، أعد الإرسال",
     inv: "اكتب بريداً إلكترونياً صحيحاً", fail: "تعذّر إرسال البريد، حاول لاحقاً", sent: "تم إرسال الرمز", demo: "وضع تجريبي: لم يتم ربط خدمة البريد بعد، رمزك هو", many: "محاولات كثيرة، اطلب رمزاً جديداً",
     prof: "ملفي الشخصي", pick: "اختيار صورة الملف الشخصي", upload: "رفع صورة", logout: "تسجيل الخروج", done: "تم", cart: "حفظنا سلتك ومفضلتك في حسابك",
-    wel: "أهلاً بك", welsub: "يسعدنا انضمامك إلى دعاء القاضي. عطرك القادم بانتظارك.", wait: "ثانية", verified: "تم التحقق"
+    paste: "لصق", pastebad: "لم نجد رمزاً منسوخاً، انسخ الرمز من الإيميل أولاً", wel: "أهلاً بك", welsub: "يسعدنا انضمامك إلى دعاء القاضي. عطرك القادم بانتظارك.", wait: "ثانية", verified: "تم التحقق"
   };
   var EN = {
     needlogin: "Please log in first to complete your order", dt: "Delivery details", dp: "Enter your phone number so we can contact you about the order", phone: "Mobile number (e.g. 01012345678)", addr: "Address (optional)", loc: "Add my location (optional)", locok: "Location saved", locbad: "Could not get your location", phbad: "Enter a valid Egyptian mobile number", savedet: "Save & continue order", back2: "Back", ordering: "Completing order", cust: "Customer", dmy: "Delivery & phone",
@@ -3094,7 +3120,7 @@ html[dir=rtl] .pwrow{padding:7px 8px 7px 18px}
     t2: "Enter the code", p2: "We sent a code to", verify: "Verify", resend: "Resend code", change: "Change email", bad: "Wrong code", exp: "Code expired, please resend",
     inv: "Please enter a valid email", fail: "Could not send the email, try again later", sent: "Code sent", demo: "Demo mode: email sending is not connected yet. Your code is", many: "Too many tries, request a new code",
     prof: "My profile", pick: "Choose your picture", upload: "Upload photo", logout: "Log out", done: "Done", cart: "Your cart and favourites are saved to your account",
-    wel: "Welcome", welsub: "We are so happy to have you at Doaa Kadi. Your next fragrance is waiting.", wait: "s", verified: "Verified"
+    paste: "Paste", pastebad: "No copied code found. Copy the code from your email first", wel: "Welcome", welsub: "We are so happy to have you at Doaa Kadi. Your next fragrance is waiting.", wait: "s", verified: "Verified"
   };  AR.ownerp = "لوحة المالك: الطلبات والرسائل"; EN.ownerp = "Owner panel: orders & messages"; AR.retry = "حاول مرة أخرى"; EN.retry = "Try again"; AR.ownerp = "لوحة الطلبات والرسائل (المالك)"; EN.ownerp = "Orders & messages (owner)"; AR.ownerp = "لوحة الطلبات والرسائل"; EN.ownerp = "Orders & messages panel"; AR.avfail = "تعذّر حفظ الصورة في حسابك"; EN.avfail = "Could not save the picture to your account"; AR.chat = "رسائلي"; EN.chat = "My messages"; AR.msgph = "اكتب رسالتك…"; EN.msgph = "Type a message…"; AR.sendm = "إرسال"; EN.sendm = "Send"; AR.nomsg = "لا توجد رسائل بعد"; EN.nomsg = "No messages yet"; AR.neterr = "تعذّر الاتصال، حاول مرة أخرى"; EN.neterr = "Connection problem, please try again"; AR.orderno = "طلب رقم"; EN.orderno = "Order #"; AR.noorder = "لا توجد طلبات بعد"; EN.noorder = "No orders yet"; AR.tooq = "انتظر قليلاً ثم أعد المحاولة"; EN.tooq = "Please wait a moment and try again";
   var L = function (k) { return (root.lang === "ar" ? AR : EN)[k] || k; };
   var EMOJI = ["🌸", "🧴", "✨", "🦋", "🌙", "👑", "💎", "🌷", "🕊️", "🫧"];
@@ -3158,9 +3184,9 @@ html[dir=rtl] .pwrow{padding:7px 8px 7px 18px}
   document.body.appendChild(ov);
   var ab = $(".ab", ov), bk = $(".aback", ov), bkFn = null, pend = null, poll = 0;
   bk.addEventListener("click", function () { if (bkFn) bkFn(); });
-  function setBack(fn) { bkFn = fn; bk.classList.toggle("show", !!fn); }
+  function setBack(fn) { ov.classList.remove("chatfull"); bkFn = fn; bk.classList.toggle("show", !!fn); }
   function open(v) { ov.classList.add("open"); if (v) v(); }
-  function close() { ov.classList.remove("open"); setBack(null); pend = null; clearInterval(poll); }
+  function close() { ov.classList.remove("open"); setTimeout(function () { if (!ov.classList.contains("open")) ov.classList.remove("chatfull"); }, 400); setBack(null); pend = null; clearInterval(poll); }
   $(".ax", ov).addEventListener("click", close);
   ov.addEventListener("pointerdown", function (e) { if (e.target === ov) close(); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
@@ -3258,13 +3284,17 @@ html[dir=rtl] .pwrow{padding:7px 8px 7px 18px}
   /* ---- 5. code check (shared) ---- */
   function viewCode(note) {
     setBack(function () { var b = pend && pend.back; pend = null; clearInterval(tm); if (b) b(); });
-    ab.innerHTML = logo() + '<h3>' + L("t2") + '</h3><p>' + L("p2") + '<br><b class="amail"></b></p><input class="code" id="acd" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="••••••"><div class="amsg" id="amsg"></div>' +
+    ab.innerHTML = logo() + '<h3>' + L("t2") + '</h3><p>' + L("p2") + '<br><b class="amail"></b></p><div class="codew"><input class="code" id="acd" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="••••••"><button class="cpaste" id="apaste" type="button" aria-label="' + L("paste") + '"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4.5" width="14" height="17" rx="2.5"/><path d="M9 4.5V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v.5"/><path d="M9 11h6M9 15h4"/></svg></button></div><div class="amsg" id="amsg"></div>' +
       '<button class="abtn" id="aver" type="button">' + L("verify") + '</button><div class="alinks"><button class="alink" id="ares" type="button"></button><button class="alink" id="achg" type="button">' + L("change") + '</button></div>';
     $(".amail", ab).textContent = pend.email;
     var cd = $("#acd"), m = $("#amsg"), rs = $("#ares"), bt = $("#aver"), p = pend, tm; if (note) err(m, note, true); setTimeout(function () { cd.focus(); }, 250);
     function tick() { if (!ov.classList.contains("open") || !rs.isConnected) { clearInterval(tm); return; } var s = 60 - Math.floor((Date.now() - p.last) / 1000); rs.disabled = s > 0; rs.textContent = L("resend") + (s > 0 ? " (" + s + L("wait") + ")" : ""); }
     tm = setInterval(tick, 500); tick();
     cd.addEventListener("input", function () { cd.value = cd.value.replace(/\D/g, "").slice(0, 8); });
+    $("#apaste").addEventListener("click", function () {
+      var rd = navigator.clipboard && navigator.clipboard.readText ? navigator.clipboard.readText() : Promise.reject();
+      rd.then(function (t) { var d = String(t || "").replace(/\D/g, "").slice(0, 8); if (!d) { err(m, L("pastebad")); return; } cd.value = d; m.className = "amsg"; cd.focus(); }, function () { err(m, L("pastebad")); });
+    });
     function chk() {
       var v = cd.value.trim(); m.className = "amsg"; if (v.length < 6) { err(m, L("bad")); return; }
       busy(bt, 1);
@@ -3317,7 +3347,7 @@ html[dir=rtl] .pwrow{padding:7px 8px 7px 18px}
     parts.forEach(function (c, n) { h += '<span style="--i:' + n + '">' + c + '</span>' + (ar && n === 0 ? " " : ""); });
     w.innerHTML = h + '</div>';
     document.body.appendChild(w); requestAnimationFrame(function () { requestAnimationFrame(function () { w.classList.add("on"); }); });
-    setTimeout(function () { w.classList.remove("on"); setTimeout(function () { w.remove(); }, 800); }, 3600);
+    setTimeout(function () { w.classList.remove("on"); setTimeout(function () { w.remove(); }, 800); }, 4200);
   }
 
   /* ---- delivery details (phone required, location optional) ---- */
@@ -3410,6 +3440,7 @@ html[dir=rtl] .pwrow{padding:7px 8px 7px 18px}
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function viewChat(orderId, backFn) {
     setBack(backFn || function () { viewProfile(); });
+    ov.classList.add("chatfull");
     if (!orderId) { ab.innerHTML = logo() + '<h3>' + L("chat") + '</h3><p>' + L("noorder") + '</p>'; return; }
     ab.innerHTML = '<h3>' + L("chat") + '</h3><p class="amail">' + L("orderno") + ' ' + orderId + '</p><div class="chat" id="chl"></div><div class="chin"><input type="text" id="cmi" maxlength="500" placeholder="' + L("msgph") + '"><button class="abtn" id="cms" type="button">' + L("sendm") + '</button></div>';
     var list = $("#chl"), inp = $("#cmi"), last = "";
