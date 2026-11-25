@@ -1761,7 +1761,7 @@ html[lang=ar] .swh .en{display:none}html[lang=ar] .swh .ar{display:block}
 <div class="where" id="where" aria-hidden="true"><b></b><span></span></div>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="ver" aria-hidden="true">V.128</div>
+<div class="ver" aria-hidden="true">V.129</div>
 <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav class="dots-nav" id="dotsNav" aria-label="Sections"></nav>
@@ -3374,7 +3374,7 @@ html[lang=ar] .swh .en{display:none}html[lang=ar] .swh .ar{display:block}
       mist.width = w * d; mist.height = h * d; mctx.setTransform(d, 0, 0, d, 0, 0);
     }
     function setSize(k, anim) {
-      cur.key = k; N = mlOf(k) * PER_ML; n = 0; parts.length = 0;
+      cur.key = k; N = Math.round(mlOf(k) * (/^t/.test(String(k)) ? PER_ML : 50 / 3)); n = 0; parts.length = 0;
       var sp = SPEC["p" + k] || SPEC.pt5, o = sp.o, ek = /^e/.test(k);
       st.obj = o; st.full = o === "tst" ? .86 : o === "std" ? .92 : .8; st.sy = 1.14; st.edge = 1;
       st.s = o === "tst" ? 1.65 : ek ? ({ "30": .95, "50": 1.08, "100": 1.12 }[mlOf(k) + ""] || 1) : ({ "30": 1.08, "50": 1.14, "100": 1.2 }[mlOf(k) + ""] || 1.1);
